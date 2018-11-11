@@ -3,5 +3,23 @@
   <div class="row center">
     <h5>MATERIAS</h5>
   </div>
+  <table>
+    <thead>
+      <tr>
+          <th>ID</th>
+          <th>NOMBRE</th>
+          <th>NIVEL</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let materia of materias">
+        <td>{{materia.id}}</td>
+        <td>{{materia.nombre}}</td>
+        <td>{{materia.nivel}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+
 </div>
 <app-footer></app-footer>

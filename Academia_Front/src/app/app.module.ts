@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
 import { MaterialModule } from './angularMaterial';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -27,7 +29,8 @@ import { AulasComponent } from './Aula/aulas/aulas.component';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    MaterialModule
+    MaterialModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
