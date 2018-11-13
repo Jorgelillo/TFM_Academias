@@ -13,7 +13,11 @@ import { DocentesComponent } from './Docente/docentes/docentes.component';
 import { EstudiantesComponent } from './Estudiante/estudiantes/estudiantes.component';
 import { MateriasComponent } from './Materia/materias/materias.component';
 import { AulasComponent } from './Aula/aulas/aulas.component';
-
+import { CrearMateriaComponent } from './Materia/crear-materia/crear-materia.component';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { DetallesMateriaComponent } from './Materia/detalles-materia/detalles-materia.component';
+import { CrearDocenteComponent } from './Docente/crear-docente/crear-docente.component';
+import { DetallesDocenteComponent } from './Docente/detalles-docente/detalles-docente.component';
 
 @NgModule({
   declarations: [
@@ -24,13 +28,19 @@ import { AulasComponent } from './Aula/aulas/aulas.component';
     DocentesComponent,
     EstudiantesComponent,
     MateriasComponent,
-    AulasComponent
+    AulasComponent,
+    CrearMateriaComponent,
+    DetallesMateriaComponent,
+    CrearDocenteComponent,
+    DetallesDocenteComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     MaterialModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,4 +1,4 @@
-import { Injectable, asNativeElements } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -6,44 +6,46 @@ import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class MateriasService {
+export class DocentesService {
 
   constructor(
     private http: HttpClient) { }
 
 /*
-* Función que obtiene todas las materias de la bbdd
+* Función que obtiene todas las docentes de la bbdd
 */    
-public getMaterias(): Observable<any[]> {
+public getDocentes(): Observable<any[]> {
   const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
-  const url = 'http://localhost:8080/materias';
+  const url = 'http://localhost:8080/docentes';
 
   return this.http.get<any[]>(url, {headers: Httpheader})
     .pipe(
-      tap(materias => console.log('fetched materias'))
+      tap(docentes => console.log('fetched docentes'))
     );  
   }
 
 /*
-*Función que obtiene una de las materias de la bbdd
+*Función que obtiene una de las docentes de la bbdd
 * @param id de la materia
 */
-public getMateria(id: number): Observable<any> {
+public getDocente(id: number): Observable<any> {
   const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
-  const url = `http://localhost:8080/materias/${id}`;
+  const url = `http://localhost:8080/docentes/${id}`;
 
   return this.http.get(url, {headers: Httpheader })
     .pipe(
-        tap(materia => console.log(`fetched materias id=${id}`))
+        tap(materia => console.log(`fetched docentes id=${id}`))
     );
   }
 
-  crearMateria(nombre: String, nivel: String):Observable<any>{
+  crearDocente(nombre: String, apellidos: String, email: String, telefono: String):Observable<any>{
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
-    const url = `http://localhost:8080/materias`;
+    const url = `http://localhost:8080/docentes`;
     const body = {
-      "nivel": nivel,
-      "nombre": nombre
+      "nombre": nombre,
+      "apellidos": apellidos,
+      "email": email,
+      "telefono": telefono
     }
 
     return this.http.post(url, body, {headers: Httpheader})
@@ -52,7 +54,7 @@ public getMateria(id: number): Observable<any> {
     )
   }
 
-  borrarMateria(id: number): Observable<any> {
+  borrarDocente(id: number): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/materias/${id}`;
 

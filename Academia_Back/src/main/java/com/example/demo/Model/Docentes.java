@@ -1,11 +1,16 @@
 package com.example.demo.Model;
 
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -28,6 +33,13 @@ public class Docentes {
 	
 	@Column
 	private int telefono;
+	
+	@ManyToMany(mappedBy = "docentes", cascade = CascadeType.DETACH)
+	private List<Materias> materias;
+	
+	public Docentes() {
+		materias = new ArrayList<>();
+	}
 
 	public long getId() {
 		return Id;
@@ -67,6 +79,14 @@ public class Docentes {
 
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
+	}
+
+	public List<Materias> getMaterias() {
+		return materias;
+	}
+
+	public void setMaterias(List<Materias> materias) {
+		this.materias = materias;
 	}
 	
 }

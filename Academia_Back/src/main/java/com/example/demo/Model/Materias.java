@@ -1,10 +1,15 @@
 package com.example.demo.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -21,6 +26,14 @@ public class Materias {
 	
 	@Column
 	private String nivel;
+	
+	@ManyToMany(cascade = CascadeType.DETACH)
+	private List<Docentes> docentes;
+	
+	public Materias() {
+		docentes = new ArrayList<>();
+	}
+
 
 	public long getId() {
 		return Id;
@@ -44,6 +57,14 @@ public class Materias {
 
 	public void setNivel(String nivel) {
 		this.nivel = nivel;
+	}
+
+	public List<Docentes> getDocentes() {
+		return docentes;
+	}
+
+	public void setDocentes(List<Docentes> docentes) {
+		this.docentes = docentes;
 	}
 	
 }
