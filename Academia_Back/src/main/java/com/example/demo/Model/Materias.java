@@ -33,8 +33,7 @@ public class Materias {
 	public Materias() {
 		docentes = new ArrayList<>();
 	}
-
-
+	
 	public long getId() {
 		return Id;
 	}
@@ -66,5 +65,6 @@ public class Materias {
 	public void setDocentes(List<Docentes> docentes) {
 		this.docentes = docentes;
 	}
+	
 	
 }

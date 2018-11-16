@@ -26,7 +26,7 @@ public getDocentes(): Observable<any[]> {
 
 /*
 *Función que obtiene una de las docentes de la bbdd
-* @param id de la materia
+* @param id del docente
 */
 public getDocente(id: number): Observable<any> {
   const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
@@ -34,7 +34,7 @@ public getDocente(id: number): Observable<any> {
 
   return this.http.get(url, {headers: Httpheader })
     .pipe(
-        tap(materia => console.log(`fetched docentes id=${id}`))
+        tap(docentes => console.log(`fetched docentes id=${id}`))
     );
   }
 
@@ -50,8 +50,8 @@ public getDocente(id: number): Observable<any> {
 
     return this.http.post(url, body, {headers: Httpheader})
       .pipe(
-        tap((materia: any) => console.log(`Docente creado /id=${materia.id}`))
-    )
+        tap((docente: any) => console.log(`Docente creado /id=${docente.id}`))
+    );
   }
 
   borrarDocente(id: number): Observable<any> {
@@ -60,8 +60,17 @@ public getDocente(id: number): Observable<any> {
 
     return this.http.delete(url, {headers: Httpheader})
       .pipe(
-        tap((materia: any) => console.log(`Docente eliminado /id=${id}`))
-      )
+        tap((docente: any) => console.log(`Docente eliminado /id=${id}`))
+      );
   }
 
-}
+  getDocentesMateria(id: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/materias/${id}/docentes`;
+
+    return this.http.get(url, {headers: Httpheader})
+      .pipe(
+        tap((docentes: any) => console.log(`fetched docentes id=${id}`))
+      );
+    }
+  }

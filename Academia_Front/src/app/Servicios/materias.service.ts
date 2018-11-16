@@ -62,4 +62,13 @@ public getMateria(id: number): Observable<any> {
       )
   }
 
+  getMateriasDocentes(id: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/docentes/${id}/materias`;
+
+    return this.http.get(url, {headers: Httpheader})
+      .pipe(
+        tap((materia: any) => console.log(`Fetched materias`))
+      )
+  }
 }

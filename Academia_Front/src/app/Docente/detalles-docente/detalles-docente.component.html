@@ -4,3 +4,21 @@
     <h5>{{docente.nombre}}</h5>
   </div>
 </div>
+<table class="centered">
+  <thead>
+    <tr>
+        <th>ID</th>
+        <th>NOMBRE</th>
+        <th>NIVEL</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let materia of materias">
+      <td>{{materia.id}}</td>
+      <td>{{materia.nombre}}</td>
+      <td>{{materia.nivel}}</td>
+      <td><button id="btnVer" (click)= "verMateria(materia.id)">Ver</button></td>
+      <td><button id="btnBorrar" (click)= "borrarMateria(materia.id)">Eliminar</button></td>
+    </tr>
+  </tbody>
+</table>

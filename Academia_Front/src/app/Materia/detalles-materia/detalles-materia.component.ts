@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MateriasService } from 'src/app/Servicios/materias.service';
 import { ActivatedRoute } from '@angular/router';
 import { Materias } from 'src/app/Modelos/Materias';
+import { DocentesService } from 'src/app/Servicios/docentes.service';
 
 @Component({
   selector: 'app-detalles-materia',
@@ -11,13 +12,16 @@ import { Materias } from 'src/app/Modelos/Materias';
 export class DetallesMateriaComponent implements OnInit {
 
   materia: Materias;
+  docentes: any[];
 
   constructor(private materiaService: MateriasService,
+              private docentesService: DocentesService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
     this.getMateria(id);
+    this.getDocentesMateria(id);
   }
 
   /*
@@ -33,4 +37,17 @@ export class DetallesMateriaComponent implements OnInit {
       }
     );
   }
+
+  /*
+  *Función que obtiene los docentes de una materia
+  */
+ getDocentesMateria(id: number): void {
+  this.docentesService.getDocentesMateria(id).subscribe(
+    data => {
+      this.docentes = data['_embedded'].docentes;
+      console.log(this.docentes);
+    }
+  )
+}
+
 }

@@ -4,3 +4,25 @@
     <h5>{{materia.nombre}}</h5>
   </div>
 </div>
+<table class="centered">
+  <thead>
+    <tr>
+        <th>ID</th>
+        <th>NOMBRE</th>
+        <th>APELLIDOS</th>
+        <th>EMAIL</th>
+        <th>TELEFONO</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let docente of docentes">
+      <td>{{docente.id}}</td>
+      <td>{{docente.nombre}}</td>
+      <td>{{docente.apellidos}}</td>
+      <td>{{docente.email}}</td>
+      <td>{{docente.telefono}}</td>
+      <td><button id="btnVer" (click)= "verDocente(docente.id)">Ver</button></td>
+      <td><button id="btnBorrar" (click)= "borrarDocente(docente.id)">Eliminar</button></td>
+    </tr>
+  </tbody>
+</table>

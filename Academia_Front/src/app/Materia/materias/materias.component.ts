@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MateriasService } from 'src/app/Servicios/materias.service';
+import { Materias } from 'src/app/Modelos/Materias';
 
 @Component({
   selector: 'app-materias',
@@ -9,7 +10,7 @@ import { MateriasService } from 'src/app/Servicios/materias.service';
 export class MateriasComponent implements OnInit {
 
   materias: any[];
-
+  
   constructor(private materiaService: MateriasService) { }
 
   ngOnInit() {
