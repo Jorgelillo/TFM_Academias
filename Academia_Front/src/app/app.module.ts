@@ -18,6 +18,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { DetallesMateriaComponent } from './Materia/detalles-materia/detalles-materia.component';
 import { CrearDocenteComponent } from './Docente/crear-docente/crear-docente.component';
 import { DetallesDocenteComponent } from './Docente/detalles-docente/detalles-docente.component';
+import { CrearEstudianteComponent } from './Estudiante/crear-estudiante/crear-estudiante.component';
+import { DetallesEstudianteComponent } from './Estudiante/detalles-estudiante/detalles-estudiante.component';
+import { DetallesAulaComponent } from './Aula/detalles-aula/detalles-aula.component';
+import { CrearAulaComponent } from './Aula/crear-aula/crear-aula.component';
 
 @NgModule({
   declarations: [
@@ -32,7 +36,11 @@ import { DetallesDocenteComponent } from './Docente/detalles-docente/detalles-do
     CrearMateriaComponent,
     DetallesMateriaComponent,
     CrearDocenteComponent,
-    DetallesDocenteComponent
+    DetallesDocenteComponent,
+    CrearEstudianteComponent,
+    DetallesEstudianteComponent,
+    DetallesAulaComponent,
+    CrearAulaComponent
   ],
   imports: [
     BrowserModule,

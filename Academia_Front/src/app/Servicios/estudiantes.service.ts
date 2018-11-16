@@ -6,41 +6,41 @@ import { tap } from 'rxjs/operators';
 @Injectable({
   providedIn: 'root'
 })
-export class DocentesService {
+export class EstudiantesService {
 
   constructor(
     private http: HttpClient) { }
 
 /*
-* Función que obtiene todas las docentes de la bbdd
+* Función que obtiene todos los estudiantes de la bbdd
 */    
-public getDocentes(): Observable<any[]> {
+public getEstudiantes(): Observable<any[]> {
   const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
-  const url = 'http://localhost:8080/docentes';
+  const url = 'http://localhost:8080/estudiantes';
 
   return this.http.get<any[]>(url, {headers: Httpheader})
     .pipe(
-      tap(docentes => console.log('fetched docentes'))
+      tap(estudiantes => console.log('fetched estudiantes'))
     );  
   }
 
 /*
-*Función que obtiene una de las docentes de la bbdd
+*Función que obtiene una de los estudiantes de la bbdd
 * @param id de la materia
 */
-public getDocente(id: number): Observable<any> {
+public getEstudiante(id: number): Observable<any> {
   const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
-  const url = `http://localhost:8080/docentes/${id}`;
+  const url = `http://localhost:8080/estudiantes/${id}`;
 
   return this.http.get(url, {headers: Httpheader })
     .pipe(
-        tap(materia => console.log(`fetched docentes id=${id}`))
+        tap(estudiantes => console.log(`fetched estudiantes id=${id}`))
     );
   }
 
-  crearDocente(nombre: String, apellidos: String, email: String, telefono: String):Observable<any>{
+  crearEstudiante(nombre: String, apellidos: String, email: String, telefono: String):Observable<any>{
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
-    const url = `http://localhost:8080/docentes`;
+    const url = `http://localhost:8080/estudiantes`;
     const body = {
       "nombre": nombre,
       "apellidos": apellidos,
@@ -50,17 +50,17 @@ public getDocente(id: number): Observable<any> {
 
     return this.http.post(url, body, {headers: Httpheader})
       .pipe(
-        tap((materia: any) => console.log(`Docente creado /id=${materia.id}`))
+        tap((estudiantes: any) => console.log(`Estudiantes creado /id=${estudiantes.id}`))
     )
   }
 
-  borrarDocente(id: number): Observable<any> {
+  borrarEstudiante(id: number): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
-    const url = `http://localhost:8080/docentes/${id}`;
+    const url = `http://localhost:8080/estudiantes/${id}`;
 
     return this.http.delete(url, {headers: Httpheader})
       .pipe(
-        tap((materia: any) => console.log(`Docente eliminado /id=${id}`))
+        tap((estudiantes: any) => console.log(`Estudiante eliminado /id=${id}`))
       )
   }
 

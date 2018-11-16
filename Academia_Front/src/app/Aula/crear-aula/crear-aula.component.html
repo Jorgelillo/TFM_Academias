@@ -1,0 +1,18 @@
+<div class="row">
+  <form (ngSubmit)="crearAulas()" [formGroup]="crearaulas" novalidate>
+    <div class="row">
+        <div class="input-field col s12">
+          <label class="active" for="capacidad">Teléfono</label>
+          <input id="capacidad" type="text" class="validate" formControlName="capacidad">
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+              <button id="botonCrear" class="btn waves-effect waves-light right" 
+                      type="button" type="submit" 
+                      name="action">Enviar
+              </button>
+          </div>
+        </div>
+      </div>
+  </form>
+</div>

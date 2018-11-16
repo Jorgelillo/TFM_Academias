@@ -1,0 +1,30 @@
+<div class="row">
+  <form (ngSubmit)="crearEstudiantes()" [formGroup]="crearEstudiante" novalidate>
+    <div class="row">
+        <div class="input-field col s12">
+          <label class="active" for="nombre">Nombre del estudiante</label>
+          <input id="nombre" type="text" class="validate" formControlName="nombre">
+        </div>
+        <div class="input-field col s12">
+          <label class="active" for="apellidos">Apellidos</label>
+          <input id="apellidos" type="text" class="validate" formControlName="apellidos">
+        </div>
+        <div class="input-field col s12">
+          <label class="active" for="email">Email</label>
+          <input id="email" type="text" class="validate" formControlName="email">
+        </div>
+        <div class="input-field col s12">
+          <label class="active" for="telefono">Teléfono</label>
+          <input id="telefono" type="text" class="validate" formControlName="telefono">
+        </div>
+        <div class="row">
+          <div class="input-field col s12">
+              <button id="botonCrear" class="btn waves-effect waves-light right" 
+                      type="button" type="submit" 
+                      name="action">Enviar
+              </button>
+          </div>
+        </div>
+      </div>
+  </form>
+</div>

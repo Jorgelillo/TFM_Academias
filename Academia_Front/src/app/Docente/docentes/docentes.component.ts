@@ -14,13 +14,13 @@ export class DocentesComponent implements OnInit {
   constructor(private docentesService: DocentesService) { }
 
   ngOnInit() {
-    this.getMaterias();
+    this.getDocentes();
   }
 
   /*
-  *Función que obtiene todas las materias de la bbdd
+  *Función que obtiene todos los docentes de la bbdd
   */
-  getMaterias(): void {
+ getDocentes(): void {
     this.docentesService.getDocentes().subscribe(
       data => {
         this.docentes = data['_embedded'].docentes;
@@ -29,9 +29,9 @@ export class DocentesComponent implements OnInit {
     )
   }
   /*
-  *Función que obtiene una de las materias de la bbdd
+  *Función que obtiene uno de los docentes de la bbdd
   */
-  getMateria(id: number): void {
+  getDocente(id: number): void {
     this.docentesService.getDocente(id).subscribe(
       data => {
         console.log(data);
@@ -39,9 +39,9 @@ export class DocentesComponent implements OnInit {
     )
   }
   /*
-  *Función que elimina una de las materias de la bbdd
+  *Función que elimina uno de los docentes de la bbdd
   */
-  borrarMateria(id: number): void {
+  borrarDocente(id: number): void {
     this.docentesService.borrarDocente(id).subscribe(
       data => {
         location.reload();
@@ -49,10 +49,10 @@ export class DocentesComponent implements OnInit {
     )
   }
   /*
-  *Función que muestra los detalles de una materia
+  *Función que muestra los detalles de un docente
   */
-  verMateria(id: number): void {
-    location.assign(`materias/detalles/${id}`);
+  verDocente(id: number): void {
+    location.assign(`docentes/detalles/${id}`);
   }
 
   /*
