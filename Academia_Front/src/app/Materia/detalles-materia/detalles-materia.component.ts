@@ -12,7 +12,12 @@ import { DocentesService } from 'src/app/Servicios/docentes.service';
 export class DetallesMateriaComponent implements OnInit {
 
   materia: Materias;
+  docentesRestantes: any[];
   docentes: any[];
+  activarBoton: boolean;
+  mostrar: boolean;
+
+  
 
   constructor(private materiaService: MateriasService,
               private docentesService: DocentesService,
@@ -22,6 +27,7 @@ export class DetallesMateriaComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.getMateria(id);
     this.getDocentesMateria(id);
+    this.getDocentesRestantes(id);
   }
 
   /*
@@ -48,6 +54,30 @@ export class DetallesMateriaComponent implements OnInit {
       console.log(this.docentes);
     }
   )
+}
+
+    /*
+  *Función que obtiene todas las materias de la bbdd
+  */
+ getDocentesRestantes(id: number): void {
+  this.docentesService.getDocentesRestantes(id).subscribe(
+    data => {
+      this.docentesRestantes = data;
+      if(this.docentesRestantes.length !== 0){
+        this.activarBoton = true;
+       } else {
+        this.activarBoton = false;
+      }
+    }
+  )
+}
+
+mostrarDocentes(): void {
+  if (this.mostrar) {
+    this.mostrar = false;
+  } else {
+    this.mostrar = true;
+  }
 }
 
 }

@@ -66,5 +66,21 @@ public class Materias {
 		this.docentes = docentes;
 	}
 	
+	public List<Docentes> docentesRestantes(List<Docentes> docentes){
+		List<Docentes> docentesRestantes = new ArrayList<>();
+		for(Docentes docente : docentes) {
+			if(!this.docentes.contains(docente)) {
+				Docentes doc = new Docentes();
+				doc.setId(docente.getId());
+				doc.setNombre(docente.getNombre());
+				doc.setApellidos(docente.getApellidos());
+				doc.setEmail(docente.getEmail());
+				doc.setTelefono(docente.getTelefono());
+				docentesRestantes.add(doc);
+			}
+		}
+		return docentesRestantes;
+	}
+	
 	
 }

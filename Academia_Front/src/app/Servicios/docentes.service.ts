@@ -93,4 +93,14 @@ public getDocente(id: number): Observable<any> {
     );
   }
 
+  getDocentesRestantes(id: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/materias/${id}/docentesRestantes`;
+
+    return this.http.get(url, {headers: Httpheader})
+      .pipe(
+        tap((_: any) => console.log(`Fetched docentes`))
+      );
+  }
+
   }

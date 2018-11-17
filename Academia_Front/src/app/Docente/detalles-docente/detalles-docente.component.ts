@@ -12,6 +12,7 @@ import { MateriasService } from 'src/app/Servicios/materias.service';
 export class DetallesDocenteComponent implements OnInit {
 
   mostrar: boolean;
+  activarBoton: boolean;
   docente: Docentes;
   materias: any[];
   materiasRestantes: any[];
@@ -63,9 +64,12 @@ export class DetallesDocenteComponent implements OnInit {
  getMateriasRestantes(id: number): void {
   this.materiasService.getMateriasRestantes(id).subscribe(
     data => {
-      console.log(data);
       this.materiasRestantes = data;
-      console.log(this.materiasRestantes);
+      if(this.materiasRestantes.length !== 0){
+        this.activarBoton = true;
+       } else {
+        this.activarBoton = false;
+      }
     }
   )
 }
