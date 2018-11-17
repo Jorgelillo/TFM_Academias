@@ -73,4 +73,24 @@ public getDocente(id: number): Observable<any> {
         tap((docentes: any) => console.log(`fetched docentes id=${id}`))
       );
     }
+
+  addMateria(idDocente: number, idMateria: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'text/uri-list'});
+    const url = `http://localhost:8080/materias/${idMateria}/docentes`;
+    const body = `http://localhost:8080/docentes/${idDocente}`;
+
+    return this.http.patch<any>(url, body, {headers: Httpheader}).pipe(
+      tap((materias: any) => console.log(`Añadida materia id=${materias}`))
+    );
+  }
+
+  borrarMateria(idDocente: number, idMateria: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/materias/${idMateria}/docentes/${idDocente}`;
+
+    return this.http.delete<any>(url, {headers: Httpheader}).pipe(
+      tap((_: any) => console.log(`Eliminada materia id=${idMateria}`))
+    );
+  }
+
   }

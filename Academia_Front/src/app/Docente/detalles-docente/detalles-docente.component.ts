@@ -11,8 +11,10 @@ import { MateriasService } from 'src/app/Servicios/materias.service';
 })
 export class DetallesDocenteComponent implements OnInit {
 
+  mostrar: boolean;
   docente: Docentes;
   materias: any[];
+  materiasRestantes: any[];
 
   constructor(private docentesService: DocentesService,
               private materiasService: MateriasService,
@@ -22,6 +24,8 @@ export class DetallesDocenteComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.getDocente(id);
     this.getMateriasDocentes(id);
+    this.getMateriasRestantes();
+    this.mostrar = false;
   }
 
   /*
@@ -49,6 +53,54 @@ export class DetallesDocenteComponent implements OnInit {
     data => {
       this.materias = data['_embedded'].materias;
       console.log(this.materias);
+      }
+    )
+  }
+
+    /*
+  *Función que obtiene todas las materias de la bbdd
+  */
+ getMateriasRestantes(): void {
+  this.materiasService.getMaterias().subscribe(
+    data => {
+      this.materiasRestantes = data['_embedded'].materias;
+      console.log(this.materiasRestantes);
     }
   )
+}
+
+  mostrarMaterias(): void {
+    if (this.mostrar) {
+      this.mostrar = false;
+    } else {
+      this.mostrar = true;
+    }
+  }
+
+  verMateria(id: number): void {
+    location.assign(`materias/detalles/${id}`);
+  }
+
+  addMateria(id: number): void {
+    this.docentesService.addMateria(this.docente.id, id).subscribe(
+      data => {
+        console.log('Id docente ' + this.docente.id);
+        console.log('Id materia ' + id);
+        console.log(data);
+      }
+    );
+   location.reload();
+  }
+
+  borrarMateria(id: number): void {
+    this.docentesService.borrarMateria(this.docente.id, id).subscribe(
+      data => {
+        console.log('Id docente ' + this.docente.id);
+        console.log('Id materia ' + id);
+        console.log(data);
+      }
+    );
+    location.reload();
+  }
+
 }
