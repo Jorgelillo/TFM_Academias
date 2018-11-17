@@ -7,5 +7,5 @@ import com.example.demo.Model.Docentes;
 
 @RepositoryRestResource(collectionResourceRel = "docentes", path = "docentes")
 public interface DocenteReopository extends CrudRepository<Docentes, Long>{
-
+	Docentes findById(long id);
 }

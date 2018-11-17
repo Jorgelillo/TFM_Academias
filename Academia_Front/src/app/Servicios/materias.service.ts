@@ -49,7 +49,7 @@ public getMateria(id: number): Observable<any> {
     return this.http.post(url, body, {headers: Httpheader})
       .pipe(
         tap((materia: any) => console.log(`Materia creada /id=${materia.id}`))
-    )
+    );
   }
 
   borrarMateria(id: number): Observable<any> {
@@ -59,7 +59,7 @@ public getMateria(id: number): Observable<any> {
     return this.http.delete(url, {headers: Httpheader})
       .pipe(
         tap((materia: any) => console.log(`Materia eliminada /id=${id}`))
-      )
+      );
   }
 
   getMateriasDocentes(id: number): Observable<any> {
@@ -69,6 +69,16 @@ public getMateria(id: number): Observable<any> {
     return this.http.get(url, {headers: Httpheader})
       .pipe(
         tap((materia: any) => console.log(`Fetched materias`))
-      )
+      );
+  }
+
+  getMateriasRestantes(id: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/docentes/${id}/materiasRestantes`;
+
+    return this.http.get(url, {headers: Httpheader})
+      .pipe(
+        tap((_: any) => console.log(`Fetched materias`))
+      );
   }
 }

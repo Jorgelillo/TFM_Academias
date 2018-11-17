@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name = "Docentes")
 public class Docentes {
@@ -89,5 +90,18 @@ public class Docentes {
 		this.materias = materias;
 	}
 	
+	public List<Materias> materiasRestantes(List<Materias> materias){
+		List<Materias> materiasRestantes = new ArrayList<>();
+		for(Materias materia : materias) {
+			if(!this.materias.contains(materia)) {
+				Materias mat = new Materias();
+				mat.setId(materia.getId());
+				mat.setNombre(materia.getNombre());
+				mat.setNivel(materia.getNivel());
+				materiasRestantes.add(mat);
+			}
+		}
+		return materiasRestantes;
+	}
 	
 }

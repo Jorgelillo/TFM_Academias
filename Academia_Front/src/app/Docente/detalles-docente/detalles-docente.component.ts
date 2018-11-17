@@ -24,7 +24,7 @@ export class DetallesDocenteComponent implements OnInit {
     const id = +this.route.snapshot.paramMap.get('id');
     this.getDocente(id);
     this.getMateriasDocentes(id);
-    this.getMateriasRestantes();
+    this.getMateriasRestantes(id);
     this.mostrar = false;
   }
 
@@ -60,10 +60,11 @@ export class DetallesDocenteComponent implements OnInit {
     /*
   *Función que obtiene todas las materias de la bbdd
   */
- getMateriasRestantes(): void {
-  this.materiasService.getMaterias().subscribe(
+ getMateriasRestantes(id: number): void {
+  this.materiasService.getMateriasRestantes(id).subscribe(
     data => {
-      this.materiasRestantes = data['_embedded'].materias;
+      console.log(data);
+      this.materiasRestantes = data;
       console.log(this.materiasRestantes);
     }
   )
