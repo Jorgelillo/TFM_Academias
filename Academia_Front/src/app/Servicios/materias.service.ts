@@ -81,4 +81,43 @@ public getMateria(id: number): Observable<any> {
         tap((_: any) => console.log(`Fetched materias`))
       );
   }
+
+  getMateriasRestantesEstudiante(id: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/estudiantes/${id}/materiasRestantes`;
+
+    return this.http.get(url, {headers: Httpheader})
+      .pipe(
+        tap((_: any) => console.log(`Fetched materias`))
+      );
+  }
+
+  borrarDocente(idMateria: number, idDocente: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/materias/${idMateria}/docentes/${idDocente}`;
+
+    return this.http.delete<any>(url, {headers: Httpheader}).pipe(
+      tap((_: any) => console.log(`Eliminado docente id=${idDocente}`))
+    );
+  }
+
+  getMateriasEstudiante(id: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/estudiantes/${id}/materias`;
+
+    return this.http.get(url, {headers: Httpheader})
+      .pipe(
+        tap((_: any) => console.log(`Fetched materias`))
+      );
+  }
+
+  borrarEstudiante(idMateria: number, idEstudiante: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/materias/${idMateria}/estudiantes/${idEstudiante}`;
+
+    return this.http.delete<any>(url, {headers: Httpheader}).pipe(
+      tap((_: any) => console.log(`Eliminado estudiante id=${idEstudiante}`))
+    );
+  }
+
 }

@@ -1,10 +1,15 @@
 package com.example.demo.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -27,6 +32,9 @@ public class Estudiantes {
 	
 	@Column
 	private int telefono;
+	
+	@ManyToMany(mappedBy = "estudiantes", cascade = CascadeType.DETACH)
+	private List<Materias> materias;
 
 	public long getId() {
 		return Id;
@@ -66,6 +74,28 @@ public class Estudiantes {
 
 	public void setTelefono(int telefono) {
 		this.telefono = telefono;
+	}
+
+	public List<Materias> getMaterias() {
+		return materias;
+	}
+
+	public void setMaterias(List<Materias> materias) {
+		this.materias = materias;
+	}
+	
+	public List<Materias> materiasRestantes(List<Materias> materias){
+		List<Materias> materiasRestantes = new ArrayList<>();
+		for(Materias materia : materias) {
+			if(!this.materias.contains(materia)) {
+				Materias mat = new Materias();
+				mat.setId(materia.getId());
+				mat.setNombre(materia.getNombre());
+				mat.setNivel(materia.getNivel());
+				materiasRestantes.add(mat);
+			}
+		}
+		return materiasRestantes;
 	}
 	
 }

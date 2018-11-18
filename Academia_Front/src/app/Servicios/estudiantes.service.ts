@@ -34,7 +34,7 @@ public getEstudiante(id: number): Observable<any> {
 
   return this.http.get(url, {headers: Httpheader })
     .pipe(
-        tap(estudiantes => console.log(`fetched estudiantes id=${id}`))
+        tap(_ => console.log(`fetched estudiantes id=${id}`))
     );
   }
 
@@ -63,5 +63,48 @@ public getEstudiante(id: number): Observable<any> {
         tap((estudiantes: any) => console.log(`Estudiante eliminado /id=${id}`))
       )
   }
+
+  getMateriasEstudiantes(id: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/materias/${id}/estudiantes`;
+
+    return this.http.get(url, {headers: Httpheader})
+      .pipe(
+        tap((_: any) => console.log(`fetched estudiantes id=${id}`))
+      );
+    }
+    
+
+    addMateria(idEstudiante: number, idMateria: number): Observable<any> {
+      const Httpheader = new HttpHeaders({'Content-Type': 'text/uri-list'});
+      const url = `http://localhost:8080/materias/${idMateria}/estudiantes`;
+      const body = `http://localhost:8080/estudiantes/${idEstudiante}`;
+  
+      return this.http.patch<any>(url, body, {headers: Httpheader}).pipe(
+        tap((materias: any) => console.log(`Añadida materia id=${materias}`))
+      );
+    }
+  
+    borrarMateria(idEstudiante: number, idMateria: number): Observable<any> {
+      const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+      const url = `http://localhost:8080/materias/${idMateria}/estudiantes/${idEstudiante}`;
+  
+      return this.http.delete<any>(url, {headers: Httpheader}).pipe(
+        tap((_: any) => console.log(`Eliminada materia id=${idMateria}`))
+      );
+    }
+
+    
+  getEstudiantesRestantes(id: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/materias/${id}/estudiantesRestantes`;
+
+    return this.http.get(url, {headers: Httpheader})
+      .pipe(
+        tap((_: any) => console.log(`Fetched estudiantes`))
+      );
+  }
+
+
 
 }

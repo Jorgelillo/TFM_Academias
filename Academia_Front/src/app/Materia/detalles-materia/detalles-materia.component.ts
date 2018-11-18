@@ -3,6 +3,7 @@ import { MateriasService } from 'src/app/Servicios/materias.service';
 import { ActivatedRoute } from '@angular/router';
 import { Materias } from 'src/app/Modelos/Materias';
 import { DocentesService } from 'src/app/Servicios/docentes.service';
+import { EstudiantesService } from 'src/app/Servicios/estudiantes.service';
 
 @Component({
   selector: 'app-detalles-materia',
@@ -14,13 +15,16 @@ export class DetallesMateriaComponent implements OnInit {
   materia: Materias;
   docentesRestantes: any[];
   docentes: any[];
-  activarBoton: boolean;
-  mostrar: boolean;
-
-  
+  estudiantes: any[];
+  estudiantesRestantes: any[];
+  activarBotonDoc: boolean;
+  activarBotonEst: boolean;
+  mostrarDoc: boolean;
+  mostrarEst: boolean;
 
   constructor(private materiaService: MateriasService,
               private docentesService: DocentesService,
+              private estudiantesService: EstudiantesService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -28,6 +32,8 @@ export class DetallesMateriaComponent implements OnInit {
     this.getMateria(id);
     this.getDocentesMateria(id);
     this.getDocentesRestantes(id);
+    this.getEstudiantesMateria(id);
+    this.getEstudiantesRestantes(id);
   }
 
   /*
@@ -55,7 +61,6 @@ export class DetallesMateriaComponent implements OnInit {
     }
   )
 }
-
     /*
   *Función que obtiene todas las materias de la bbdd
   */
@@ -64,20 +69,86 @@ export class DetallesMateriaComponent implements OnInit {
     data => {
       this.docentesRestantes = data;
       if(this.docentesRestantes.length !== 0){
-        this.activarBoton = true;
+        this.activarBotonDoc = true;
        } else {
-        this.activarBoton = false;
+        this.activarBotonDoc = false;
       }
     }
   )
 }
 
 mostrarDocentes(): void {
-  if (this.mostrar) {
-    this.mostrar = false;
+  if (this.mostrarDoc) {
+    this.mostrarDoc = false;
   } else {
-    this.mostrar = true;
+    this.mostrarDoc = true;
   }
+}
+
+verDocente(id: number): void {
+  location.assign(`docentes/detalles/${id}`);
+}
+
+borrarDocente(id: number): void {
+  this.materiaService.borrarDocente(this.materia.id, id).subscribe(
+    data => {
+      console.log('Id docente ' + this.materia.id);
+      console.log('Id materia ' + id);
+      console.log(data);
+    }
+  );
+  location.reload();
+}
+
+    /*
+    *Función que obtiene los docentes de una materia
+    */
+  getEstudiantesMateria(id: number): void {
+    this.estudiantesService.getMateriasEstudiantes(id).subscribe(
+      data => {
+        this.estudiantes = data['_embedded'].estudiantes;
+        console.log(this.estudiantes);
+      }
+    )
+  }
+
+      /*
+    *Función que obtiene todas las materias de la bbdd
+    */
+  getEstudiantesRestantes(id: number): void {
+    this.estudiantesService.getEstudiantesRestantes(id).subscribe(
+      data => {
+        this.estudiantesRestantes = data;
+        if(this.estudiantesRestantes.length !== 0){
+          this.activarBotonEst = true;
+        } else {
+          this.activarBotonEst = false;
+        }
+      }
+    )
+  }
+
+  mostrarEstudiantes(): void {
+    if (this.mostrarEst) {
+      this.mostrarEst = false;
+    } else {
+      this.mostrarEst = true;
+    }
+  }
+
+  verEstudiante(id: number): void {
+    location.assign(`estudiantes/detalles/${id}`);
+  }
+
+borrarEstudiante(id: number): void {
+  this.materiaService.borrarEstudiante(this.materia.id, id).subscribe(
+    data => {
+      console.log('Id Estudiante ' + this.materia.id);
+      console.log('Id materia ' + id);
+      console.log(data);
+    }
+  );
+  location.reload();
 }
 
 }

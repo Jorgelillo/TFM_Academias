@@ -9,6 +9,7 @@ import { DocentesComponent } from './Docente/docentes/docentes.component';
 import { DetallesMateriaComponent } from './Materia/detalles-materia/detalles-materia.component';
 import { DetallesDocenteComponent } from './Docente/detalles-docente/detalles-docente.component';
 import { DetallesAulaComponent } from './Aula/detalles-aula/detalles-aula.component';
+import { DetallesEstudianteComponent } from './Estudiante/detalles-estudiante/detalles-estudiante.component';
 
 const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
@@ -16,6 +17,7 @@ const routes: Routes = [
   { path: 'docentes', component: DocentesComponent },
   { path: 'docentes/detalles/:id', component: DetallesDocenteComponent },
   { path: 'estudiantes', component: EstudiantesComponent },
+  { path: 'estudiantes/detalles/:id', component: DetallesEstudianteComponent },
   { path: 'materias', component: MateriasComponent },
   { path: 'materias/detalles/:id', component: DetallesMateriaComponent },
   { path: 'aulas', component: AulasComponent },

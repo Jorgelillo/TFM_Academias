@@ -30,8 +30,12 @@ public class Materias {
 	@ManyToMany(cascade = CascadeType.DETACH)
 	private List<Docentes> docentes;
 	
+	@ManyToMany(cascade = CascadeType.DETACH)
+	private List<Estudiantes> estudiantes;
+	
 	public Materias() {
 		docentes = new ArrayList<>();
+		estudiantes = new ArrayList<>();
 	}
 	
 	public long getId() {
@@ -66,6 +70,14 @@ public class Materias {
 		this.docentes = docentes;
 	}
 	
+	public List<Estudiantes> getEstudiantes() {
+		return estudiantes;
+	}
+
+	public void setEstudiantes(List<Estudiantes> estudiantes) {
+		this.estudiantes = estudiantes;
+	}
+
 	public List<Docentes> docentesRestantes(List<Docentes> docentes){
 		List<Docentes> docentesRestantes = new ArrayList<>();
 		for(Docentes docente : docentes) {
@@ -80,6 +92,22 @@ public class Materias {
 			}
 		}
 		return docentesRestantes;
+	}
+	
+	public List<Estudiantes> estudiantesRestantes(List<Estudiantes> estudiantes){
+		List<Estudiantes> estudiantesRestantes = new ArrayList<>();
+		for(Estudiantes estudiante : estudiantes) {
+			if(!this.estudiantes.contains(estudiante)) {
+				Estudiantes est = new Estudiantes();
+				est.setId(estudiante.getId());
+				est.setNombre(estudiante.getNombre());
+				est.setApellidos(estudiante.getApellidos());
+				est.setEmail(estudiante.getEmail());
+				est.setTelefono(estudiante.getTelefono());
+				estudiantesRestantes.add(est);
+			}
+		}
+		return estudiantesRestantes;
 	}
 	
 	

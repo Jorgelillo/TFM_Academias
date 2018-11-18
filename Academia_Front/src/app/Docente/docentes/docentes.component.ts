@@ -28,9 +28,10 @@ export class DocentesComponent implements OnInit {
       }
     )
   }
+  
   /*
   *Función que obtiene uno de los docentes de la bbdd
-  */
+  
   getDocente(id: number): void {
     this.docentesService.getDocente(id).subscribe(
       data => {
@@ -38,6 +39,8 @@ export class DocentesComponent implements OnInit {
       }
     )
   }
+
+  */
   /*
   *Función que elimina uno de los docentes de la bbdd
   */

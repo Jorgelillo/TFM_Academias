@@ -29,7 +29,7 @@ export class EstudiantesComponent implements OnInit {
   }
   /*
   *Función que obtiene uno de los estudiantes de la bbdd
-  */
+  
   getEstudiante(id: number): void {
     this.estudiantesService.getEstudiante(id).subscribe(
       data => {
@@ -37,6 +37,9 @@ export class EstudiantesComponent implements OnInit {
       }
     )
   }
+
+  */
+ 
   /*
   *Función que elimina uno de los estudiantes de la bbdd
   */
