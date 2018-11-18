@@ -3,6 +3,7 @@ import { Docentes } from 'src/app/Modelos/Docentes';
 import { DocentesService } from 'src/app/Servicios/docentes.service';
 import { ActivatedRoute } from '@angular/router';
 import { MateriasService } from 'src/app/Servicios/materias.service';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-detalles-docente',
@@ -16,8 +17,10 @@ export class DetallesDocenteComponent implements OnInit {
   docente: Docentes;
   materias: any[];
   materiasRestantes: any[];
+  modificarDocente: FormGroup;
 
-  constructor(private docentesService: DocentesService,
+  constructor(private formBuilder: FormBuilder,
+              private docentesService: DocentesService,
               private materiasService: MateriasService,
               private route: ActivatedRoute) { }
 
@@ -26,7 +29,30 @@ export class DetallesDocenteComponent implements OnInit {
     this.getDocente(id);
     this.getMateriasDocentes(id);
     this.getMateriasRestantes(id);
+    this.crearFormulario();
     this.mostrar = false;
+  }
+
+  crearFormulario(){ 
+    this.modificarDocente = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      apellidos: ['', Validators.required],
+      email: ['', Validators.required],
+      telefono: ['', Validators.required]
+    });
+  }
+
+  modificarDocentes(): void {
+    const nombre = this.modificarDocente.value.nombre;
+    const apellidos = this.modificarDocente.value.apellidos;
+    const email = this.modificarDocente.value.email;
+    const telefono = this.modificarDocente.value.telefono;
+    this.docentesService.modificarDocente(this.docente.id, nombre, apellidos, email, telefono).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+    location.assign(`docentes/detalles/${this.docente.id}`);
   }
 
   /*

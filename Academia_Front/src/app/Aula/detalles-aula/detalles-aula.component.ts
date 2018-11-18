@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Aulas } from 'src/app/Modelos/Aulas';
 import { AulasServiceService } from 'src/app/Servicios/aulas-service.service';
 import { ActivatedRoute } from '@angular/router';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+
 
 @Component({
   selector: 'app-detalles-aula',
@@ -11,14 +13,33 @@ import { ActivatedRoute } from '@angular/router';
 export class DetallesAulaComponent implements OnInit {
 
   aula: Aulas;
+  modificarAula: FormGroup;
 
-  constructor(private aulasService: AulasServiceService,
+  constructor(private formBuilder: FormBuilder,
+              private aulasService: AulasServiceService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
-    console.log(id);
     this.getDocente(id);
+    this.crearFormulario();
+
+  }
+
+  crearFormulario(){ 
+    this.modificarAula = this.formBuilder.group({
+      capacidad: ['', Validators.required],
+    });
+  }
+
+  modificarAulas(): void {
+    const capacidad = this.modificarAula.value.capacidad;
+    this.aulasService.modificarAulas(this.aula.id, capacidad).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+    location.assign(`aulas/detalles/${this.aula.id}`);
   }
 
   /*

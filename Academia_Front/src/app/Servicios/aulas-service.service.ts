@@ -61,6 +61,18 @@ public getAula(id: number): Observable<any> {
       )
   }
 
+  modificarAulas(id: number, capacidad: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/aulas/${id}/`;
+    const body = {
+      'capacidad': capacidad
+    }
+
+    return this.http.patch<any>(url, body, {headers: Httpheader}).pipe(
+      tap( _=> console.log(`Aula modificada`))
+    );
+  }
+
 
 
 

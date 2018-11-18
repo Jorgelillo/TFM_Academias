@@ -120,4 +120,18 @@ public getMateria(id: number): Observable<any> {
     );
   }
 
+  
+  modificarMaterias(id: number, nombre: string, nivel: string): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/materias/${id}/`;
+    const body = {
+      'nombre': nombre,
+      'nivel': nivel
+    }
+
+    return this.http.patch<any>(url, body, {headers: Httpheader}).pipe(
+      tap( _=> console.log(`Materia modificada`))
+    );
+  }
+
 }

@@ -3,6 +3,7 @@
   <div class="row">
     <div class="col s12">
       <h5>{{materia.nombre}}</h5>
+      <h5>{{materia.nivel}}</h5>
     </div>
   </div>
   <h5>Docentes que la imparten</h5>
@@ -35,7 +36,9 @@
   <div class="row">
       <a id="mostrarAdd" class="waves-effect waves-light btn-small right" *ngIf="!activarBotonDoc" disabled (click)="mostrarDocentes()">Añadir Docentes</a>
       <a id="mostrarAdd" class="waves-effect waves-light btn-small right" *ngIf="activarBotonDoc" (click)="mostrarDocentes()">Añadir Docentes</a>
+      <a class="waves-effect waves-light btn modal-trigger right" href="#modificar">Modificar</a>
   </div>
+ 
   <div class="row" [hidden]="!mostrarDoc">
     <div class="col s12">
         <table class="centered">
@@ -123,5 +126,40 @@
         </table>
       </div>
     </div>
+</div>
 
+<!--Modal Structure -->
+<div id="modificar" class="modal">
+  <div class="modal-content">
+    <div class="row">
+        <form (ngSubmit)="modificarMaterias()" [formGroup]="modificarMateria" novalidate>
+          <div class="row">
+              <div class="input-field col s12">
+                <label class="active" for="nombre">Nombre de la materia</label>
+                <input id="nombre" type="text" class="validate" formControlName="nombre">
+              </div>
+              <div class="input-field col s6">
+                <label>
+                    <input name="nivel" type="radio" value="ESO" formControlName="nivel" checked/>
+                    <span>ESO</span>
+                </label>
+              </div>
+              <div class="input-field col s6">
+                <label>
+                    <input name="nivel" type="radio" formControlName="nivel" value="BACHILLERATO"/>
+                    <span>BACHILLERATO</span>
+                </label>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                    <button id="botonCrear" class="btn waves-effect waves-light right" 
+                            type="button" type="submit" 
+                            name="action">Enviar
+                    </button>
+                </div>
+              </div>
+            </div>
+        </form>
+    </div>
+  </div>
 </div>

@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Materias } from 'src/app/Modelos/Materias';
 import { DocentesService } from 'src/app/Servicios/docentes.service';
 import { EstudiantesService } from 'src/app/Servicios/estudiantes.service';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-detalles-materia',
@@ -21,8 +22,11 @@ export class DetallesMateriaComponent implements OnInit {
   activarBotonEst: boolean;
   mostrarDoc: boolean;
   mostrarEst: boolean;
+  modificarMateria: FormGroup;
 
-  constructor(private materiaService: MateriasService,
+
+  constructor(private formBuilder: FormBuilder,
+              private materiaService: MateriasService,
               private docentesService: DocentesService,
               private estudiantesService: EstudiantesService,
               private route: ActivatedRoute) { }
@@ -34,6 +38,25 @@ export class DetallesMateriaComponent implements OnInit {
     this.getDocentesRestantes(id);
     this.getEstudiantesMateria(id);
     this.getEstudiantesRestantes(id);
+    this.crearFormulario();
+  }
+
+  crearFormulario(){ 
+    this.modificarMateria = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      nivel: ['', Validators.required]
+    });
+  }
+
+  modificarMaterias(): void {
+    const nombre = this.modificarMateria.value.nombre;
+    const nivel = this.modificarMateria.value.nivel;
+    this.materiaService.modificarMaterias(this.materia.id, nombre, nivel).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+    location.assign(`materias/detalles/${this.materia.id}`);
   }
 
   /*
@@ -100,6 +123,15 @@ borrarDocente(id: number): void {
   location.reload();
 }
 
+addDocente(idDocente: number): void {
+  this.docentesService.addMateria(idDocente, this.materia.id).subscribe(
+    data => {
+      console.log(data);
+    }
+  );
+  location.reload();
+}
+
     /*
     *Función que obtiene los docentes de una materia
     */
@@ -145,6 +177,15 @@ borrarEstudiante(id: number): void {
     data => {
       console.log('Id Estudiante ' + this.materia.id);
       console.log('Id materia ' + id);
+      console.log(data);
+    }
+  );
+  location.reload();
+}
+
+addEstudiante(idEstudiante: number): void {
+  this.estudiantesService.addMateria(idEstudiante, this.materia.id).subscribe(
+    data => {
       console.log(data);
     }
   );

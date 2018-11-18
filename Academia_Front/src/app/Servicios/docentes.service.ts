@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 
 @Injectable({
   providedIn: 'root'
@@ -101,6 +102,21 @@ public getDocente(id: number): Observable<any> {
       .pipe(
         tap((_: any) => console.log(`Fetched docentes`))
       );
+  }
+
+  modificarDocente(id: number, nombre: string, apellidos: string, email: string, telefono: String): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/docentes/${id}/`;
+    const body = {
+      'nombre': nombre,
+      'apellidos': apellidos,
+      'email': email,
+      'telefono': telefono
+    }
+
+    return this.http.patch<any>(url, body, {headers: Httpheader}).pipe(
+      tap( _=> console.log(`Docente modificado`))
+    );
   }
 
   }

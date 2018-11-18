@@ -105,6 +105,21 @@ public getEstudiante(id: number): Observable<any> {
       );
   }
 
+  modificarEstudiantes(id: number, nombre: string, apellidos: string, email: string, telefono: String): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/estudiantes/${id}/`;
+    const body = {
+      'nombre': nombre,
+      'apellidos': apellidos,
+      'email': email,
+      'telefono': telefono
+    }
+
+    return this.http.patch<any>(url, body, {headers: Httpheader}).pipe(
+      tap( _=> console.log(`Estudiante modificado`))
+    );
+  }
+
 
 
 }

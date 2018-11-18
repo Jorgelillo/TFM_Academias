@@ -3,6 +3,8 @@ import { Estudiantes } from 'src/app/Modelos/Estudiantes';
 import { EstudiantesService } from 'src/app/Servicios/estudiantes.service';
 import { MateriasService } from 'src/app/Servicios/materias.service';
 import { ActivatedRoute } from '@angular/router';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+
 
 @Component({
   selector: 'app-detalles-estudiante',
@@ -17,8 +19,10 @@ export class DetallesEstudianteComponent implements OnInit {
   estudiante: Estudiantes;
   materias: any[];
   materiasRestantes: any[];
+  modificarEstudiante: FormGroup;
 
-  constructor(private estudianteService: EstudiantesService,
+  constructor(private formBuilder: FormBuilder,
+              private estudianteService: EstudiantesService,
               private materiasService: MateriasService,
               private route: ActivatedRoute) { }
 
@@ -27,7 +31,30 @@ export class DetallesEstudianteComponent implements OnInit {
     this.getEstudiante(id);
     this.getMateriasEstudiante(id);
     this.getMateriasRestantesEstudiante(id);
+    this.crearFormulario();
     this.mostrar = false;
+  }
+
+  crearFormulario(){ 
+    this.modificarEstudiante = this.formBuilder.group({
+      nombre: ['', Validators.required],
+      apellidos: ['', Validators.required],
+      email: ['', Validators.required],
+      telefono: ['', Validators.required]
+    });
+  }
+
+  modificarEstudiantes(): void {
+    const nombre = this.modificarEstudiante.value.nombre;
+    const apellidos = this.modificarEstudiante.value.apellidos;
+    const email = this.modificarEstudiante.value.email;
+    const telefono = this.modificarEstudiante.value.telefono;
+    this.estudianteService.modificarEstudiantes(this.estudiante.id, nombre, apellidos, email, telefono).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+    location.assign(`estudiantes/detalles/${this.estudiante.id}`);
   }
 
   /*
