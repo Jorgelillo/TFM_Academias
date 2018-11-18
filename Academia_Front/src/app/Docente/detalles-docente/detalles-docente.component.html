@@ -23,7 +23,7 @@
   </div>
 </div>
 <div class="row">
-    <a class="waves-effect waves-light btn modal-trigger right" href="#modificar">Modificar</a>
+    <a class="waves-effect waves-light btn-small btn modal-trigger right" href="#modificar">Modificar</a>
 </div>
 <div class="row">
   <div class="col s12">
@@ -49,8 +49,8 @@
   </div>
 </div>
 <div class="row">
-  <a id="mostrarAdd" class="waves-effect waves-light btn-small right" *ngIf="!activarBoton" disabled (click)="mostrarMaterias()">Añadir Materias</a>
-  <a id="mostrarAdd" class="waves-effect waves-light btn-small right" *ngIf="activarBoton" (click)="mostrarMaterias()">Añadir Materias</a>
+  <a id="mostrarAdd" class="waves-effect waves-light btn-small btn right" *ngIf="!activarBoton" disabled (click)="mostrarMaterias()">Añadir Materias</a>
+  <a id="mostrarAdd" class="waves-effect waves-light btn-small btn right" *ngIf="activarBoton" (click)="mostrarMaterias()">Añadir Materias</a>
 </div>
 <div class="row" [hidden]="!mostrar">
     <div class="col s12">
@@ -76,6 +76,7 @@
       </table>
     </div>
   </div>
+  <app-footer></app-footer>
 </div>
 
   <!--Modal Structure -->

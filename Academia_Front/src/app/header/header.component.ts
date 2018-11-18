@@ -7,9 +7,31 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeaderComponent implements OnInit {
 
+  url: string[] = ['docentes', 'estudiantes', 'aulas', 'materias'];
+
   constructor() { }
 
   ngOnInit() {
+    this.getUrl();
   }
+
+  private getUrl(): void {
+    const url = location.href;
+    console.log(url);
+
+      if (url.substr(0, 30) === `http://localhost:4200/docentes`) {
+        this.url['docentes'] = 'active';
+        }
+      if (url.substr(0, 33) === `http://localhost:4200/estudiantes`) {
+        this.url['estudiantes'] = 'active';
+        }
+      if (url.substr(0, 27) === `http://localhost:4200/aulas`) {
+        this.url['aulas'] = 'active';
+        }
+      if (url.substr(0, 30) === `http://localhost:4200/materias`) {
+        this.url['materias'] = 'active';
+        }
+
+      }
 
 }
