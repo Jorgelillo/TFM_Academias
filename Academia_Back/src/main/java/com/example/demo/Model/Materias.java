@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -33,9 +34,13 @@ public class Materias {
 	@ManyToMany(cascade = CascadeType.DETACH)
 	private List<Estudiantes> estudiantes;
 	
+	@OneToMany(mappedBy = "materias",  cascade = CascadeType.DETACH)
+	private List<Horarios> horarios;
+	
 	public Materias() {
 		docentes = new ArrayList<>();
 		estudiantes = new ArrayList<>();
+		horarios = new ArrayList<>();
 	}
 	
 	public long getId() {
@@ -77,6 +82,14 @@ public class Materias {
 	public void setEstudiantes(List<Estudiantes> estudiantes) {
 		this.estudiantes = estudiantes;
 	}
+	
+	public List<Horarios> getHorarios() {
+		return horarios;
+	}
+
+	public void setHorarios(List<Horarios> horarios) {
+		this.horarios = horarios;
+	}
 
 	public List<Docentes> docentesRestantes(List<Docentes> docentes){
 		List<Docentes> docentesRestantes = new ArrayList<>();
@@ -109,6 +122,5 @@ public class Materias {
 		}
 		return estudiantesRestantes;
 	}
-	
 	
 }

@@ -1,10 +1,14 @@
 package com.example.demo.Model;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
@@ -18,6 +22,9 @@ public class Aulas {
 	
 	@Column
 	private int capacidad;
+	
+	@OneToMany(mappedBy = "aulas",  cascade = CascadeType.DETACH)
+	private List<Horarios> horarios;
 
 	public long getId() {
 		return Id;
