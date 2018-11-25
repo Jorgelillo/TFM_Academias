@@ -18,6 +18,7 @@ export class DetallesDocenteComponent implements OnInit {
   materias: any[];
   materiasRestantes: any[];
   modificarDocente: FormGroup;
+  horarios: any[] = [];
 
   constructor(private formBuilder: FormBuilder,
               private docentesService: DocentesService,
@@ -80,9 +81,31 @@ export class DetallesDocenteComponent implements OnInit {
     data => {
       this.materias = data['_embedded'].materias;
       console.log(this.materias);
+      console.log(data);
+      for(let i = 0; i < this.materias.length; i++){
+        console.log(this.materias[i].nombre)
+        console.log(this.materias[i]['_links'].horarios.href);
+        this.getMateriasHorarios(this.materias[i]['_links'].horarios.href);
+      }
       }
     )
   }
+
+  getMateriasHorarios(url: string): void {
+    this.materiasService.getHorarios(url).subscribe(
+      data => {
+        const horarios = data['_embedded'].horarios;
+        for(let i = 0; i < horarios.length; i++){
+          console.log(data['_embedded'].horarios[i].horarios);
+          console.log(horarios);
+          this.horarios.push(data['_embedded'].horarios[i].horarios);
+          // this.horarios[i] = data['_embedded'].horarios[i].horarios;
+          }
+          console.log(this.horarios);
+        }
+      )
+    }
+
 
     /*
   *Función que obtiene todas las materias de la bbdd

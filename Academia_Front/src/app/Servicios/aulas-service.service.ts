@@ -38,10 +38,12 @@ public getAula(id: number): Observable<any> {
     );
   }
 
-  crearAula(capacidad: number):Observable<any>{
+  crearAula(nombre: string, codigo: string, capacidad: number):Observable<any>{
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/aulas`;
     const body = {
+      "nombre": nombre,
+      "codigo": codigo,
       "capacidad": capacidad
     }
 
@@ -61,11 +63,13 @@ public getAula(id: number): Observable<any> {
       )
   }
 
-  modificarAulas(id: number, capacidad: number): Observable<any> {
+  modificarAulas(id: number, capacidad: number, nombre: string, codigo: string): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/aulas/${id}/`;
     const body = {
-      'capacidad': capacidad
+      'capacidad': capacidad,
+      'nombre': nombre, 
+      'codigo': codigo
     }
 
     return this.http.patch<any>(url, body, {headers: Httpheader}).pipe(
@@ -73,7 +77,21 @@ public getAula(id: number): Observable<any> {
     );
   }
 
+  getHorarios(id: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/aulas/${id}/horarios`;
 
+    return this.http.get<any>(url, {headers: Httpheader}).pipe(
+      tap( _=> console.log(`fetched horarios aula id ${id}`))
+    );
+  }
 
+  getAulaHorario(url: string): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+
+    return this.http.get<any>(url, {headers: Httpheader}).pipe(
+      tap( _=> console.log(`fetched aula de horario`))
+    );
+    }
 
 }

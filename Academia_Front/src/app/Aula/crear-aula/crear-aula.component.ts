@@ -19,13 +19,17 @@ export class CrearAulaComponent implements OnInit {
             
   crearFormulario(){ 
     this.crearaulas = this.formBuilder.group({
-      capacidad: ['', Validators.required],
+      nombre: ['', Validators.required],
+      codigo: ['', Validators.required],
+      capacidad: ['', Validators.required]
     });
   }
 
   crearAulas() {
+    const nombre = this.crearaulas.value.nombre;
+    const codigo = this.crearaulas.value.codigo;
     const capacidad = this.crearaulas.value.capacidad;
-    this.aulasService.crearAula(capacidad).subscribe(
+    this.aulasService.crearAula(nombre, codigo, capacidad).subscribe(
       data => {
         console.log(data);
         location.assign('aulas');

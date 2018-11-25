@@ -21,6 +21,12 @@ public class Aulas {
 	private long Id;
 	
 	@Column
+	private String codigo;
+	
+	@Column
+	private String nombre;
+	
+	@Column
 	private int capacidad;
 	
 	@OneToMany(mappedBy = "aulas",  cascade = CascadeType.DETACH)
@@ -34,6 +40,22 @@ public class Aulas {
 		Id = id;
 	}
 
+	public String getCodigo() {
+		return codigo;
+	}
+
+	public void setCodigo(String codigo) {
+		this.codigo = codigo;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+	
 	public int getCapacidad() {
 		return capacidad;
 	}
@@ -41,6 +63,14 @@ public class Aulas {
 	public void setCapacidad(int capacidad) {
 		this.capacidad = capacidad;
 	}
+	public List<Horarios> getHorarios() {
+		return horarios;
+	}
+
+	public void setHorarios(List<Horarios> horarios) {
+		this.horarios = horarios;
+	}
+	
 
 	
 }

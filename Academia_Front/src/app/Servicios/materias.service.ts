@@ -24,6 +24,15 @@ public getMaterias(): Observable<any[]> {
     );  
   }
 
+  public getHorarios(url: string): Observable<any[]> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+  
+    return this.http.get<any[]>(url, {headers: Httpheader})
+      .pipe(
+        tap(horarios => console.log('fetched horarios'))
+      );  
+    }
+
 /*
 *Función que obtiene una de las materias de la bbdd
 * @param id de la materia
@@ -38,12 +47,13 @@ public getMateria(id: number): Observable<any> {
     );
   }
 
-  crearMateria(nombre: String, nivel: String):Observable<any>{
+  crearMateria(nombre: String, nivel: String, grupo: String):Observable<any>{
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/materias`;
     const body = {
       "nivel": nivel,
-      "nombre": nombre
+      "nombre": nombre,
+      "grupo": grupo
     }
 
     return this.http.post(url, body, {headers: Httpheader})
@@ -121,12 +131,13 @@ public getMateria(id: number): Observable<any> {
   }
 
   
-  modificarMaterias(id: number, nombre: string, nivel: string): Observable<any> {
+  modificarMaterias(id: number, nombre: string, nivel: string, grupo: string): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/materias/${id}/`;
     const body = {
       'nombre': nombre,
-      'nivel': nivel
+      'nivel': nivel,
+      "grupo": grupo
     }
 
     return this.http.patch<any>(url, body, {headers: Httpheader}).pipe(

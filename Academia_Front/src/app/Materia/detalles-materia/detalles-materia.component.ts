@@ -5,6 +5,8 @@ import { Materias } from 'src/app/Modelos/Materias';
 import { DocentesService } from 'src/app/Servicios/docentes.service';
 import { EstudiantesService } from 'src/app/Servicios/estudiantes.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { AulasServiceService } from 'src/app/Servicios/aulas-service.service';
+import { HorariosService } from 'src/app/Servicios/horarios.service';
 
 @Component({
   selector: 'app-detalles-materia',
@@ -17,18 +19,25 @@ export class DetallesMateriaComponent implements OnInit {
   docentesRestantes: any[];
   docentes: any[];
   estudiantes: any[];
+  aulas: any[];
+  aula: any[];
   estudiantesRestantes: any[];
+  horariosMateria: any[];
   activarBotonDoc: boolean;
   activarBotonEst: boolean;
   mostrarDoc: boolean;
   mostrarEst: boolean;
   modificarMateria: FormGroup;
+  horarioAula: FormGroup;
 
 
   constructor(private formBuilder: FormBuilder,
+              private formBuider2: FormBuilder,
               private materiaService: MateriasService,
               private docentesService: DocentesService,
               private estudiantesService: EstudiantesService,
+              private aulasService: AulasServiceService,
+              private horariosService: HorariosService,
               private route: ActivatedRoute) { }
 
   ngOnInit() {
@@ -38,20 +47,47 @@ export class DetallesMateriaComponent implements OnInit {
     this.getDocentesRestantes(id);
     this.getEstudiantesMateria(id);
     this.getEstudiantesRestantes(id);
-    this.crearFormulario();
+    this.crearFormularioModificar();
+    this.crearFormularioHorarios();
+    this.getHorario(id);
+    this.getAulas();
   }
 
-  crearFormulario(){ 
+  crearFormularioModificar(){ 
     this.modificarMateria = this.formBuilder.group({
       nombre: ['', Validators.required],
-      nivel: ['', Validators.required]
+      nivel: ['', Validators.required],
+      grupo: ['', Validators.required]
+    });
+  }
+
+ crearFormularioHorarios(){ 
+    this.horarioAula = this.formBuider2.group({
+      horario: ['', Validators.required],
+      selectAulas: ['', Validators.required]
     });
   }
 
   modificarMaterias(): void {
     const nombre = this.modificarMateria.value.nombre;
     const nivel = this.modificarMateria.value.nivel;
-    this.materiaService.modificarMaterias(this.materia.id, nombre, nivel).subscribe(
+    const grupo = this.modificarMateria.value.grupo;
+    this.materiaService.modificarMaterias(this.materia.id, nombre, nivel, grupo).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+    location.assign(`materias/detalles/${this.materia.id}`);
+  }
+
+  horarioAulas(): void {
+    const horarios = this.horarioAula.value.horario;
+    const selectAulas = this.horarioAula.value.selectAulas;
+
+    const aulas = `/${selectAulas}`
+    const materias = `/${this.materia.id}`
+
+    this.horariosService.setHorarios(horarios, materias, aulas).subscribe(
       data => {
         console.log(data);
       }
@@ -69,6 +105,7 @@ export class DetallesMateriaComponent implements OnInit {
       this.materia.id = id;
       this.materia.nombre = data.nombre;
       this.materia.nivel = data.nivel;
+      this.materia.grupo = data.grupo;
       }
     );
   }
@@ -190,6 +227,36 @@ addEstudiante(idEstudiante: number): void {
     }
   );
   location.reload();
+}
+
+getAulas(): void {
+  this.aulasService.getAulas().subscribe(
+    data => {
+      this.aulas = data['_embedded'].aulas;
+      console.log(this.aulas);
+    }
+  );
+}
+
+getHorario(id: number): void {
+  this.horariosService.getHorarioAula(id).subscribe(
+    data => {
+      this.horariosMateria = data['_embedded'].horarios;
+      console.log(this.horariosMateria);
+      const url = this.horariosMateria[0]['_links'].aulas.href;
+      this.getAula(url);
+      console.log(this.horariosMateria[0]['_links'].aulas.href);
+    }
+  );
+}
+
+getAula(url: string): void {
+  this.aulasService.getAulaHorario(url).subscribe(
+    data => {
+      console.log(data);
+      this.aula = data;
+    }
+  );
 }
 
 }

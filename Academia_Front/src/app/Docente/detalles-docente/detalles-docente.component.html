@@ -25,6 +25,16 @@
 <div class="row">
     <a class="waves-effect waves-light btn-small btn modal-trigger right" href="#modificar">Modificar</a>
 </div>
+
+<div class="row">
+  <div class="col s12">
+    <h5>Horario de trabajo</h5>
+    <ul *ngFor="let horario of horarios">
+      <li>{{horario}}</li>
+    </ul>
+  </div>
+</div>
+
 <div class="row">
   <div class="col s12">
     <h5>Materias que imparte</h5>
@@ -34,6 +44,7 @@
             <th>ID</th>
             <th>NOMBRE</th>
             <th>NIVEL</th>
+            <th>GRUPO</th>
         </tr>
       </thead>
       <tbody>
@@ -41,6 +52,7 @@
           <td>{{materia.id}}</td>
           <td>{{materia.nombre}}</td>
           <td>{{materia.nivel}}</td>
+          <td>{{materia.grupo}}</td>
           <td><button id="btnVer" (click)= "verMateria(materia.id)">Ver</button></td>
           <td><button id="btnBorrar" (click)= "borrarMateria(materia.id)">Eliminar</button></td>
         </tr>

@@ -7,12 +7,16 @@
   <thead>
     <tr>
         <th>ID</th>
+        <th>CODIGO</th>
+        <th>NOMBRE</th>
         <th>CAPACIDAD</th>
     </tr>
   </thead>
   <tbody>
     <tr *ngFor="let aula of aulas">
       <td>{{aula.id}}</td>
+      <td>{{aula.codigo}}</td>
+      <td>{{aula.nombre}}</td>
       <td>{{aula.capacidad}}</td>
       <td><button id="btnVer" (click)= "verAula(aula.id)">Ver</button></td>
       <td><button id="btnBorrar" (click)= "borrarAula(aula.id)">Eliminar</button></td>

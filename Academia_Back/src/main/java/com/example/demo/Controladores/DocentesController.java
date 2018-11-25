@@ -27,7 +27,7 @@ public class DocentesController {
 	@RequestMapping(value = "/docentes/{id}/materiasRestantes", method = RequestMethod.GET)
 	public ResponseEntity<List<Materias>> materiasRestantes(@PathVariable("id") long id) {
 		Docentes docente = docenteRepositorio.findById(id);
-				
+		
 		if ( docente ==  null ) {
 			return new ResponseEntity<List<Materias>>(HttpStatus.NOT_FOUND);
 		} else {

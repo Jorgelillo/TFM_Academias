@@ -69,8 +69,4 @@ public class Horarios {
 		this.aulas = aulas;
 	}
 	
-	
-	
-	
-
 }

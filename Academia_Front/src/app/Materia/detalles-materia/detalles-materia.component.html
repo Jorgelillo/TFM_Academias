@@ -4,10 +4,14 @@
     <div class="col s12">
       <h5>{{materia.nombre}}</h5>
       <h5>{{materia.nivel}}</h5>
+      <h5>{{materia.grupo}}</h5>
+      <h6 *ngFor="let horario of horariosMateria">Horario: {{horario?.horarios}}</h6>
+      <h6>Aula: {{aula?.nombre}}</h6>
     </div>
   </div>
   <div class="row">
     <a class="waves-effect waves-light btn modal-trigger right" href="#modificar">Modificar</a>
+    <a class="waves-effect waves-light btn modal-trigger right" href="#horarioAulasModal">Horario y Aula</a>
   </div>
   <ul class="collapsible">
     <li>
@@ -146,10 +150,17 @@
     <div class="row">
         <form (ngSubmit)="modificarMaterias()" [formGroup]="modificarMateria" novalidate>
           <div class="row">
-              <div class="input-field col s12">
-                <label class="active" for="nombre">Nombre de la materia</label>
-                <input id="nombre" type="text" class="validate" formControlName="nombre">
-              </div>
+            <div class="row">
+                <div class="input-field col s6">
+                  <label class="active" for="nombre">Nombre de la materia</label>
+                  <input id="nombre" type="text" class="validate" formControlName="nombre">
+                </div>
+                <div class="input-field col s6">
+                    <label class="active" for="grupo">Grupo</label>
+                    <input id="grupo" type="text" class="validate" formControlName="grupo">
+                </div>
+            </div>
+            <div class="row">
               <div class="input-field col s6">
                 <label>
                     <input name="nivel" type="radio" value="ESO" formControlName="nivel" checked/>
@@ -161,6 +172,36 @@
                     <input name="nivel" type="radio" formControlName="nivel" value="BACHILLERATO"/>
                     <span>BACHILLERATO</span>
                 </label>
+              </div>
+            </div>
+              <div class="row">
+                <div class="input-field col s12">
+                    <button id="botonCrear" class="btn waves-effect waves-light right" 
+                            type="button" type="submit" 
+                            name="action">Enviar
+                    </button>
+                </div>
+              </div>
+            </div>
+        </form>
+    </div>
+  </div>
+</div>
+
+<!--Modal Structure -->
+<div id="horarioAulasModal" class="modal">
+  <div class="modal-content">
+    <div class="row">
+        <form (ngSubmit)="horarioAulas()" [formGroup]="horarioAula" novalidate>
+          <div class="row">
+              <div class="input-field col s12">
+                <label class="active" for="horario">Horario</label>
+                <input id="horario" type="text" class="validate" placeholder="L(8-9)-M(8-9)" formControlName="horario">
+              </div>
+              <div class="input-field col s6">
+               <select formControlName="selectAulas" id="aulas" name="aulas">
+                  <option *ngFor="let aula of aulas" value="{{aula.id}}">{{aula.nombre}}</option>
+               </select>
               </div>
               <div class="row">
                 <div class="input-field col s12">

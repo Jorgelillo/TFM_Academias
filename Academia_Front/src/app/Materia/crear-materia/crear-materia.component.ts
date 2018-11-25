@@ -22,6 +22,7 @@ export class CrearMateriaComponent implements OnInit {
   crearFormulario(){ 
     this.crearMaterias = this.formBuilder.group({
       nombre: ['', Validators.required],
+      grupo: ['', Validators.required],
       nivel: ['', Validators.required]
     });
   }
@@ -29,7 +30,9 @@ export class CrearMateriaComponent implements OnInit {
   crearMateria() {
     const nombre = this.crearMaterias.value.nombre;
     const nivel = this.crearMaterias.value.nivel;
-    this.materiaService.crearMateria(nombre, nivel).subscribe(
+    const grupo = this.crearMaterias.value.grupo;
+
+    this.materiaService.crearMateria(nombre, nivel, grupo).subscribe(
       data => {
         console.log(data);
         location.assign('materias');

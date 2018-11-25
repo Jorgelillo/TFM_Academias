@@ -28,6 +28,9 @@ public class Materias {
 	@Column
 	private String nivel;
 	
+	@Column
+	private String grupo;
+	
 	@ManyToMany(cascade = CascadeType.DETACH)
 	private List<Docentes> docentes;
 	
@@ -89,6 +92,14 @@ public class Materias {
 
 	public void setHorarios(List<Horarios> horarios) {
 		this.horarios = horarios;
+	}
+
+	public String getGrupo() {
+		return grupo;
+	}
+
+	public void setGrupo(String grupo) {
+		this.grupo = grupo;
 	}
 
 	public List<Docentes> docentesRestantes(List<Docentes> docentes){
