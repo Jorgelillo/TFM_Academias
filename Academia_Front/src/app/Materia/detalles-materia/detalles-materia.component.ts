@@ -44,6 +44,7 @@ export class DetallesMateriaComponent implements OnInit {
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
+    this.getAulas();
     this.getMateria(id);
     this.getDocentesMateria(id);
     this.getDocentesRestantes(id);
@@ -53,7 +54,6 @@ export class DetallesMateriaComponent implements OnInit {
     this.crearFormularioHorarios();
     this.crearFormularioActualizarHorarios()
     this.getHorario(id);
-    this.getAulas();
   }
 
   crearFormularioModificar(){ 
