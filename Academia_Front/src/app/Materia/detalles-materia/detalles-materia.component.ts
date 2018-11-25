@@ -29,10 +29,12 @@ export class DetallesMateriaComponent implements OnInit {
   mostrarEst: boolean;
   modificarMateria: FormGroup;
   horarioAula: FormGroup;
+  actualizarAula: FormGroup;
 
 
   constructor(private formBuilder: FormBuilder,
               private formBuider2: FormBuilder,
+              private formBuider3: FormBuilder,
               private materiaService: MateriasService,
               private docentesService: DocentesService,
               private estudiantesService: EstudiantesService,
@@ -49,6 +51,7 @@ export class DetallesMateriaComponent implements OnInit {
     this.getEstudiantesRestantes(id);
     this.crearFormularioModificar();
     this.crearFormularioHorarios();
+    this.crearFormularioActualizarHorarios()
     this.getHorario(id);
     this.getAulas();
   }
@@ -63,6 +66,13 @@ export class DetallesMateriaComponent implements OnInit {
 
  crearFormularioHorarios(){ 
     this.horarioAula = this.formBuider2.group({
+      horario: ['', Validators.required],
+      selectAulas: ['', Validators.required]
+    });
+  }
+
+  crearFormularioActualizarHorarios(){ 
+    this.actualizarAula = this.formBuider3.group({
       horario: ['', Validators.required],
       selectAulas: ['', Validators.required]
     });
@@ -88,6 +98,24 @@ export class DetallesMateriaComponent implements OnInit {
     const materias = `/${this.materia.id}`
 
     this.horariosService.setHorarios(horarios, materias, aulas).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+    location.assign(`materias/detalles/${this.materia.id}`);
+  }
+
+  actualizarHorarios(): void {
+    const horarios = this.actualizarAula.value.horario;
+    const selectAulas = this.actualizarAula.value.selectAulas;
+
+    console.log(horarios);
+    console.log(selectAulas);
+
+    const aulas = `http://localhost:4200/aulas/${selectAulas}`;
+    const horarioId = this.horariosMateria[0].id;
+
+    this.horariosService.actualizarHorarios(horarioId, horarios, aulas).subscribe(
       data => {
         console.log(data);
       }
@@ -243,9 +271,11 @@ getHorario(id: number): void {
     data => {
       this.horariosMateria = data['_embedded'].horarios;
       console.log(this.horariosMateria);
+      if( this.horariosMateria[0]) {
       const url = this.horariosMateria[0]['_links'].aulas.href;
       this.getAula(url);
-      console.log(this.horariosMateria[0]['_links'].aulas.href);
+      }
+      // console.log(this.horariosMateria[0]['_links'].aulas.href);
     }
   );
 }

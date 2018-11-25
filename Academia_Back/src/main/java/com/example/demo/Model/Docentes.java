@@ -98,6 +98,7 @@ public class Docentes {
 				mat.setId(materia.getId());
 				mat.setNombre(materia.getNombre());
 				mat.setNivel(materia.getNivel());
+				mat.setGrupo(materia.getGrupo());
 				materiasRestantes.add(mat);
 			}
 		}

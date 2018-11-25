@@ -46,13 +46,16 @@ public class Materias {
 		horarios = new ArrayList<>();
 	}
 	
+
 	public long getId() {
 		return Id;
 	}
 
-	public void setId(long id) {
-		Id = id;
+
+	public void setId(long Id) {
+		this.Id = Id;
 	}
+
 
 	public String getNombre() {
 		return nombre;

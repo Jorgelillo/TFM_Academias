@@ -25,6 +25,23 @@ export class HorariosService {
   )
 }
 
+actualizarHorarios(horariosId: string, horarios: string, aulas: string):Observable<any>{
+  const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+  const url = `http://localhost:8080/horarios/${horariosId}`;
+  const body = {
+    "horarios": horarios,
+    "aulas": aulas,
+  }
+  console.log(body);
+
+  return this.http.patch(url, body, {headers: Httpheader})
+  .pipe(
+    tap((estudiantes: any) => console.log(`Horario actualizado`))
+)
+}
+
+
+
 getHorarioAula(idMateria: number):Observable<any>{
   const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
   const url = `http://localhost:8080/materias/${idMateria}/horarios`;

@@ -34,6 +34,7 @@
             <th>ID</th>
             <th>NOMBRE</th>
             <th>NIVEL</th>
+            <th>GRUPO</th>
         </tr>
       </thead>
       <tbody>
@@ -41,6 +42,7 @@
           <td>{{materia.id}}</td>
           <td>{{materia.nombre}}</td>
           <td>{{materia.nivel}}</td>
+          <td>{{materia.grupo}}</td>
           <td><button id="btnVer" (click)= "verMateria(materia.id)">Ver</button></td>
           <td><button id="btnBorrar" (click)= "borrarMateria(materia.id)">Eliminar</button></td>
         </tr>
@@ -60,6 +62,7 @@
             <th>id</th>
             <th>Nombre</th>
             <th>Nivel</th>
+            <th>Grupo</th>
             <th></th>
             <th></th>
           </tr>
@@ -69,6 +72,7 @@
             <td>{{materia.id}}</td>
             <td>{{materia.nombre}}</td>
             <td>{{materia.nivel}}</td>
+            <td>{{materia.grupo}}</td>
             <td><button id="btnVer" (click)= "verMateria(materia.id)">Ver</button></td>
             <td><button id="btnBorrar" (click)= "addMateria(materia.id)">Añadir</button></td>
           </tr>

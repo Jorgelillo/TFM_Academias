@@ -93,6 +93,7 @@ export class DetallesEstudianteComponent implements OnInit {
   this.materiasService.getMateriasRestantesEstudiante(id).subscribe(
     data => {
       this.materiasRestantes = data;
+      console.log(this.materiasRestantes);
       if(this.materiasRestantes.length !== 0){
         this.activarBoton = true;
        } else {

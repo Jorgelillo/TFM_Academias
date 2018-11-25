@@ -92,6 +92,7 @@ public class Estudiantes {
 				mat.setId(materia.getId());
 				mat.setNombre(materia.getNombre());
 				mat.setNivel(materia.getNivel());
+				mat.setGrupo(materia.getGrupo());
 				materiasRestantes.add(mat);
 			}
 		}
