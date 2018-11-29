@@ -20,7 +20,7 @@ public getAulas(): Observable<any[]> {
 
   return this.http.get<any[]>(url, {headers: Httpheader})
     .pipe(
-      tap(aulas => console.log('fetched aulas'))
+      tap(_ => console.log('fetched aulas'))
     );  
   }
 

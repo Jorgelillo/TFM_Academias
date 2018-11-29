@@ -53,7 +53,7 @@ export class DetallesDocenteComponent implements OnInit {
         console.log(data);
       }
     );
-    location.assign(`docentes/detalles/${this.docente.id}`);
+    location.assign(`docente/detalles/${this.docente.id}`);
   }
 
   /*
@@ -132,7 +132,7 @@ export class DetallesDocenteComponent implements OnInit {
   }
 
   verMateria(id: number): void {
-    location.assign(`materias/detalles/${id}`);
+    location.assign(`materia/detalles/${id}`);
   }
 
   addMateria(id: number): void {

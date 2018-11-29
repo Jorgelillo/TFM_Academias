@@ -201,7 +201,9 @@
               </div>
               <div class="input-field col s6">
                <select formControlName="selectAulas" id="aulas" name="aulas">
+                 <ng-container>
                   <option *ngFor="let aula of aulas" value="{{aula.id}}">{{aula.nombre}}</option>
+                </ng-container>
                </select>
               </div>
               <div class="row">
@@ -229,8 +231,10 @@
                   <input id="horario" type="text" class="validate" placeholder="L(8-9)-M(8-9)" formControlName="horario">
                 </div>
                 <div class="input-field col s6">
-                 <select *ngIf="aulas" formControlName="selectAulas" id="aulas" name="aulas" class="form-control">
-                    <option *ngFor="let aula of aulas" value="{{aula.id}}">{{aula.nombre}}</option>
+                 <select  formControlName="selectAulas" id="aulas" name="aulas" class="form-control">
+                    <ng-container *ngIf="aulas"> 
+                      <option *ngFor="let aula of aulas" value="{{aula.id}}">{{aula.nombre}}</option>
+                    </ng-container>
                  </select>
                 </div>
                 <div class="row">

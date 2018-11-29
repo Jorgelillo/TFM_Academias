@@ -35,7 +35,7 @@ export class CrearMateriaComponent implements OnInit {
     this.materiaService.crearMateria(nombre, nivel, grupo).subscribe(
       data => {
         console.log(data);
-        location.assign('materias');
+        location.assign('materia');
       }
     )
   }

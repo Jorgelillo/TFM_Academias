@@ -87,7 +87,7 @@ export class DetallesMateriaComponent implements OnInit {
         console.log(data);
       }
     );
-    location.assign(`materias/detalles/${this.materia.id}`);
+    location.assign(`materia/detalles/${this.materia.id}`);
   }
 
   horarioAulas(): void {
@@ -102,7 +102,7 @@ export class DetallesMateriaComponent implements OnInit {
         console.log(data);
       }
     );
-    location.assign(`materias/detalles/${this.materia.id}`);
+    location.assign(`materia/detalles/${this.materia.id}`);
   }
 
   actualizarHorarios(): void {
@@ -112,7 +112,7 @@ export class DetallesMateriaComponent implements OnInit {
     console.log(horarios);
     console.log(selectAulas);
 
-    const aulas = `http://localhost:4200/aulas/${selectAulas}`;
+    const aulas = `http://localhost:4200/aula/${selectAulas}`;
     const horarioId = this.horariosMateria[0].id;
 
     this.horariosService.actualizarHorarios(horarioId, horarios, aulas).subscribe(
@@ -120,7 +120,7 @@ export class DetallesMateriaComponent implements OnInit {
         console.log(data);
       }
     );
-    location.assign(`materias/detalles/${this.materia.id}`);
+    location.assign(`materia/detalles/${this.materia.id}`);
   }
 
   /*
@@ -174,7 +174,7 @@ mostrarDocentes(): void {
 }
 
 verDocente(id: number): void {
-  location.assign(`docentes/detalles/${id}`);
+  location.assign(`docente/detalles/${id}`);
 }
 
 borrarDocente(id: number): void {
@@ -234,7 +234,7 @@ addDocente(idDocente: number): void {
   }
 
   verEstudiante(id: number): void {
-    location.assign(`estudiantes/detalles/${id}`);
+    location.assign(`estudiante/detalles/${id}`);
   }
 
 borrarEstudiante(id: number): void {

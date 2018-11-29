@@ -42,7 +42,7 @@ borrarAula(id: number): void {
 *Función que muestra los detalles de un aula
 */
 verAula(id: number): void {
-  location.assign(`aulas/detalles/${id}`);
+  location.assign(`aula/detalles/${id}`);
 }
 
 /*

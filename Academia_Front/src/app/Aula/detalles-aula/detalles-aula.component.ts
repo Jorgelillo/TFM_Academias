@@ -16,6 +16,13 @@ export class DetallesAulaComponent implements OnInit {
   modificarAula: FormGroup;
   horarios: any[];
 
+  lunes: any[] = [];
+  martes: any[] = [];
+  miercoles: any[] = [];
+  jueves: any[] = [];
+  viernes: any[] = [];
+  sabado: any[] = [];
+
   constructor(private formBuilder: FormBuilder,
               private aulasService: AulasServiceService,
               private route: ActivatedRoute) { }
@@ -45,7 +52,7 @@ export class DetallesAulaComponent implements OnInit {
         console.log(data);
       }
     );
-    location.assign(`aulas/detalles/${this.aula.id}`);
+    location.assign(`aula/detalles/${this.aula.id}`);
   }
 
   /*
@@ -69,6 +76,67 @@ export class DetallesAulaComponent implements OnInit {
       data => {
         this.horarios = data['_embedded'].horarios;
         console.log(this.horarios);
+
+        for( let i = 0; i < this.horarios.length; i++){
+          let hora = this.horarios[i].horarios;
+          console.log(hora.substring(0,1));
+          console.log(hora.substring(9,10));
+
+          if (hora.substring(0,1) == 'L'){
+            this.lunes.push(hora.substring(2,7));
+            console.log(this.lunes);
+          }
+          if (hora.substring(9,10) == 'L'){
+            this.lunes.push(hora.substring(11,16));
+            console.log(this.lunes);
+          }
+          if (hora.substring(0,1) == 'M'){
+            this.martes.push(hora.substring(2,7));
+            console.log(this.martes);
+          }
+          if (hora.substring(9,10) == 'M'){
+            this.martes.push(hora.substring(11,16));
+            console.log(this.martes);
+          }
+          if (hora.substring(0,1) == 'X'){
+            this.miercoles.push(hora.substring(2,7));
+            console.log(this.miercoles);
+          }
+          if (hora.substring(9,10) == 'X'){
+            this.miercoles.push(hora.substring(11,16));
+            console.log(this.miercoles);
+          }
+          if (hora.substring(0,1) == 'J'){
+            this.jueves.push(hora.substring(2,7));
+            console.log(this.jueves);
+          }
+          if (hora.substring(9,10) == 'J'){
+            this.jueves.push(hora.substring(11,16));
+            console.log(this.jueves);
+          }
+          if (hora.substring(0,1) == 'V'){
+            this.viernes.push(hora.substring(2,7));
+            console.log(this.viernes);
+          }
+          if (hora.substring(9,10) == 'V'){
+            this.viernes.push(hora.substring(11,16));
+            console.log(this.viernes);
+          }
+          if (hora.substring(0,1) == 'S'){
+            this.sabado.push(hora.substring(2,7));
+            console.log(this.sabado);
+          }
+          if (hora.substring(9,10) == 'S'){
+            this.sabado.push(hora.substring(11,16));
+            console.log(this.sabado);
+          }
+        }
+        this.lunes.sort();
+        this.martes.sort();
+        this.miercoles.sort();
+        this.jueves.sort();
+        this.viernes.sort();
+        this.sabado.sort();
       }
     );
 

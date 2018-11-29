@@ -14,14 +14,14 @@ import { DetallesEstudianteComponent } from './Estudiante/detalles-estudiante/de
 const routes: Routes = [
   { path: '', redirectTo: 'welcome', pathMatch: 'full' },
   { path: 'welcome', component: WelcomeComponent },
-  { path: 'docentes', component: DocentesComponent },
-  { path: 'docentes/detalles/:id', component: DetallesDocenteComponent },
-  { path: 'estudiantes', component: EstudiantesComponent },
-  { path: 'estudiantes/detalles/:id', component: DetallesEstudianteComponent },
-  { path: 'materias', component: MateriasComponent },
-  { path: 'materias/detalles/:id', component: DetallesMateriaComponent },
-  { path: 'aulas', component: AulasComponent },
-  { path: 'aulas/detalles/:id', component: DetallesAulaComponent },
+  { path: 'docente', component: DocentesComponent },
+  { path: 'docente/detalles/:id', component: DetallesDocenteComponent },
+  { path: 'estudiante', component: EstudiantesComponent },
+  { path: 'estudiante/detalles/:id', component: DetallesEstudianteComponent },
+  { path: 'materia', component: MateriasComponent },
+  { path: 'materia/detalles/:id', component: DetallesMateriaComponent },
+  { path: 'aula', component: AulasComponent },
+  { path: 'aula/detalles/:id', component: DetallesAulaComponent },
   { path: '**', component: WelcomeComponent}
 ];
 

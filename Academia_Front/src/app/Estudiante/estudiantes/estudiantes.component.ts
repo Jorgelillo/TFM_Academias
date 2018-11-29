@@ -54,7 +54,7 @@ export class EstudiantesComponent implements OnInit {
   *Función que muestra los detalles de un estudiante
   */
   verEstudiante(id: number): void {
-    location.assign(`estudiantes/detalles/${id}`);
+    location.assign(`estudiante/detalles/${id}`);
   }
 
   /*

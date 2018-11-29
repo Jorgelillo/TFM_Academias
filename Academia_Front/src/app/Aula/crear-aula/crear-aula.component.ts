@@ -32,7 +32,7 @@ export class CrearAulaComponent implements OnInit {
     this.aulasService.crearAula(nombre, codigo, capacidad).subscribe(
       data => {
         console.log(data);
-        location.assign('aulas');
+        location.assign('aula');
       }
     )
   }

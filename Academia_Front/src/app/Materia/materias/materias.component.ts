@@ -55,7 +55,7 @@ export class MateriasComponent implements OnInit {
   *Función que muestra los detalles de una materia
   */
   verMateria(id: number): void {
-    location.assign(`materias/detalles/${id}`);
+    location.assign(`materia/detalles/${id}`);
   }
 
   /*

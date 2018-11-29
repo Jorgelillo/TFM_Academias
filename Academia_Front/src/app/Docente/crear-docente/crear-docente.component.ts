@@ -35,7 +35,7 @@ export class CrearDocenteComponent implements OnInit {
     this.docentesService.crearDocente(nombre, apellidos, email, telefono).subscribe(
       data => {
         console.log(data);
-        location.assign('docentes');
+        location.assign('docente');
       }
     )
   }
