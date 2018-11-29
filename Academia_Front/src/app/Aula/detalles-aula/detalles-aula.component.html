@@ -16,11 +16,17 @@
       <thead>
         <tr>
             <th>Horarios</th>
+            <th>Materia</th>
+            <th>Nivel</th>
+            <th>Grupo</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let horario of horarios">
-          <td>{{horario.horarios}}</td>
+        <tr *ngFor="let vis of vista">
+          <td>{{vis.horario}}</td>
+          <td>{{vis.materia}}</td>
+          <td>{{vis.nivel}}</td>
+          <td>{{vis.grupo}}</td>
         </tr>
       </tbody>
     </table>
@@ -29,38 +35,44 @@
 <div class="row">
   <div class="col s2">
     <p class="calendario">LUNES</p>
-    <div *ngFor="let l of lunes">
-        <p >{{l}}</p>
+    <div class="dia" *ngFor="let l of lunes">
+        <p>{{l.horario}}</p>
+        <p>{{l.materia}}</p>
     </div>
   </div>
   <div class="col s2">
     <p class="calendario">MARTES</p>
-    <div *ngFor="let m of martes">
-        <p >{{m}}</p>
+    <div class="dia" *ngFor="let m of martes">
+        <p>{{m.horario}}</p>
+        <p>{{m.materia}}</p>
     </div>
   </div>
   <div class="col s2">
     <p class="calendario">MIERCOLES</p>
-    <div *ngFor="let x of miercoles">
-        <p >{{x}}</p>
+    <div class="dia" *ngFor="let x of miercoles">
+        <p>{{x.horario}}</p>
+        <p>{{x.materia}}</p>
     </div>
   </div>
   <div class="col s2">
     <p class="calendario">JUEVES</p>
-    <div *ngFor="let j of jueves">
-        <p >{{j}}</p>
+    <div class="dia" *ngFor="let j of jueves">
+        <p>{{j.horario}}</p>
+        <p>{{j.materia}}</p>
     </div>
   </div>
   <div class="col s2">
     <p class="calendario">VIERNES</p>
-    <div *ngFor="let v of viernes">
-        <p >{{v}}</p>
+    <div class="dia" *ngFor="let v of viernes">
+        <p>{{v.horario}}</p>
+        <p>{{v.materia}}</p>
     </div>
   </div>
   <div class="col s2">
     <p class="calendario">SABADO</p>
-    <div *ngFor="let s of sabado">
-        <p >{{s}}</p>
+    <div class="dia" *ngFor="let s of sabado">
+        <p>{{s.horario}}</p>
+        <p>{{s.materia}}</p>
     </div>
   </div>
 </div>

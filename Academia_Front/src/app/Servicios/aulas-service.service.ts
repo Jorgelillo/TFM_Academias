@@ -94,4 +94,12 @@ public getAula(id: number): Observable<any> {
     );
     }
 
+    getVistaHorarios(id: number): Observable<any> {
+      const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+      const urlVista = `http://localhost:8080/horarioView/${id}`
+      return this.http.get<any>(urlVista, {headers: Httpheader}).pipe(
+        tap( _=> console.log(`fetched vista del aula`))
+      );
+      }
+
 }

@@ -6,7 +6,7 @@
       <h5>{{materia.nivel}}</h5>
       <h5>{{materia.grupo}}</h5>
       <h6 *ngFor="let horario of horariosMateria">Horario: {{horario?.horarios}}</h6>
-      <h6 *ngIf="aula">Aula: {{aula?.nombre}}</h6>
+      <h6 *ngIf="aula">Aula: <a href="aula/detalles/{{aula?.id}}">{{aula?.nombre}}</a></h6>
     </div>
   </div>
   <div class="row">
@@ -232,7 +232,7 @@
                 </div>
                 <div class="input-field col s6">
                  <select  formControlName="selectAulas" id="aulas" name="aulas" class="form-control">
-                    <ng-container *ngIf="aulas"> 
+                    <ng-container> 
                       <option *ngFor="let aula of aulas" value="{{aula.id}}">{{aula.nombre}}</option>
                     </ng-container>
                  </select>

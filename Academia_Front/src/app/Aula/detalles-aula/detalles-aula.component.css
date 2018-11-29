@@ -1,3 +1,12 @@
 .calendario {
     background-color: #F5A9F2;
+    border-style: solid;
+    border-width: 1px;
+    text-align: center;
+}
+
+.dia{
+    border-style: solid;
+    border-width: 1px;
+    text-align: center;
 }

@@ -7,5 +7,7 @@ import com.example.demo.Model.Aulas;
 
 @RepositoryRestResource(collectionResourceRel = "aulas", path = "aulas")
 public interface AulaRepository extends CrudRepository<Aulas, Long>{
+	
+	Aulas findById(long id);
 
 }

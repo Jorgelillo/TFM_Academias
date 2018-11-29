@@ -15,13 +15,16 @@ export class DetallesAulaComponent implements OnInit {
   aula: Aulas;
   modificarAula: FormGroup;
   horarios: any[];
+  vista: any[];
 
-  lunes: any[] = [];
-  martes: any[] = [];
-  miercoles: any[] = [];
-  jueves: any[] = [];
-  viernes: any[] = [];
-  sabado: any[] = [];
+  dia: any = [];
+
+  lunes: any = [];
+  martes: any = [];
+  miercoles: any = [];
+  jueves: any = [];
+  viernes: any = [];
+  sabado: any = [];
 
   constructor(private formBuilder: FormBuilder,
               private aulasService: AulasServiceService,
@@ -32,6 +35,7 @@ export class DetallesAulaComponent implements OnInit {
     this.getAula(id);
     this.crearFormulario();
     this.getHorarios(id);
+    this.getVistaHorarios(id);
 
   }
 
@@ -71,12 +75,92 @@ export class DetallesAulaComponent implements OnInit {
     );
   }
 
+  getVistaHorarios(id: number): void {
+    this.aulasService.getVistaHorarios(id).subscribe(
+      data => {
+        this.vista = data;
+        console.log(this.vista);
+        for( let i = 0; i < this.vista.length; i++){
+          let hora = this.vista[i].horario;
+          let datos = this.vista[i];
+
+          console.log(hora);
+
+          if (hora.substring(0,1) == 'L'){
+            this.lunes.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              })
+          }
+          if (hora.substring(9,10) == 'L'){
+            this.lunes.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              })
+          }
+          if (hora.substring(0,1) == 'M'){
+            this.martes.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              })
+          }
+          if (hora.substring(9,10) == 'M'){
+            this.martes.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              })
+          }
+          if (hora.substring(0,1) == 'X'){
+            this.miercoles.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              })
+          }
+          if (hora.substring(9,10) == 'X'){
+            this.miercoles.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              })
+          }
+          if (hora.substring(0,1) == 'J'){
+            this.jueves.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              })
+          }
+          if (hora.substring(9,10) == 'J'){
+            this.jueves.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              })
+          }
+          if (hora.substring(0,1) == 'V'){
+            this.viernes.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              })
+          }
+          if (hora.substring(9,10) == 'V'){
+            this.viernes.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              })
+          }
+          if (hora.substring(0,1) == 'S'){
+            this.sabado.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              })
+          }
+          if (hora.substring(9,10) == 'S'){
+            this.sabado.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              })
+          }
+          console.log(this.miercoles);
+          console.log(this.miercoles);
+        }
+        }
+      );
+    }
+
+
+
   getHorarios(id: number): void {
     this.aulasService.getHorarios(id).subscribe(
       data => {
         this.horarios = data['_embedded'].horarios;
         console.log(this.horarios);
-
+/*
         for( let i = 0; i < this.horarios.length; i++){
           let hora = this.horarios[i].horarios;
           console.log(hora.substring(0,1));
@@ -137,6 +221,7 @@ export class DetallesAulaComponent implements OnInit {
         this.jueves.sort();
         this.viernes.sort();
         this.sabado.sort();
+        */
       }
     );
 
