@@ -8,9 +8,10 @@
     </div>
   </div>
   <div class="row">
-    <a class="waves-effect waves-light btn modal-trigger right" href="#modificar">Modificar</a>
+    <a class="waves-effect waves-light btn btn-small modal-trigger right" href="#modificar">Modificar</a>
+    <a id="mostrarHorarios" class="waves-effect waves-light btn btn-small right" (click)="mostrarHorarios()">Detalles Horarios</a>
   </div>
-  <div class="row">
+  <div class="row" [hidden]="!mostrar">
   <div class="col s12">
     <table>
       <thead>
@@ -32,45 +33,46 @@
     </table>
   </div>
 </div>
-<div class="row">
+<br>
+<div class="row schedule" *ngIf="verHora">
   <div class="col s2">
     <p class="calendario">LUNES</p>
-    <div class="dia" *ngFor="let l of lunes">
+    <div class="dia {{l?.materia}}" *ngFor="let l of lunes">
         <p>{{l.horario}}</p>
         <p>{{l.materia}}</p>
     </div>
   </div>
   <div class="col s2">
     <p class="calendario">MARTES</p>
-    <div class="dia" *ngFor="let m of martes">
-        <p>{{m.horario}}</p>
+    <div class="dia {{m?.materia}}" *ngFor="let m of martes">
+        <p>{{m.horario}} </p>
         <p>{{m.materia}}</p>
     </div>
   </div>
   <div class="col s2">
     <p class="calendario">MIERCOLES</p>
-    <div class="dia" *ngFor="let x of miercoles">
+    <div class="dia {{x?.materia}}" *ngFor="let x of miercoles">
         <p>{{x.horario}}</p>
         <p>{{x.materia}}</p>
     </div>
   </div>
   <div class="col s2">
     <p class="calendario">JUEVES</p>
-    <div class="dia" *ngFor="let j of jueves">
+    <div class="dia {{j?.materia}}" *ngFor="let j of jueves">
         <p>{{j.horario}}</p>
         <p>{{j.materia}}</p>
     </div>
   </div>
   <div class="col s2">
     <p class="calendario">VIERNES</p>
-    <div class="dia" *ngFor="let v of viernes">
+    <div class="dia {{v?.materia}}" *ngFor="let v of viernes">
         <p>{{v.horario}}</p>
         <p>{{v.materia}}</p>
     </div>
   </div>
   <div class="col s2">
     <p class="calendario">SABADO</p>
-    <div class="dia" *ngFor="let s of sabado">
+    <div class="dia {{s?.materia}}" *ngFor="let s of sabado">
         <p>{{s.horario}}</p>
         <p>{{s.materia}}</p>
     </div>

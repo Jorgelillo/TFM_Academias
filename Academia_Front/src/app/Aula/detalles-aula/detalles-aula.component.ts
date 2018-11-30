@@ -16,8 +16,8 @@ export class DetallesAulaComponent implements OnInit {
   modificarAula: FormGroup;
   horarios: any[];
   vista: any[];
-
-  dia: any = [];
+  mostrar: boolean;
+  verHora: boolean;
 
   lunes: any = [];
   martes: any = [];
@@ -32,10 +32,12 @@ export class DetallesAulaComponent implements OnInit {
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
+    this.verHora = false;
     this.getAula(id);
     this.crearFormulario();
     this.getHorarios(id);
     this.getVistaHorarios(id);
+    this.mostrar = false;
 
   }
 
@@ -79,6 +81,13 @@ export class DetallesAulaComponent implements OnInit {
     this.aulasService.getVistaHorarios(id).subscribe(
       data => {
         this.vista = data;
+        if(this.vista.length == 0){
+          this.verHora = false;
+          console.log(this.verHora);
+        } else {
+          this.verHora = true;
+          console.log(this.verHora);
+        }
         console.log(this.vista);
         for( let i = 0; i < this.vista.length; i++){
           let hora = this.vista[i].horario;
@@ -92,7 +101,7 @@ export class DetallesAulaComponent implements OnInit {
               })
           }
           if (hora.substring(9,10) == 'L'){
-            this.lunes.push({horario: hora.substring(2,7),
+            this.lunes.push({horario: hora.substring(11,16),
               materia: datos.materia,
               })
           }
@@ -102,7 +111,7 @@ export class DetallesAulaComponent implements OnInit {
               })
           }
           if (hora.substring(9,10) == 'M'){
-            this.martes.push({horario: hora.substring(2,7),
+            this.martes.push({horario: hora.substring(11,16),
               materia: datos.materia,
               })
           }
@@ -112,7 +121,7 @@ export class DetallesAulaComponent implements OnInit {
               })
           }
           if (hora.substring(9,10) == 'X'){
-            this.miercoles.push({horario: hora.substring(2,7),
+            this.miercoles.push({horario: hora.substring(11,16),
               materia: datos.materia,
               })
           }
@@ -122,7 +131,7 @@ export class DetallesAulaComponent implements OnInit {
               })
           }
           if (hora.substring(9,10) == 'J'){
-            this.jueves.push({horario: hora.substring(2,7),
+            this.jueves.push({horario: hora.substring(11,16),
               materia: datos.materia,
               })
           }
@@ -132,7 +141,7 @@ export class DetallesAulaComponent implements OnInit {
               })
           }
           if (hora.substring(9,10) == 'V'){
-            this.viernes.push({horario: hora.substring(2,7),
+            this.viernes.push({horario: hora.substring(11,16),
               materia: datos.materia,
               })
           }
@@ -142,7 +151,7 @@ export class DetallesAulaComponent implements OnInit {
               })
           }
           if (hora.substring(9,10) == 'S'){
-            this.sabado.push({horario: hora.substring(2,7),
+            this.sabado.push({horario: hora.substring(11,16),
               materia: datos.materia,
               })
           }
@@ -225,5 +234,13 @@ export class DetallesAulaComponent implements OnInit {
       }
     );
 
+  }
+
+  mostrarHorarios(): void {
+    if (this.mostrar) {
+      this.mostrar = false;
+    } else {
+      this.mostrar = true;
+    }
   }
 }

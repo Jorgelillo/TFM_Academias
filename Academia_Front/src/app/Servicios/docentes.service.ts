@@ -119,4 +119,14 @@ public getDocente(id: number): Observable<any> {
     );
   }
 
+  getVistaHorarios(id: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const url = `http://localhost:8080/horarioMateriaView/${id}`;
+
+    return this.http.get(url, {headers: Httpheader})
+      .pipe(
+        tap((_: any) => console.log(`Fetched detalles`))
+      );
+  }
+
   }

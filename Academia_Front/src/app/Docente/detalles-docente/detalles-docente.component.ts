@@ -20,6 +20,17 @@ export class DetallesDocenteComponent implements OnInit {
   modificarDocente: FormGroup;
   horarios: any[] = [];
 
+  verHora: boolean;
+  vista: any[];
+
+
+  lunes: any = [];
+  martes: any = [];
+  miercoles: any = [];
+  jueves: any = [];
+  viernes: any = [];
+  sabado: any = [];
+
   constructor(private formBuilder: FormBuilder,
               private docentesService: DocentesService,
               private materiasService: MateriasService,
@@ -31,9 +42,13 @@ export class DetallesDocenteComponent implements OnInit {
     this.getMateriasDocentes(id);
     this.getMateriasRestantes(id);
     this.crearFormulario();
+    this.getVistaHorarios(id);
     this.mostrar = false;
   }
 
+  detalles(){
+    console.log()
+  }
   crearFormulario(){ 
     this.modificarDocente = this.formBuilder.group({
       nombre: ['', Validators.required],
@@ -71,6 +86,105 @@ export class DetallesDocenteComponent implements OnInit {
       console.log(data);
       }
     );
+  }
+
+  getVistaHorarios(id: number): void {
+    this.docentesService.getVistaHorarios(id).subscribe(
+
+      data => {
+
+      this.vista = data;
+        if(this.vista.length == 0){
+          this.verHora = false;
+          console.log(this.verHora);
+        } else {
+          this.verHora = true;
+          console.log(this.verHora);
+        }
+        console.log(this.vista);
+        for( let i = 0; i < this.vista.length; i++){
+          let hora = this.vista[i].horario;
+          let datos = this.vista[i];
+
+          console.log(hora);
+
+          if (hora.substring(0,1) == 'L'){
+            this.lunes.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              grupo: datos.grupo
+              })
+          }
+          if (hora.substring(9,10) == 'L'){
+            this.lunes.push({horario: hora.substring(11,16),
+              materia: datos.materia,
+              grupo: datos.grupo
+              })
+          }
+          if (hora.substring(0,1) == 'M'){
+            this.martes.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              grupo: datos.grupo
+              })
+          }
+          if (hora.substring(9,10) == 'M'){
+            this.martes.push({horario: hora.substring(11,16),
+              materia: datos.materia,
+              grupo: datos.grupo
+              })
+          }
+          if (hora.substring(0,1) == 'X'){
+            this.miercoles.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              grupo: datos.grupo
+              })
+          }
+          if (hora.substring(9,10) == 'X'){
+            this.miercoles.push({horario: hora.substring(11,16),
+              materia: datos.materia,
+              grupo: datos.grupo
+              })
+          }
+          if (hora.substring(0,1) == 'J'){
+            this.jueves.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              grupo: datos.grupo
+              })
+          }
+          if (hora.substring(9,10) == 'J'){
+            this.jueves.push({horario: hora.substring(11,16),
+              materia: datos.materia,
+              grupo: datos.grupo
+              })
+          }
+          if (hora.substring(0,1) == 'V'){
+            this.viernes.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              grupo: datos.grupo
+              })
+          }
+          if (hora.substring(9,10) == 'V'){
+            this.viernes.push({horario: hora.substring(11,16),
+              materia: datos.materia,
+              grupo: datos.grupo
+              })
+          }
+          if (hora.substring(0,1) == 'S'){
+            this.sabado.push({horario: hora.substring(2,7),
+              materia: datos.materia,
+              grupo: datos.grupo
+              })
+          }
+          if (hora.substring(9,10) == 'S'){
+            this.sabado.push({horario: hora.substring(11,16),
+              materia: datos.materia,
+              grupo: datos.grupo
+              })
+          }
+          console.log(this.miercoles);
+          console.log(this.miercoles);
+        }
+        }
+      );
   }
 
   /*

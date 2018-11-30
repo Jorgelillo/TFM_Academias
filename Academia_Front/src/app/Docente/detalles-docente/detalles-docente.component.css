@@ -8,3 +8,42 @@ img {
 .btn{
     margin: 5px;
 }
+
+.calendario {
+    background-color: #F5A9F2;
+    border-style: solid;
+    border-width: 1px;
+    text-align: center;
+}
+
+.dia{
+    border-style: solid;
+    border-width: 1px;
+    text-align: center;
+}
+.schedule {
+    background-color: #F5F6CE;
+}
+.Naturales {
+    background-color: #E1F5A9;
+}
+
+.Lengua {
+    background-color: #CEECF5;
+}
+
+.Fisica {
+    background-color: #D8CEF6;
+}
+
+.Sociales {
+    background-color: #F3E2A9;
+}
+
+.Matematicas {
+    background-color: #F2F5A9;
+}
+
+.Sistemas {
+    background-color: #F6CECE;
+}
