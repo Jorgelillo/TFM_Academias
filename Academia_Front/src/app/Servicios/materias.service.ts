@@ -24,6 +24,9 @@ public getMaterias(): Observable<any[]> {
     );  
   }
 
+  /*
+* Función que obtiene los horarios de una materia a partir de una url como parámetro
+*/
   public getHorarios(url: string): Observable<any[]> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
   
@@ -47,6 +50,9 @@ public getMateria(id: number): Observable<any> {
     );
   }
 
+  /*
+* Función que permite crear una materia e insertarla en la base de datos
+*/
   crearMateria(nombre: String, nivel: String, grupo: String):Observable<any>{
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/materias`;
@@ -55,13 +61,15 @@ public getMateria(id: number): Observable<any> {
       "nombre": nombre,
       "grupo": grupo
     }
-
     return this.http.post(url, body, {headers: Httpheader})
       .pipe(
         tap((materia: any) => console.log(`Materia creada /id=${materia.id}`))
     );
   }
 
+  /*
+  * Función que permite borrar los datos de una materia
+  */
   borrarMateria(id: number): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/materias/${id}`;
@@ -72,6 +80,9 @@ public getMateria(id: number): Observable<any> {
       );
   }
 
+  /*
+  * Función que permite obtener las materias que imparte un docente
+  */
   getMateriasDocentes(id: number): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/docentes/${id}/materias`;
@@ -82,6 +93,9 @@ public getMateria(id: number): Observable<any> {
       );
   }
 
+  /*
+  * Función que obtiene las materias que no imparte un docente
+  */
   getMateriasRestantes(id: number): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/docentes/${id}/materiasRestantes`;
@@ -92,6 +106,9 @@ public getMateria(id: number): Observable<any> {
       );
   }
 
+  /*
+* Función que obtiene las materias donde no esta matriculado un estudiante
+*/
   getMateriasRestantesEstudiante(id: number): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/estudiantes/${id}/materiasRestantes`;
@@ -102,6 +119,9 @@ public getMateria(id: number): Observable<any> {
       );
   }
 
+  /*
+* Función que permite borrar la relacion entre una materia y un docente de la base de datos
+*/
   borrarDocente(idMateria: number, idDocente: number): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/materias/${idMateria}/docentes/${idDocente}`;
@@ -111,6 +131,9 @@ public getMateria(id: number): Observable<any> {
     );
   }
 
+  /*
+* Función que obtiene las materias donde esta matriculado un estudiante
+*/
   getMateriasEstudiante(id: number): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/estudiantes/${id}/materias`;
@@ -121,6 +144,9 @@ public getMateria(id: number): Observable<any> {
       );
   }
 
+  /*
+* Función que borra la relacion entre una materia y un estudiante
+*/
   borrarEstudiante(idMateria: number, idEstudiante: number): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/materias/${idMateria}/estudiantes/${idEstudiante}`;
@@ -130,7 +156,9 @@ public getMateria(id: number): Observable<any> {
     );
   }
 
-  
+  /*
+* Función que permite modificar los datos de una materia
+*/
   modificarMaterias(id: number, nombre: string, nivel: string, grupo: string): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/materias/${id}/`;

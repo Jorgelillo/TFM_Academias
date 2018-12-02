@@ -10,6 +10,10 @@ export class HorariosService {
 
   constructor(private http: HttpClient) { }
 
+  /*
+  *Función que permite definir el horario y el aula de una materia
+  */
+
   setHorarios(horarios: string, materias: string, aulas: string):Observable<any>{
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/horarios`;
@@ -25,6 +29,9 @@ export class HorariosService {
   )
 }
 
+/*
+* Función que permite actualizar el horario y aula de una materia
+*/
 actualizarHorarios(horariosId: string, horarios: string, aulas: string):Observable<any>{
   const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
   const url = `http://localhost:8080/horarios/${horariosId}`;
@@ -40,8 +47,9 @@ actualizarHorarios(horariosId: string, horarios: string, aulas: string):Observab
 )
 }
 
-
-
+/*
+* Función que obtiene el horario de un aula
+*/
 getHorarioAula(idMateria: number):Observable<any>{
   const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
   const url = `http://localhost:8080/materias/${idMateria}/horarios`;

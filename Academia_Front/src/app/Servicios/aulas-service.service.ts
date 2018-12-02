@@ -11,7 +11,7 @@ export class AulasServiceService {
   constructor(
     private http: HttpClient) { }
 
-  /*
+/*
 * Función que obtiene todas las aulas de la bbdd
 */    
 public getAulas(): Observable<any[]> {
@@ -38,6 +38,9 @@ public getAula(id: number): Observable<any> {
     );
   }
 
+/*
+* Función que crea un aula y la inserta en la base de datos
+*/
   crearAula(nombre: string, codigo: string, capacidad: number):Observable<any>{
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/aulas`;
@@ -53,6 +56,9 @@ public getAula(id: number): Observable<any> {
     )
   }
 
+  /*
+  * Función que borra un aula de la bbdd
+  */
   borrarAula(id: number): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/aulas/${id}`;
@@ -63,6 +69,9 @@ public getAula(id: number): Observable<any> {
       )
   }
 
+  /*
+  * Función que modifica un aula de la base de datos
+  */
   modificarAulas(id: number, capacidad: number, nombre: string, codigo: string): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/aulas/${id}/`;
@@ -71,12 +80,14 @@ public getAula(id: number): Observable<any> {
       'nombre': nombre, 
       'codigo': codigo
     }
-
     return this.http.patch<any>(url, body, {headers: Httpheader}).pipe(
       tap( _=> console.log(`Aula modificada`))
     );
   }
 
+  /*
+  * Función que obtiene los horarios de una aula
+  */
   getHorarios(id: number): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/aulas/${id}/horarios`;
@@ -86,6 +97,9 @@ public getAula(id: number): Observable<any> {
     );
   }
 
+  /*
+  *Función que obtiene el horario de un aula recibiendo una url
+  */
   getAulaHorario(url: string): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
 
@@ -94,12 +108,15 @@ public getAula(id: number): Observable<any> {
     );
     }
 
-    getVistaHorarios(id: number): Observable<any> {
-      const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
-      const urlVista = `http://localhost:8080/horarioView/${id}`
+  /*
+  * Función que obtiene una vista predefinida de los horarios
+  */
+  getVistaHorarios(id: number): Observable<any> {
+    const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+    const urlVista = `http://localhost:8080/horarioView/${id}`
       return this.http.get<any>(urlVista, {headers: Httpheader}).pipe(
         tap( _=> console.log(`fetched vista del aula`))
       );
-      }
+    }
 
 }

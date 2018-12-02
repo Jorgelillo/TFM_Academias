@@ -38,6 +38,9 @@ public getEstudiante(id: number): Observable<any> {
     );
   }
 
+  /*
+* Función que permite crear un nuevo estudiante e insertarlo en la base de datos
+*/
   crearEstudiante(nombre: String, apellidos: String, email: String, telefono: String):Observable<any>{
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/estudiantes`;
@@ -54,6 +57,9 @@ public getEstudiante(id: number): Observable<any> {
     )
   }
 
+  /*
+* Función que elimina un estudiante de la bbdd
+*/
   borrarEstudiante(id: number): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/estudiantes/${id}`;
@@ -64,6 +70,9 @@ public getEstudiante(id: number): Observable<any> {
       )
   }
 
+/*
+* Función que obtiene las materias donde esta matriculado un estudiante
+*/
   getMateriasEstudiantes(id: number): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/materias/${id}/estudiantes`;
@@ -74,7 +83,9 @@ public getEstudiante(id: number): Observable<any> {
       );
     }
     
-
+/*
+* Función añade una materia a un estudiante
+*/
     addMateria(idEstudiante: number, idMateria: number): Observable<any> {
       const Httpheader = new HttpHeaders({'Content-Type': 'text/uri-list'});
       const url = `http://localhost:8080/materias/${idMateria}/estudiantes`;
@@ -85,6 +96,9 @@ public getEstudiante(id: number): Observable<any> {
       );
     }
   
+  /*
+  * Función que elimina la relación entre una materia y un estudiante
+  */
     borrarMateria(idEstudiante: number, idMateria: number): Observable<any> {
       const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
       const url = `http://localhost:8080/materias/${idMateria}/estudiantes/${idEstudiante}`;
@@ -94,7 +108,9 @@ public getEstudiante(id: number): Observable<any> {
       );
     }
 
-    
+  /*
+  * Función que obtiene los estudiantes no matriculados en una materia
+  */
   getEstudiantesRestantes(id: number): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/materias/${id}/estudiantesRestantes`;
@@ -105,6 +121,9 @@ public getEstudiante(id: number): Observable<any> {
       );
   }
 
+  /*
+  * Función que permite modificar los datos de un estudiante
+  */
   modificarEstudiantes(id: number, nombre: string, apellidos: string, email: string, telefono: String): Observable<any> {
     const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
     const url = `http://localhost:8080/estudiantes/${id}/`;
