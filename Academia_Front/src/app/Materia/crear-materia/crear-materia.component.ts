@@ -19,19 +19,25 @@ export class CrearMateriaComponent implements OnInit {
     this.crearFormulario();
   }
 
+  /**
+  * Función que crea un formulario y sus funcionalidades
+  */
   crearFormulario(){ 
     this.crearMaterias = this.formBuilder.group({
       nombre: ['', Validators.required],
       grupo: ['', Validators.required],
       nivel: ['', Validators.required]
-    });
+      }
+    );
   }
 
+  /**
+  * Función que permite crear una materia e insertarla en la bbdd a través de un formulario destinado a ello
+  */
   crearMateria() {
     const nombre = this.crearMaterias.value.nombre;
     const nivel = this.crearMaterias.value.nivel;
     const grupo = this.crearMaterias.value.grupo;
-
     this.materiaService.crearMateria(nombre, nivel, grupo).subscribe(
       data => {
         console.log(data);
@@ -39,4 +45,5 @@ export class CrearMateriaComponent implements OnInit {
       }
     )
   }
+
 }

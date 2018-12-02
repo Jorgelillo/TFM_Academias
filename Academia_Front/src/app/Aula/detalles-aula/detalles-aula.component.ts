@@ -35,12 +35,14 @@ export class DetallesAulaComponent implements OnInit {
     this.verHora = false;
     this.getAula(id);
     this.crearFormulario();
-    this.getHorarios(id);
     this.getVistaHorarios(id);
     this.mostrar = false;
-
+    // this.getHorarios(id);
   }
 
+  /*
+  *Función que crea la funcionalidad de un formulario
+  */
   crearFormulario(){ 
     this.modificarAula = this.formBuilder.group({
       nombre: ['', Validators.required],
@@ -49,6 +51,10 @@ export class DetallesAulaComponent implements OnInit {
     });
   }
 
+  /*
+  *Función permite modificar los datos del aula
+  *con los datos introducidos en el formulario
+  */
   modificarAulas(): void {
     const nombre = this.modificarAula.value.nombre;
     const codigo = this.modificarAula.value.codigo;
@@ -62,21 +68,26 @@ export class DetallesAulaComponent implements OnInit {
   }
 
   /*
-  *Función que obtiene uno de los docentes de la bbdd
+  *Función que obtiene una de las aulas de la bbdd
   */
- getAula(id: number): void {
-  this.aula = new Aulas();
-  this.aulasService.getAula(id).subscribe(
-    data => {
-      this.aula.id = data.id;
-      this.aula.nombre = data.nombre;
-      this.aula.codigo = data.codigo;
-      this.aula.capacidad = data.capacidad;
-      console.log(data);
+  getAula(id: number): void {
+    this.aula = new Aulas();
+    this.aulasService.getAula(id).subscribe(
+      data => {
+        this.aula.id = data.id;
+        this.aula.nombre = data.nombre;
+        this.aula.codigo = data.codigo;
+        this.aula.capacidad = data.capacidad;
+        console.log(data);
       }
     );
   }
 
+  /*
+  *Función que obtiene una vista preconfigurada de la base de datos
+  *sobre los horarios de un aula. Además, permite comprobar cada uno de ellos 
+  *y clasificarlos en un horario según el día de la semana y la hora que tengan
+  */
   getVistaHorarios(id: number): void {
     this.aulasService.getVistaHorarios(id).subscribe(
       data => {
@@ -158,18 +169,28 @@ export class DetallesAulaComponent implements OnInit {
           console.log(this.miercoles);
           console.log(this.miercoles);
         }
-        }
-      );
+      }
+    );
+  }
+
+  /*
+  *Función que muestra o no los horarios según una variable boolean
+  */
+  mostrarHorarios(): void {
+    if (this.mostrar) {
+      this.mostrar = false;
+    } else {
+      this.mostrar = true;
     }
+  }
 
-
-
+/*
   getHorarios(id: number): void {
     this.aulasService.getHorarios(id).subscribe(
       data => {
         this.horarios = data['_embedded'].horarios;
         console.log(this.horarios);
-/*
+
         for( let i = 0; i < this.horarios.length; i++){
           let hora = this.horarios[i].horarios;
           console.log(hora.substring(0,1));
@@ -230,17 +251,11 @@ export class DetallesAulaComponent implements OnInit {
         this.jueves.sort();
         this.viernes.sort();
         this.sabado.sort();
-        */
+       
       }
     );
 
   }
+   */
 
-  mostrarHorarios(): void {
-    if (this.mostrar) {
-      this.mostrar = false;
-    } else {
-      this.mostrar = true;
-    }
-  }
 }

@@ -8,6 +8,7 @@ import { AulasServiceService } from 'src/app/Servicios/aulas-service.service';
   styleUrls: ['./crear-aula.component.css']
 })
 export class CrearAulaComponent implements OnInit {
+  
   crearaulas: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
@@ -15,16 +16,24 @@ export class CrearAulaComponent implements OnInit {
 
   ngOnInit() {
     this.crearFormulario();
-    }
-            
+  }
+  
+  /*
+  *Función que crea la funcionalidad de un formulario
+  */
   crearFormulario(){ 
     this.crearaulas = this.formBuilder.group({
       nombre: ['', Validators.required],
       codigo: ['', Validators.required],
       capacidad: ['', Validators.required]
-    });
+      }
+    );
   }
 
+  /*
+  *Función que crea un aula a partir de los datos
+  *introducidos en el formulario.
+  */
   crearAulas() {
     const nombre = this.crearaulas.value.nombre;
     const codigo = this.crearaulas.value.codigo;
@@ -36,4 +45,5 @@ export class CrearAulaComponent implements OnInit {
       }
     )
   }
+  
 }

@@ -4,11 +4,18 @@
     border-width: 1px;
     text-align: center;
 }
-
+.row .col {
+    padding: 0;
+}
+.btn{
+    margin: 5px;
+}
 .dia{
     border-style: solid;
     border-width: 1px;
     text-align: center;
+    height: 100px;
+    width: 100%;
 }
 .schedule {
     background-color: #F5F6CE;
@@ -16,23 +23,18 @@
 .Naturales {
     background-color: #E1F5A9;
 }
-
 .Lengua {
     background-color: #CEECF5;
 }
-
 .Fisica {
     background-color: #D8CEF6;
 }
-
 .Sociales {
     background-color: #F3E2A9;
 }
-
 .Matematicas {
     background-color: #F2F5A9;
 }
-
 .Sistemas {
     background-color: #F6CECE;
 }

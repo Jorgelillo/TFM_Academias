@@ -1,30 +1,30 @@
 <app-header></app-header>
 <div class="container z-depth-5">
-<div class="row superior">
-  <div class="col s5">
-    <img src="./../../../assets/images/UserDefault.png" alt="Imagen del docente" width="200px" >
+  <div class="row superior">
+    <div class="col s5">
+      <img src="./../../../assets/images/UserDefault.png" alt="Imagen del docente" width="200px" >
+    </div>
+    <div class="col s7">
+      <div class="row">
+        <div class="col s3"><h6><b>Id:</b></h6></div><div class="col s9"> <h6>{{docente.id}}</h6></div>
+      </div>
+      <div class="row">
+        <div class="col s3"><h6><b>Nombre:</b></h6></div><div class="col s9"><h6>{{docente.nombre}}</h6></div>
+      </div>
+      <div class="row">
+        <div class="col s3"> <h6><b>Apellidos:</b></h6></div><div class="col s9"><h6>{{docente.apellidos}}</h6></div>
+      </div>
+      <div class="row">
+        <div class="col s3"> <h6><b>Email:</b></h6></div><div class="col s9"><h6>{{docente.email}}</h6></div>
+      </div>
+      <div class="row">
+        <div class="col s3"> <h6><b>Teléfono:</b></h6></div><div class="col s9"><h6>{{docente.telefono}}</h6></div>
+      </div>
+    </div>
   </div>
-  <div class="col s7">
-    <div class="row">
-      <div class="col s3"><h6><b>Id:</b></h6></div><div class="col s9"> <h6>{{docente.id}}</h6></div>
-    </div>
-    <div class="row">
-      <div class="col s3"><h6><b>Nombre:</b></h6></div><div class="col s9"><h6>{{docente.nombre}}</h6></div>
-    </div>
-    <div class="row">
-      <div class="col s3"> <h6><b>Apellidos:</b></h6></div><div class="col s9"><h6>{{docente.apellidos}}</h6></div>
-    </div>
-    <div class="row">
-      <div class="col s3"> <h6><b>Email:</b></h6></div><div class="col s9"><h6>{{docente.email}}</h6></div>
-    </div>
-    <div class="row">
-      <div class="col s3"> <h6><b>Teléfono:</b></h6></div><div class="col s9"><h6>{{docente.telefono}}</h6></div>
-    </div>
+  <div class="row">
+      <a class="waves-effect waves-light btn-small btn modal-trigger right" href="#modificar">Modificar</a>
   </div>
-</div>
-<div class="row">
-    <a class="waves-effect waves-light btn-small btn modal-trigger right" href="#modificar">Modificar</a>
-</div>
 
 <!--
 <div class="row">
@@ -37,115 +37,111 @@
 </div>
 -->
 
-<div class="row schedule"  *ngIf="verHora">
-    <div class="col s2">
-      <p class="calendario">LUNES</p>
-      <div class="dia {{l?.materia}}" *ngFor="let l of lunes">
-          <p>{{l.horario}}</p>
-          <p>{{l.materia}}</p>
-          <p>{{l.grupo}}</p>
+  <div class="row schedule"  *ngIf="verHora">
+      <div class="col s2">
+        <p class="calendario">LUNES</p>
+        <div class="dia {{l?.materia}}" *ngFor="let l of lunes">
+            <p>{{l.horario}}</p>
+            <p>{{l.materia}}</p>
+            <p>{{l.grupo}}</p>
+        </div>
+      </div>
+      <div class="col s2">
+        <p class="calendario">MARTES</p>
+        <div class="dia {{m?.materia}}" *ngFor="let m of martes">
+            <p>{{m.horario}} </p>
+            <p>{{m.materia}}</p>
+            <p>{{m.grupo}}</p>
+        </div>
+      </div>
+      <div class="col s2">
+        <p class="calendario">MIERCOLES</p>
+        <div class="dia {{x?.materia}}" *ngFor="let x of miercoles">
+            <p>{{x.horario}}</p>
+            <p>{{x.materia}}</p>
+            <p>{{x.grupo}}</p>
+        </div>
+      </div>
+      <div class="col s2">
+        <p class="calendario">JUEVES</p>
+        <div class="dia {{j?.materia}}" *ngFor="let j of jueves">
+            <p>{{j.horario}}</p>
+            <p>{{j.materia}}</p>
+            <p>{{j.grupo}}</p>
+        </div>
+      </div>
+      <div class="col s2">
+        <p class="calendario">VIERNES</p>
+        <div class="dia {{v?.materia}}" *ngFor="let v of viernes">
+            <p>{{v.horario}}</p>
+            <p>{{v.materia}}</p>
+            <p>{{v.grupo}}</p>
+        </div>
+      </div>
+      <div class="col s2">
+        <p class="calendario">SABADO</p>
+        <div class="dia {{s?.materia}}" *ngFor="let s of sabado">
+            <p>{{s.horario}}</p>
+            <p>{{s.materia}}</p>
+            <p>{{s.grupo}}</p>
+        </div>
       </div>
     </div>
-    <div class="col s2">
-      <p class="calendario">MARTES</p>
-      <div class="dia {{m?.materia}}" *ngFor="let m of martes">
-          <p>{{m.horario}} </p>
-          <p>{{m.materia}}</p>
-          <p>{{m.grupo}}</p>
-      </div>
-    </div>
-    <div class="col s2">
-      <p class="calendario">MIERCOLES</p>
-      <div class="dia {{x?.materia}}" *ngFor="let x of miercoles">
-          <p>{{x.horario}}</p>
-          <p>{{x.materia}}</p>
-          <p>{{x.grupo}}</p>
-      </div>
-    </div>
-    <div class="col s2">
-      <p class="calendario">JUEVES</p>
-      <div class="dia {{j?.materia}}" *ngFor="let j of jueves">
-          <p>{{j.horario}}</p>
-          <p>{{j.materia}}</p>
-          <p>{{j.grupo}}</p>
-      </div>
-    </div>
-    <div class="col s2">
-      <p class="calendario">VIERNES</p>
-      <div class="dia {{v?.materia}}" *ngFor="let v of viernes">
-          <p>{{v.horario}}</p>
-          <p>{{v.materia}}</p>
-          <p>{{v.grupo}}</p>
-      </div>
-    </div>
-    <div class="col s2">
-      <p class="calendario">SABADO</p>
-      <div class="dia {{s?.materia}}" *ngFor="let s of sabado">
-          <p>{{s.horario}}</p>
-          <p>{{s.materia}}</p>
-          <p>{{s.grupo}}</p>
-      </div>
-    </div>
-  </div>
-
-
-
-
-<div class="row">
-  <div class="col s12">
-    <h5>Materias que imparte</h5>
-    <table class="centered">
-      <thead>
-        <tr>
-            <th>ID</th>
-            <th>NOMBRE</th>
-            <th>NIVEL</th>
-            <th>GRUPO</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let materia of materias">
-          <td>{{materia.id}}</td>
-          <td>{{materia.nombre}}</td>
-          <td>{{materia.nivel}}</td>
-          <td>{{materia.grupo}}</td>
-          <td><button id="btnVer" (click)= "verMateria(materia.id)">Ver</button></td>
-          <td><button id="btnBorrar" (click)= "borrarMateria(materia.id)">Eliminar</button></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
-<div class="row">
-  <a id="mostrarAdd" class="waves-effect waves-light btn-small btn right" *ngIf="!activarBoton" disabled (click)="mostrarMaterias()">Añadir Materias</a>
-  <a id="mostrarAdd" class="waves-effect waves-light btn-small btn right" *ngIf="activarBoton" (click)="mostrarMaterias()">Añadir Materias</a>
-</div>
-<div class="row" [hidden]="!mostrar">
+  <div class="row">
     <div class="col s12">
+      <h5>Materias que imparte</h5>
       <table class="centered">
         <thead>
           <tr>
-            <th>id</th>
-            <th>Nombre</th>
-            <th>Nivel</th>
-            <th>Grupo</th>
-            <th></th>
-            <th></th>
+              <th>ID</th>
+              <th>NOMBRE</th>
+              <th>NIVEL</th>
+              <th>GRUPO</th>
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let materia of materiasRestantes">
+          <tr *ngFor="let materia of materias">
             <td>{{materia.id}}</td>
             <td>{{materia.nombre}}</td>
             <td>{{materia.nivel}}</td>
             <td>{{materia.grupo}}</td>
             <td><button id="btnVer" (click)= "verMateria(materia.id)">Ver</button></td>
-            <td><button id="btnBorrar" (click)= "addMateria(materia.id)">Añadir</button></td>
+            <td><button id="btnBorrar" (click)= "borrarMateria(materia.id)">Eliminar</button></td>
           </tr>
         </tbody>
       </table>
     </div>
   </div>
+  <div class="row">
+    <a id="mostrarAdd" class="waves-effect waves-light btn-small btn right" *ngIf="!activarBoton" disabled (click)="mostrarMaterias()">Añadir Materias</a>
+    <a id="mostrarAdd" class="waves-effect waves-light btn-small btn right" *ngIf="activarBoton" (click)="mostrarMaterias()">Añadir Materias</a>
+  </div>
+  <div class="row" [hidden]="!mostrar">
+      <div class="col s12">
+        <table class="centered">
+          <thead>
+            <tr>
+              <th>id</th>
+              <th>Nombre</th>
+              <th>Nivel</th>
+              <th>Grupo</th>
+              <th></th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let materia of materiasRestantes">
+              <td>{{materia.id}}</td>
+              <td>{{materia.nombre}}</td>
+              <td>{{materia.nivel}}</td>
+              <td>{{materia.grupo}}</td>
+              <td><button id="btnVer" (click)= "verMateria(materia.id)">Ver</button></td>
+              <td><button id="btnBorrar" (click)= "addMateria(materia.id)">Añadir</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
   <app-footer></app-footer>
 </div>
 

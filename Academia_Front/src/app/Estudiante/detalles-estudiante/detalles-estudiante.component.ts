@@ -35,15 +35,23 @@ export class DetallesEstudianteComponent implements OnInit {
     this.mostrar = false;
   }
 
+  /**
+  * Función que crea un formulario y sus funcionalidades
+  */
   crearFormulario(){ 
     this.modificarEstudiante = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
       email: ['', Validators.required],
       telefono: ['', Validators.required]
-    });
+      }
+    );
   }
 
+  /**
+  * Función que permite modificar los detalles de un estudiante 
+  * a través del formulario establecido para ello
+  */
   modificarEstudiantes(): void {
     const nombre = this.modificarEstudiante.value.nombre;
     const apellidos = this.modificarEstudiante.value.apellidos;
@@ -58,51 +66,55 @@ export class DetallesEstudianteComponent implements OnInit {
   }
 
   /*
-  *Función que obtiene uno de los docentes de la bbdd
+  *Función que obtiene uno de los estudiantes de la bbdd
   */
- getEstudiante(id: number): void {
-  this.estudiante = new Estudiantes();
-  this.estudianteService.getEstudiante(id).subscribe(
-    data => {
-      this.estudiante.id = data.id;
-      this.estudiante.nombre = data.nombre;
-      this.estudiante.apellidos = data.apellidos;
-      this.estudiante.email = data.email;
-      this.estudiante.telefono = data.telefono;
-      console.log(data);
-      }
-    );
-  }
+  getEstudiante(id: number): void {
+    this.estudiante = new Estudiantes();
+    this.estudianteService.getEstudiante(id).subscribe(
+      data => {
+        this.estudiante.id = data.id;
+        this.estudiante.nombre = data.nombre;
+        this.estudiante.apellidos = data.apellidos;
+        this.estudiante.email = data.email;
+        this.estudiante.telefono = data.telefono;
+        console.log(data);
+        }
+      );
+    }
 
   /*
-  *Función que obtiene las materias de un docente
+  *Función que obtiene las materias de un estudiante
   */
- getMateriasEstudiante(id: number): void {
-  this.materiasService.getMateriasEstudiante(id).subscribe(
-    data => {
-      this.materias = data['_embedded'].materias;
-      console.log(this.materias);
+  getMateriasEstudiante(id: number): void {
+    this.materiasService.getMateriasEstudiante(id).subscribe(
+      data => {
+        this.materias = data['_embedded'].materias;
+        console.log(this.materias);
       }
     )
   }
 
-    /*
-  *Función que obtiene todas las materias de la bbdd
+  /*
+  *Función que obtiene todas las materias de la bbdd en las que no está 
+  *matriculado un estudiante
   */
- getMateriasRestantesEstudiante(id: number): void {
-  this.materiasService.getMateriasRestantesEstudiante(id).subscribe(
-    data => {
-      this.materiasRestantes = data;
-      console.log(this.materiasRestantes);
-      if(this.materiasRestantes.length !== 0){
-        this.activarBoton = true;
-       } else {
-        this.activarBoton = false;
+  getMateriasRestantesEstudiante(id: number): void {
+    this.materiasService.getMateriasRestantesEstudiante(id).subscribe(
+      data => {
+        this.materiasRestantes = data;
+        console.log(this.materiasRestantes);
+        if(this.materiasRestantes.length !== 0){
+          this.activarBoton = true;
+        } else {
+          this.activarBoton = false;
+        }
       }
-    }
-  )
-}
+    )
+  }
 
+  /**
+   * Función que muestra o no las materias segun una variable booleana
+   */
   mostrarMaterias(): void {
     if (this.mostrar) {
       this.mostrar = false;
@@ -111,10 +123,16 @@ export class DetallesEstudianteComponent implements OnInit {
     }
   }
 
+  /**
+  * Función que redirige a los detalles de una materia segun a la que se haya clicado
+  */
   verMateria(id: number): void {
     location.assign(`materia/detalles/${id}`);
   }
 
+  /**
+  * Función añade una materia a un estudiante
+  */
   addMateria(id: number): void {
     this.estudianteService.addMateria(this.estudiante.id, id).subscribe(
       data => {
@@ -126,6 +144,9 @@ export class DetallesEstudianteComponent implements OnInit {
    location.reload();
   }
 
+  /**
+  * Función que elimina la relacion entre un estudiante y una materia
+  */
   borrarMateria(id: number): void {
     this.estudianteService.borrarMateria(this.estudiante.id, id).subscribe(
       data => {

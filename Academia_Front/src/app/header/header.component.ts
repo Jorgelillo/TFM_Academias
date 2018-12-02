@@ -15,6 +15,9 @@ export class HeaderComponent implements OnInit {
     this.getUrl();
   }
 
+  /**
+   * Función que recoge la URL y pone en 'active' la opción del nav según donde se encuentre
+   */
   private getUrl(): void {
     const url = location.href;
     console.log(url);

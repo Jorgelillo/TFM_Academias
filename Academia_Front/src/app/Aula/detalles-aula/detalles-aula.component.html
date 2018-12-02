@@ -12,72 +12,72 @@
     <a id="mostrarHorarios" class="waves-effect waves-light btn btn-small right" (click)="mostrarHorarios()">Detalles Horarios</a>
   </div>
   <div class="row" [hidden]="!mostrar">
-  <div class="col s12">
-    <table>
-      <thead>
-        <tr>
-            <th>Horarios</th>
-            <th>Materia</th>
-            <th>Nivel</th>
-            <th>Grupo</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr *ngFor="let vis of vista">
-          <td>{{vis.horario}}</td>
-          <td>{{vis.materia}}</td>
-          <td>{{vis.nivel}}</td>
-          <td>{{vis.grupo}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="col s12">
+      <table>
+        <thead>
+          <tr>
+              <th>Horarios</th>
+              <th>Materia</th>
+              <th>Nivel</th>
+              <th>Grupo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let vis of vista">
+            <td>{{vis.horario}}</td>
+            <td>{{vis.materia}}</td>
+            <td>{{vis.nivel}}</td>
+            <td>{{vis.grupo}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
-</div>
 <br>
-<div class="row schedule" *ngIf="verHora">
-  <div class="col s2">
-    <p class="calendario">LUNES</p>
-    <div class="dia {{l?.materia}}" *ngFor="let l of lunes">
-        <p>{{l.horario}}</p>
-        <p>{{l.materia}}</p>
+    <div class="row schedule" *ngIf="verHora">
+      <div class="col s2">
+        <p class="calendario">LUNES</p>
+        <div class="dia {{l?.materia}}" *ngFor="let l of lunes">
+            <p>{{l.horario}}</p>
+            <p>{{l.materia}}</p>
+        </div>
+      </div>
+      <div class="col s2">
+        <p class="calendario">MARTES</p>
+        <div class="dia {{m?.materia}}" *ngFor="let m of martes">
+            <p>{{m.horario}} </p>
+            <p>{{m.materia}}</p>
+        </div>
+      </div>
+      <div class="col s2">
+        <p class="calendario">MIERCOLES</p>
+        <div class="dia {{x?.materia}}" *ngFor="let x of miercoles">
+            <p>{{x.horario}}</p>
+            <p>{{x.materia}}</p>
+        </div>
+      </div>
+      <div class="col s2">
+        <p class="calendario">JUEVES</p>
+        <div class="dia {{j?.materia}}" *ngFor="let j of jueves">
+            <p>{{j.horario}}</p>
+            <p>{{j.materia}}</p>
+        </div>
+      </div>
+      <div class="col s2">
+        <p class="calendario">VIERNES</p>
+        <div class="dia {{v?.materia}}" *ngFor="let v of viernes">
+            <p>{{v.horario}}</p>
+            <p>{{v.materia}}</p>
+        </div>
+      </div>
+      <div class="col s2">
+        <p class="calendario">SABADO</p>
+        <div class="dia {{s?.materia}}" *ngFor="let s of sabado">
+            <p>{{s.horario}}</p>
+            <p>{{s.materia}}</p>
+        </div>
+      </div>
     </div>
-  </div>
-  <div class="col s2">
-    <p class="calendario">MARTES</p>
-    <div class="dia {{m?.materia}}" *ngFor="let m of martes">
-        <p>{{m.horario}} </p>
-        <p>{{m.materia}}</p>
-    </div>
-  </div>
-  <div class="col s2">
-    <p class="calendario">MIERCOLES</p>
-    <div class="dia {{x?.materia}}" *ngFor="let x of miercoles">
-        <p>{{x.horario}}</p>
-        <p>{{x.materia}}</p>
-    </div>
-  </div>
-  <div class="col s2">
-    <p class="calendario">JUEVES</p>
-    <div class="dia {{j?.materia}}" *ngFor="let j of jueves">
-        <p>{{j.horario}}</p>
-        <p>{{j.materia}}</p>
-    </div>
-  </div>
-  <div class="col s2">
-    <p class="calendario">VIERNES</p>
-    <div class="dia {{v?.materia}}" *ngFor="let v of viernes">
-        <p>{{v.horario}}</p>
-        <p>{{v.materia}}</p>
-    </div>
-  </div>
-  <div class="col s2">
-    <p class="calendario">SABADO</p>
-    <div class="dia {{s?.materia}}" *ngFor="let s of sabado">
-        <p>{{s.horario}}</p>
-        <p>{{s.materia}}</p>
-    </div>
-  </div>
-</div>
   <app-footer></app-footer>
 </div>
 
@@ -90,15 +90,15 @@
               <div class="row">
                   <div class="input-field col s6">
                     <label class="active" for="nombre">Nombre</label>
-                    <input id="nombre" type="text" class="validate" formControlName="nombre">
+                    <input id="nombre" type="text" class="validate" placeholder="{{aula.nombre}}" formControlName="nombre">
                   </div>
                   <div class="input-field col s6">
                       <label class="active" for="codigo">Código</label>
-                      <input id="codigo" type="text" class="validate" formControlName="codigo">
+                      <input id="codigo" type="text" class="validate" placeholder="{{aula.codigo}}" formControlName="codigo">
                   </div>
                   <div class="input-field col s6">
                     <label class="active" for="capacidad">Capacidad</label>
-                    <input id="capacidad" type="text" class="validate" formControlName="capacidad">
+                    <input id="capacidad" type="text" class="validate" placeholder="{{aula.capacidad}}" formControlName="capacidad">
                   </div>
                 </div>
               <div class="row">

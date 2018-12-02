@@ -17,16 +17,23 @@ export class CrearDocenteComponent implements OnInit {
   ngOnInit() {
     this.crearFormulario();
     }
-            
+
+  /*
+  * Función que crea un formulario y sus funcionalidades
+  */       
   crearFormulario(){ 
     this.creardocentes = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
       email: ['', Validators.required],
       telefono: ['', Validators.required]
-    });
+      }
+    )
   }
 
+  /*
+  *Función que permite crear docentes e insertarlos a la base de datos
+  */
   crearDocentes() {
     const nombre = this.creardocentes.value.nombre;
     const apellidos = this.creardocentes.value.apellidos;
@@ -39,4 +46,5 @@ export class CrearDocenteComponent implements OnInit {
       }
     )
   }
+  
 }

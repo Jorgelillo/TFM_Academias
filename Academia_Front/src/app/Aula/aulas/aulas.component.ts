@@ -16,41 +16,41 @@ export class AulasComponent implements OnInit {
     this.getAulas();
   }
 
- /*
+  /*
   *Función que obtiene todos las aulas de la bbdd
   */
- getAulas(): void {
-  this.aulasService.getAulas().subscribe(
-    data => {
-      this.aulas = data['_embedded'].aulas;
-      console.log(this.aulas);
-    }
-  )
-}
+  getAulas(): void {
+    this.aulasService.getAulas().subscribe(
+      data => {
+        this.aulas = data['_embedded'].aulas;
+        console.log(this.aulas);
+      }
+    )
+  }
 
-/*
-*Función que elimina una de las aulas de la bbdd
-*/
-borrarAula(id: number): void {
-  this.aulasService.borrarAula(id).subscribe(
-    data => {
-      location.reload();
-    }
-  )
-}
-/*
-*Función que muestra los detalles de un aula
-*/
-verAula(id: number): void {
-  location.assign(`aula/detalles/${id}`);
-}
+  /*
+  *Función que elimina una de las aulas de la bbdd
+  */
+  borrarAula(id: number): void {
+    this.aulasService.borrarAula(id).subscribe(
+      data => {
+        location.reload();
+      }
+    )
+  }
 
-/*
-*Función que dirige al apartado welcome
-*/
-volver(): void {
-  location.assign('welcome');
-}
+  /*
+  *Función que muestra los detalles de un aula
+  */
+  verAula(id: number): void {
+    location.assign(`aula/detalles/${id}`);
+  }
 
+  /*
+  *Función que dirige al apartado welcome
+  */
+  volver(): void {
+    location.assign('welcome');
+  }
 
 }

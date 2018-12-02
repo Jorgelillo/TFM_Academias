@@ -23,7 +23,6 @@ export class DetallesDocenteComponent implements OnInit {
   verHora: boolean;
   vista: any[];
 
-
   lunes: any = [];
   martes: any = [];
   miercoles: any = [];
@@ -46,18 +45,22 @@ export class DetallesDocenteComponent implements OnInit {
     this.mostrar = false;
   }
 
-  detalles(){
-    console.log()
-  }
+  /**
+  * Función que crea un formulario y sus funcionalidades
+  */
   crearFormulario(){ 
     this.modificarDocente = this.formBuilder.group({
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
       email: ['', Validators.required],
       telefono: ['', Validators.required]
-    });
+      }
+    )
   }
 
+  /**
+  * Función que permite modificar un docente a partir de un formulario
+  */
   modificarDocentes(): void {
     const nombre = this.modificarDocente.value.nombre;
     const apellidos = this.modificarDocente.value.apellidos;
@@ -74,25 +77,28 @@ export class DetallesDocenteComponent implements OnInit {
   /*
   *Función que obtiene uno de los docentes de la bbdd
   */
- getDocente(id: number): void {
-  this.docente = new Docentes();
-  this.docentesService.getDocente(id).subscribe(
-    data => {
-      this.docente.id = data.id;
-      this.docente.nombre = data.nombre;
-      this.docente.apellidos = data.apellidos;
-      this.docente.email = data.email;
-      this.docente.telefono = data.telefono;
-      console.log(data);
+  getDocente(id: number): void {
+    this.docente = new Docentes();
+    this.docentesService.getDocente(id).subscribe(
+      data => {
+        this.docente.id = data.id;
+        this.docente.nombre = data.nombre;
+        this.docente.apellidos = data.apellidos;
+        this.docente.email = data.email;
+        this.docente.telefono = data.telefono;
+        console.log(data);
       }
     );
   }
 
+  /**
+   * Función que recoge los datos de los horarios de cada docente a partir de 
+   * una vista preconfigurada para ello. Además, clasifica los datos recogidos
+   * para mostrarlos en un formato horario bidimensional, según dias y horas.
+   */
   getVistaHorarios(id: number): void {
     this.docentesService.getVistaHorarios(id).subscribe(
-
       data => {
-
       this.vista = data;
         if(this.vista.length == 0){
           this.verHora = false;
@@ -105,9 +111,7 @@ export class DetallesDocenteComponent implements OnInit {
         for( let i = 0; i < this.vista.length; i++){
           let hora = this.vista[i].horario;
           let datos = this.vista[i];
-
           console.log(hora);
-
           if (hora.substring(0,1) == 'L'){
             this.lunes.push({horario: hora.substring(2,7),
               materia: datos.materia,
@@ -189,22 +193,27 @@ export class DetallesDocenteComponent implements OnInit {
 
   /*
   *Función que obtiene las materias de un docente
+  *y por cada una de ellas llama a la funcion para obtener sus horarios.
   */
- getMateriasDocentes(id: number): void {
-  this.materiasService.getMateriasDocentes(id).subscribe(
-    data => {
-      this.materias = data['_embedded'].materias;
-      console.log(this.materias);
-      console.log(data);
-      for(let i = 0; i < this.materias.length; i++){
-        console.log(this.materias[i].nombre)
-        console.log(this.materias[i]['_links'].horarios.href);
-        this.getMateriasHorarios(this.materias[i]['_links'].horarios.href);
-      }
+  getMateriasDocentes(id: number): void {
+    this.materiasService.getMateriasDocentes(id).subscribe(
+      data => {
+        this.materias = data['_embedded'].materias;
+        console.log(this.materias);
+        console.log(data);
+        for(let i = 0; i < this.materias.length; i++){
+          console.log(this.materias[i].nombre)
+          console.log(this.materias[i]['_links'].horarios.href);
+          this.getMateriasHorarios(this.materias[i]['_links'].horarios.href);
+        }
       }
     )
   }
 
+  /**
+  * Función que recoge los horarios de cada una de las materia que imparte 
+  * un docente
+  */
   getMateriasHorarios(url: string): void {
     this.materiasService.getHorarios(url).subscribe(
       data => {
@@ -220,23 +229,25 @@ export class DetallesDocenteComponent implements OnInit {
       )
     }
 
-
-    /*
-  *Función que obtiene todas las materias de la bbdd
+  /*
+  *Función que obtiene las materias que no imparte un docente
   */
- getMateriasRestantes(id: number): void {
-  this.materiasService.getMateriasRestantes(id).subscribe(
-    data => {
-      this.materiasRestantes = data;
-      if(this.materiasRestantes.length !== 0){
-        this.activarBoton = true;
-       } else {
-        this.activarBoton = false;
+  getMateriasRestantes(id: number): void {
+    this.materiasService.getMateriasRestantes(id).subscribe(
+      data => {
+        this.materiasRestantes = data;
+        if(this.materiasRestantes.length !== 0){
+          this.activarBoton = true;
+        } else {
+          this.activarBoton = false;
+        }
       }
-    }
-  )
-}
+    )
+  }
 
+  /**
+  * Función muestra o no las materias segun una variable boolean
+  */
   mostrarMaterias(): void {
     if (this.mostrar) {
       this.mostrar = false;
@@ -245,10 +256,17 @@ export class DetallesDocenteComponent implements OnInit {
     }
   }
 
+  /**
+  * Función que redirige a los detalles de una materia
+  * segun la que se haya clicado
+  */
   verMateria(id: number): void {
     location.assign(`materia/detalles/${id}`);
   }
 
+  /**
+  * Función que permite añadir una materia a un docente
+  */
   addMateria(id: number): void {
     this.docentesService.addMateria(this.docente.id, id).subscribe(
       data => {
@@ -260,6 +278,9 @@ export class DetallesDocenteComponent implements OnInit {
    location.reload();
   }
 
+  /**
+  * Función que elimina una materia que imparte un docente
+  */
   borrarMateria(id: number): void {
     this.docentesService.borrarMateria(this.docente.id, id).subscribe(
       data => {

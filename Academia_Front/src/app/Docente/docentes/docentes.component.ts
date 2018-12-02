@@ -20,7 +20,7 @@ export class DocentesComponent implements OnInit {
   /*
   *Función que obtiene todos los docentes de la bbdd
   */
- getDocentes(): void {
+  getDocentes(): void {
     this.docentesService.getDocentes().subscribe(
       data => {
         this.docentes = data['_embedded'].docentes;
@@ -39,6 +39,7 @@ export class DocentesComponent implements OnInit {
       }
     )
   }
+  
   /*
   *Función que muestra los detalles de un docente
   */

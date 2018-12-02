@@ -18,7 +18,10 @@ export class CrearEstudianteComponent implements OnInit {
   ngOnInit() {
     this.crearFormulario();
     }
-            
+
+  /**
+  * Función que crea un formulario y sus funcionalidades
+  */
   crearFormulario(){ 
     this.crearEstudiante = this.formBuilder.group({
       nombre: ['', Validators.required],
@@ -28,6 +31,9 @@ export class CrearEstudianteComponent implements OnInit {
     });
   }
 
+  /**
+  * Función que permite crear un formulario e introducirlo en la base de datos
+  */
   crearEstudiantes() {
     const nombre = this.crearEstudiante.value.nombre;
     const apellidos = this.crearEstudiante.value.apellidos;
@@ -40,5 +46,6 @@ export class CrearEstudianteComponent implements OnInit {
       }
     )
   }
+  
 }
 

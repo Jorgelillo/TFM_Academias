@@ -56,21 +56,32 @@ export class DetallesMateriaComponent implements OnInit {
     this.getHorario(id);
   }
 
+  /**
+  * Función que crea un formulario y sus funcionalidades
+  */
   crearFormularioModificar(){ 
     this.modificarMateria = this.formBuilder.group({
       nombre: ['', Validators.required],
       nivel: ['', Validators.required],
       grupo: ['', Validators.required]
-    });
+      }
+    );
   }
 
- crearFormularioHorarios(){ 
-    this.horarioAula = this.formBuider2.group({
-      horario: ['', Validators.required],
-      selectAulas: ['', Validators.required]
-    });
+  /**
+  * Función que crea un formulario y sus funcionalidades
+  */
+  crearFormularioHorarios(){ 
+      this.horarioAula = this.formBuider2.group({
+        horario: ['', Validators.required],
+        selectAulas: ['', Validators.required]
+      }
+    )
   }
 
+  /**
+  * Función que crea un formulario y sus funcionalidades
+  */
   crearFormularioActualizarHorarios(){ 
     this.actualizarAula = this.formBuider3.group({
       horario: ['', Validators.required],
@@ -78,6 +89,9 @@ export class DetallesMateriaComponent implements OnInit {
     });
   }
 
+  /**
+  * Función que permite modificar los detalles de una materia a través del formulario destinado a ello
+  */
   modificarMaterias(): void {
     const nombre = this.modificarMateria.value.nombre;
     const nivel = this.modificarMateria.value.nivel;
@@ -90,13 +104,14 @@ export class DetallesMateriaComponent implements OnInit {
     location.assign(`materia/detalles/${this.materia.id}`);
   }
 
+  /**
+  * Función que añade datos a la tabla horarios. Relaciona un aula,una materia y un horario
+  */
   horarioAulas(): void {
     const horarios = this.horarioAula.value.horario;
     const selectAulas = this.horarioAula.value.selectAulas;
-
     const aulas = `/${selectAulas}`
     const materias = `/${this.materia.id}`
-
     this.horariosService.setHorarios(horarios, materias, aulas).subscribe(
       data => {
         console.log(data);
@@ -105,16 +120,16 @@ export class DetallesMateriaComponent implements OnInit {
     location.assign(`materia/detalles/${this.materia.id}`);
   }
 
+  /**
+  * Función que permite actualizar un horario de una materia
+  */
   actualizarHorarios(): void {
     const horarios = this.actualizarAula.value.horario;
     const selectAulas = this.actualizarAula.value.selectAulas;
-
     console.log(horarios);
     console.log(selectAulas);
-
     const aulas = `http://localhost:4200/aula/${selectAulas}`;
     const horarioId = this.horariosMateria[0].id;
-
     this.horariosService.actualizarHorarios(horarioId, horarios, aulas).subscribe(
       data => {
         console.log(data);
@@ -126,14 +141,14 @@ export class DetallesMateriaComponent implements OnInit {
   /*
   *Función que obtiene una de las materias de la bbdd
   */
- getMateria(id: number): void {
-  this.materia = new Materias();
-  this.materiaService.getMateria(id).subscribe(
-    data => {
-      this.materia.id = id;
-      this.materia.nombre = data.nombre;
-      this.materia.nivel = data.nivel;
-      this.materia.grupo = data.grupo;
+  getMateria(id: number): void {
+    this.materia = new Materias();
+    this.materiaService.getMateria(id).subscribe(
+      data => {
+        this.materia.id = id;
+        this.materia.nombre = data.nombre;
+        this.materia.nivel = data.nivel;
+        this.materia.grupo = data.grupo;
       }
     );
   }
@@ -141,65 +156,77 @@ export class DetallesMateriaComponent implements OnInit {
   /*
   *Función que obtiene los docentes de una materia
   */
- getDocentesMateria(id: number): void {
-  this.docentesService.getDocentesMateria(id).subscribe(
-    data => {
-      this.docentes = data['_embedded'].docentes;
-      console.log(this.docentes);
-    }
-  )
-}
+  getDocentesMateria(id: number): void {
+    this.docentesService.getDocentesMateria(id).subscribe(
+      data => {
+        this.docentes = data['_embedded'].docentes;
+        console.log(this.docentes);
+      }
+    )
+  }
     /*
   *Función que obtiene todas las materias de la bbdd
   */
- getDocentesRestantes(id: number): void {
-  this.docentesService.getDocentesRestantes(id).subscribe(
-    data => {
-      this.docentesRestantes = data;
-      if(this.docentesRestantes.length !== 0){
-        this.activarBotonDoc = true;
-       } else {
-        this.activarBotonDoc = false;
+  getDocentesRestantes(id: number): void {
+    this.docentesService.getDocentesRestantes(id).subscribe(
+      data => {
+        this.docentesRestantes = data;
+        if(this.docentesRestantes.length !== 0){
+          this.activarBotonDoc = true;
+        } else {
+          this.activarBotonDoc = false;
+        }
       }
-    }
-  )
-}
-
-mostrarDocentes(): void {
-  if (this.mostrarDoc) {
-    this.mostrarDoc = false;
-  } else {
-    this.mostrarDoc = true;
+    )
   }
-}
 
-verDocente(id: number): void {
-  location.assign(`docente/detalles/${id}`);
-}
-
-borrarDocente(id: number): void {
-  this.materiaService.borrarDocente(this.materia.id, id).subscribe(
-    data => {
-      console.log('Id docente ' + this.materia.id);
-      console.log('Id materia ' + id);
-      console.log(data);
+  /**
+  * Función que muestra o no unos docentes segun un variable boolean
+  */
+  mostrarDocentes(): void {
+    if (this.mostrarDoc) {
+      this.mostrarDoc = false;
+    } else {
+      this.mostrarDoc = true;
     }
-  );
-  location.reload();
-}
+  }
 
-addDocente(idDocente: number): void {
-  this.docentesService.addMateria(idDocente, this.materia.id).subscribe(
-    data => {
-      console.log(data);
-    }
-  );
-  location.reload();
-}
+  /**
+  * Función que redirige a los detalles de un docente
+  */
+  verDocente(id: number): void {
+    location.assign(`docente/detalles/${id}`);
+  }
 
-    /*
-    *Función que obtiene los docentes de una materia
-    */
+  /**
+  * Función que permite la relacion entre un docente y una materia
+  */
+  borrarDocente(id: number): void {
+    this.materiaService.borrarDocente(this.materia.id, id).subscribe(
+      data => {
+        console.log('Id docente ' + this.materia.id);
+        console.log('Id materia ' + id);
+        console.log(data);
+      }
+    );
+    location.reload();
+  }
+
+  /**
+  * Función que permite añadir un docente a una materia
+  */
+  addDocente(idDocente: number): void {
+    this.docentesService.addMateria(idDocente, this.materia.id).subscribe(
+      data => {
+        console.log(data);
+      }
+    );
+    location.reload();
+  }
+
+  /*
+  *Función que obtiene los docentes de una materia
+  */
   getEstudiantesMateria(id: number): void {
     this.estudiantesService.getMateriasEstudiantes(id).subscribe(
       data => {
@@ -209,9 +236,9 @@ addDocente(idDocente: number): void {
     )
   }
 
-      /*
-    *Función que obtiene todas las materias de la bbdd
-    */
+  /**
+  *Función que obtiene todas las materias de la bbdd
+  */
   getEstudiantesRestantes(id: number): void {
     this.estudiantesService.getEstudiantesRestantes(id).subscribe(
       data => {
@@ -225,6 +252,9 @@ addDocente(idDocente: number): void {
     )
   }
 
+  /**
+  * Función que muestra o no los estudiantes de una materia según una variable boolean
+  */
   mostrarEstudiantes(): void {
     if (this.mostrarEst) {
       this.mostrarEst = false;
@@ -233,9 +263,16 @@ addDocente(idDocente: number): void {
     }
   }
 
+  /**
+  * Función que muestra los detalles del estudiante al que se le da click
+  */
   verEstudiante(id: number): void {
     location.assign(`estudiante/detalles/${id}`);
   }
+
+  /**
+  * Función que borra la relacion de una materia y un estudiante
+  */
 
 borrarEstudiante(id: number): void {
   this.materiaService.borrarEstudiante(this.materia.id, id).subscribe(
@@ -248,45 +285,57 @@ borrarEstudiante(id: number): void {
   location.reload();
 }
 
-addEstudiante(idEstudiante: number): void {
-  this.estudiantesService.addMateria(idEstudiante, this.materia.id).subscribe(
-    data => {
-      console.log(data);
-    }
-  );
-  location.reload();
-}
-
-getAulas(): void {
-  this.aulasService.getAulas().subscribe(
-    data => {
-      this.aulas = data['_embedded'].aulas;
-      console.log(this.aulas);
-    }
-  );
-}
-
-getHorario(id: number): void {
-  this.horariosService.getHorarioAula(id).subscribe(
-    data => {
-      this.horariosMateria = data['_embedded'].horarios;
-      console.log(this.horariosMateria);
-      if( this.horariosMateria[0]) {
-      const url = this.horariosMateria[0]['_links'].aulas.href;
-      this.getAula(url);
+  /**
+  * Función que matricula un estudiante a una materia
+  */
+  addEstudiante(idEstudiante: number): void {
+    this.estudiantesService.addMateria(idEstudiante, this.materia.id).subscribe(
+      data => {
+        console.log(data);
       }
-      // console.log(this.horariosMateria[0]['_links'].aulas.href);
-    }
-  );
-}
+    );
+    location.reload();
+  }
 
-getAula(url: string): void {
-  this.aulasService.getAulaHorario(url).subscribe(
-    data => {
-      console.log(data);
-      this.aula = data;
-    }
-  );
-}
+  /**
+  * Función que obtiene todas las aulas de la base de datos
+  */
+  getAulas(): void {
+    this.aulasService.getAulas().subscribe(
+      data => {
+        this.aulas = data['_embedded'].aulas;
+        console.log(this.aulas);
+      }
+    );
+  }
+
+  /**
+  * Función que obtiene el horario de un aula
+  */
+  getHorario(id: number): void {
+    this.horariosService.getHorarioAula(id).subscribe(
+      data => {
+        this.horariosMateria = data['_embedded'].horarios;
+        console.log(this.horariosMateria);
+        if( this.horariosMateria[0]) {
+        const url = this.horariosMateria[0]['_links'].aulas.href;
+        this.getAula(url);
+        }
+        // console.log(this.horariosMateria[0]['_links'].aulas.href);
+      }
+    );
+  }
+
+  /**
+  * Función que recoge los detalles de un aula
+  */
+  getAula(url: string): void {
+    this.aulasService.getAulaHorario(url).subscribe(
+      data => {
+        console.log(data);
+        this.aula = data;
+      }
+    );
+  }
 
 }

@@ -19,27 +19,15 @@ export class EstudiantesComponent implements OnInit {
   /*
   *Función que obtiene todos los estudiantes de la bbdd
   */
- getEstudiantes(): void {
-    this.estudiantesService.getEstudiantes().subscribe(
-      data => {
-        this.estudiantes = data['_embedded'].estudiantes;
-        console.log(this.estudiantes);
-      }
-    )
-  }
-  /*
-  *Función que obtiene uno de los estudiantes de la bbdd
-  
-  getEstudiante(id: number): void {
-    this.estudiantesService.getEstudiante(id).subscribe(
-      data => {
-        console.log(data);
-      }
-    )
-  }
+  getEstudiantes(): void {
+      this.estudiantesService.getEstudiantes().subscribe(
+        data => {
+          this.estudiantes = data['_embedded'].estudiantes;
+          console.log(this.estudiantes);
+        }
+      )
+    }
 
-  */
- 
   /*
   *Función que elimina uno de los estudiantes de la bbdd
   */
@@ -50,6 +38,7 @@ export class EstudiantesComponent implements OnInit {
       }
     )
   }
+  
   /*
   *Función que muestra los detalles de un estudiante
   */

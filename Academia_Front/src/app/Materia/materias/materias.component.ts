@@ -28,19 +28,7 @@ export class MateriasComponent implements OnInit {
       }
     )
   }
-  /*
-  *Función que obtiene una de las materias de la bbdd
-  
-  getMateria(id: number): void {
-    this.materiaService.getMateria(id).subscribe(
-      data => {
-        console.log(data);
-      }
-    )
-  }
 
-  */
- 
   /*
   *Función que elimina una de las materias de la bbdd
   */
@@ -51,6 +39,7 @@ export class MateriasComponent implements OnInit {
       }
     )
   }
+  
   /*
   *Función que muestra los detalles de una materia
   */
