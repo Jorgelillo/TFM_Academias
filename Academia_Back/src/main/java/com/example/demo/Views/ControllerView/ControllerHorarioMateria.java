@@ -23,6 +23,8 @@ public class ControllerHorarioMateria {
 		@Autowired
 		private DocenteReopository docenteRepository;
 		
+		//Permite mostrar una lista de horarios determiado, según el ID de docente.
+		
 		@RequestMapping(value = "/horarioMateriaView/{id}", method = RequestMethod.GET)
 		public ResponseEntity<List<VistaHorario>> vistaHorario(@PathVariable("id") long id) {
 			

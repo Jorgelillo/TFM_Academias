@@ -27,6 +27,8 @@ public class ControllerHorario {
 	@Autowired
 	private AulaRepository aulasRepository;
 	
+	//Permite mostrar un horario determiado, según su id, accediendo a las materias del mismo
+
 	@RequestMapping(value = "/horarioView/{id}", method = RequestMethod.GET)
 	public ResponseEntity<List<VistaHorario>> vistaHorario(@PathVariable("id") long id) {
 		

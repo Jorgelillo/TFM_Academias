@@ -48,6 +48,7 @@ export class MateriasComponent implements OnInit {
   */
   verMateria(id: number): void {
     location.assign(`materia/detalles/${id}`);
+    // this.router.navigate([`materia/detalles/${id}`]);
   }
 
   /*

@@ -29,6 +29,8 @@ public class MateriasController {
 	@Autowired
 	private EstudiantesRepository estudiantesRepositorio;
 	
+	//Metodo que permite mostrar los docentes que no imparte una materia
+	
 	@RequestMapping(value = "/materias/{id}/docentesRestantes", method = RequestMethod.GET)
 	public ResponseEntity<List<Docentes>> docentesRestantes(@PathVariable("id") long id) {
 		Materias materia = materiaRepositorio.findById(id);
@@ -40,6 +42,8 @@ public class MateriasController {
 			return new ResponseEntity<List<Docentes>>(docentesRestantes, HttpStatus.OK);
 		}	
 	}
+	
+	//Metodo que permite mostrar los estudiantes que no estan matriculados en una materia
 	
 	@RequestMapping(value = "/materias/{id}/estudiantesRestantes", method = RequestMethod.GET)
 	public ResponseEntity<List<Estudiantes>> estudiantesRestantes(@PathVariable("id") long id) {

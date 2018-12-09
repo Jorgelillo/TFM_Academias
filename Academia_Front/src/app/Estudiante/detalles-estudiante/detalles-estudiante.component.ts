@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Estudiantes } from 'src/app/Modelos/Estudiantes';
 import { EstudiantesService } from 'src/app/Servicios/estudiantes.service';
 import { MateriasService } from 'src/app/Servicios/materias.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 
@@ -24,7 +24,8 @@ export class DetallesEstudianteComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private estudianteService: EstudiantesService,
               private materiasService: MateriasService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -128,6 +129,7 @@ export class DetallesEstudianteComponent implements OnInit {
   * Función que redirige a los detalles de una materia segun a la que se haya clicado
   */
   verMateria(id: number): void {
+    // this.router.navigate([`materia/detalles/${id}`]);
     location.assign(`materia/detalles/${id}`);
   }
 

@@ -46,6 +46,7 @@ export class EstudiantesComponent implements OnInit {
   *Función que muestra los detalles de un estudiante
   */
   verEstudiante(id: number): void {
+    // this.router.navigate([`estudiante/detalles/${id}`]);
     location.assign(`estudiante/detalles/${id}`);
   }
 

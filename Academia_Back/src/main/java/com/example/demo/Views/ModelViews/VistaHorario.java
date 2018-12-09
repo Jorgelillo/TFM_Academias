@@ -1,5 +1,7 @@
 package com.example.demo.Views.ModelViews;
 
+//Clase que define una vista donde se muestra el horario y las propiedades de una materia
+
 public class VistaHorario implements Comparable<VistaHorario>{
 	
 	private long id;

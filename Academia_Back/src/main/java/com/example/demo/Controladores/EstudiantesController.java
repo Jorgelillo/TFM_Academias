@@ -24,6 +24,8 @@ public class EstudiantesController {
 	@Autowired
 	private MateriaRepository materiaRepositorio;
 	
+	//Metodo que permite mostrar las materias restantes de un estudiante
+
 	@RequestMapping(value = "/estudiantes/{id}/materiasRestantes", method = RequestMethod.GET)
 	public ResponseEntity<List<Materias>> materiasRestantes(@PathVariable("id") long id) {
 		Estudiantes estudiante = estudianteRepositorio.findById(id);

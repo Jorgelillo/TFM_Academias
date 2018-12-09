@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Docentes } from 'src/app/Modelos/Docentes';
 import { DocentesService } from 'src/app/Servicios/docentes.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MateriasService } from 'src/app/Servicios/materias.service';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
@@ -35,7 +35,8 @@ export class DetallesDocenteComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,
               private docentesService: DocentesService,
               private materiasService: MateriasService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -264,6 +265,7 @@ export class DetallesDocenteComponent implements OnInit {
   * segun la que se haya clicado
   */
   verMateria(id: number): void {
+    // this.router.navigate([`materia/detalles/${id}`]);
     location.assign(`materia/detalles/${id}`);
   }
 
