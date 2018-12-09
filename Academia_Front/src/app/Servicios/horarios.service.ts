@@ -25,7 +25,7 @@ export class HorariosService {
 
     return this.http.post(url, body, {headers: Httpheader})
     .pipe(
-      tap((estudiantes: any) => console.log(`Horario creado`))
+      tap((estudiantes: any) =>  console.log(`Horario creado`))
   )
 }
 
@@ -39,11 +39,11 @@ actualizarHorarios(horariosId: string, horarios: string, aulas: string):Observab
     "horarios": horarios,
     "aulas": aulas,
   }
-  console.log(body);
+  // console.log(body);
 
   return this.http.patch(url, body, {headers: Httpheader})
   .pipe(
-    tap((estudiantes: any) => console.log(`Horario actualizado`))
+    tap((estudiantes: any) =>  console.log(`Horario actualizado`))
 )
 }
 
@@ -56,7 +56,17 @@ getHorarioAula(idMateria: number):Observable<any>{
 
   return this.http.get(url, {headers: Httpheader})
   .pipe(
-    tap((horarios: any) => console.log(`Horarios`))
+    tap((horarios: any) =>  console.log(`Horarios`))
+);
+}
+
+borrarHorario(idhorarios: number):Observable<any>{
+  const Httpheader = new HttpHeaders({'Content-Type': 'application/json'});
+  const url = `http://localhost:8080/horarios/${idhorarios}`;
+
+  return this.http.delete(url, {headers: Httpheader})
+  .pipe(
+    tap((horarios: any) =>  console.log(`Horario eliminado`))
 );
 }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { AulasServiceService } from 'src/app/Servicios/aulas-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-aula',
@@ -12,7 +13,8 @@ export class CrearAulaComponent implements OnInit {
   crearaulas: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private aulasService: AulasServiceService) { }
+              private aulasService: AulasServiceService,
+              private router: Router) { }
 
   ngOnInit() {
     this.crearFormulario();
@@ -40,8 +42,9 @@ export class CrearAulaComponent implements OnInit {
     const capacidad = this.crearaulas.value.capacidad;
     this.aulasService.crearAula(nombre, codigo, capacidad).subscribe(
       data => {
-        console.log(data);
-        location.assign('aula');
+        // // console.log(data);
+        this.router.navigate([`/aula`]);
+        // location.assign('aula');
       }
     )
   }

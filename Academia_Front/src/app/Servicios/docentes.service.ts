@@ -21,7 +21,7 @@ public getDocentes(): Observable<any[]> {
 
   return this.http.get<any[]>(url, {headers: Httpheader})
     .pipe(
-      tap(docentes => console.log('fetched docentes'))
+      tap(docentes =>  console.log('fetched docentes'))
     );  
   }
 
@@ -35,7 +35,7 @@ public getDocente(id: number): Observable<any> {
 
   return this.http.get(url, {headers: Httpheader })
     .pipe(
-        tap(docentes => console.log(`fetched docentes id=${id}`))
+        tap(docentes =>  console.log(`fetched docentes id=${id}`))
     );
   }
 
@@ -53,7 +53,7 @@ public getDocente(id: number): Observable<any> {
     }
     return this.http.post(url, body, {headers: Httpheader})
       .pipe(
-        tap((docente: any) => console.log(`Docente creado /id=${docente.id}`))
+        tap((docente: any) =>  console.log(`Docente creado /id=${docente.id}`))
     );
   }
 
@@ -65,7 +65,7 @@ public getDocente(id: number): Observable<any> {
     const url = `http://localhost:8080/docentes/${id}`;
     return this.http.delete(url, {headers: Httpheader})
       .pipe(
-        tap((docente: any) => console.log(`Docente eliminado /id=${id}`))
+        tap((docente: any) =>  console.log(`Docente eliminado /id=${id}`))
       );
   }
 
@@ -78,7 +78,7 @@ public getDocente(id: number): Observable<any> {
 
     return this.http.get(url, {headers: Httpheader})
       .pipe(
-        tap((docentes: any) => console.log(`fetched docentes id=${id}`))
+        tap((docentes: any) =>  console.log(`fetched docentes id=${id}`))
       );
     }
 
@@ -91,7 +91,7 @@ public getDocente(id: number): Observable<any> {
     const body = `http://localhost:8080/docentes/${idDocente}`;
 
     return this.http.patch<any>(url, body, {headers: Httpheader}).pipe(
-      tap((materias: any) => console.log(`Añadida materia id=${materias}`))
+      tap((materias: any) =>  console.log(`Añadida materia id=${materias}`))
     );
   }
 
@@ -103,7 +103,7 @@ public getDocente(id: number): Observable<any> {
     const url = `http://localhost:8080/materias/${idMateria}/docentes/${idDocente}`;
 
     return this.http.delete<any>(url, {headers: Httpheader}).pipe(
-      tap((_: any) => console.log(`Eliminada materia id=${idMateria}`))
+      tap((_: any) =>  console.log(`Eliminada materia id=${idMateria}`))
     );
   }
 
@@ -116,7 +116,7 @@ public getDocente(id: number): Observable<any> {
 
     return this.http.get(url, {headers: Httpheader})
       .pipe(
-        tap((_: any) => console.log(`Fetched docentes`))
+        tap((_: any) =>  console.log(`Fetched docentes`))
       );
   }
 
@@ -133,7 +133,7 @@ public getDocente(id: number): Observable<any> {
       'telefono': telefono
     }
     return this.http.patch<any>(url, body, {headers: Httpheader}).pipe(
-      tap( _=> console.log(`Docente modificado`))
+      tap( _=>  console.log(`Docente modificado`))
     );
   }
 
@@ -146,7 +146,7 @@ public getDocente(id: number): Observable<any> {
 
     return this.http.get(url, {headers: Httpheader})
       .pipe(
-        tap((_: any) => console.log(`Fetched detalles`))
+        tap((_: any) =>  console.log(`Fetched detalles`))
       );
   }
 

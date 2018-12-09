@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EstudiantesService } from 'src/app/Servicios/estudiantes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-estudiantes',
@@ -10,7 +11,8 @@ export class EstudiantesComponent implements OnInit {
 
   estudiantes: any[];
 
-  constructor(private estudiantesService: EstudiantesService) { }
+  constructor(private estudiantesService: EstudiantesService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getEstudiantes();
@@ -23,7 +25,7 @@ export class EstudiantesComponent implements OnInit {
       this.estudiantesService.getEstudiantes().subscribe(
         data => {
           this.estudiantes = data['_embedded'].estudiantes;
-          console.log(this.estudiantes);
+          // console.log(this.estudiantes);
         }
       )
     }
@@ -34,7 +36,8 @@ export class EstudiantesComponent implements OnInit {
   borrarEstudiante(id: number): void {
     this.estudiantesService.borrarEstudiante(id).subscribe(
       data => {
-        location.reload();
+        this.getEstudiantes();
+        // location.reload();
       }
     )
   }
@@ -50,7 +53,8 @@ export class EstudiantesComponent implements OnInit {
   *Función que dirige al apartado welcome
   */
   volver(): void {
-    location.assign('welcome');
+    this.router.navigate([`/welcome`]);
+    // location.assign('welcome');
   }
   
 }

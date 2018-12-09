@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AulasServiceService } from 'src/app/Servicios/aulas-service.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-aulas',
@@ -10,7 +11,8 @@ export class AulasComponent implements OnInit {
 
   aulas: any[];
 
-  constructor(private aulasService: AulasServiceService) { }
+  constructor(private aulasService: AulasServiceService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getAulas();
@@ -23,7 +25,7 @@ export class AulasComponent implements OnInit {
     this.aulasService.getAulas().subscribe(
       data => {
         this.aulas = data['_embedded'].aulas;
-        console.log(this.aulas);
+        // // console.log(this.aulas);
       }
     )
   }
@@ -34,7 +36,9 @@ export class AulasComponent implements OnInit {
   borrarAula(id: number): void {
     this.aulasService.borrarAula(id).subscribe(
       data => {
-        location.reload();
+        this.router.navigate([`/aula`]);
+        this.getAulas();
+        // location.reload();
       }
     )
   }
@@ -43,6 +47,7 @@ export class AulasComponent implements OnInit {
   *Función que muestra los detalles de un aula
   */
   verAula(id: number): void {
+    // this.router.navigate([`aula/detalles/${id}`]);
     location.assign(`aula/detalles/${id}`);
   }
 
@@ -50,7 +55,8 @@ export class AulasComponent implements OnInit {
   *Función que dirige al apartado welcome
   */
   volver(): void {
-    location.assign('welcome');
+    this.router.navigate([`/welcome`]);
+    // location.assign('welcome');
   }
 
 }

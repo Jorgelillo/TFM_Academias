@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DocentesService } from 'src/app/Servicios/docentes.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,7 +12,8 @@ export class DocentesComponent implements OnInit {
 
   docentes: any[];
 
-  constructor(private docentesService: DocentesService) { }
+  constructor(private docentesService: DocentesService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getDocentes();
@@ -24,7 +26,7 @@ export class DocentesComponent implements OnInit {
     this.docentesService.getDocentes().subscribe(
       data => {
         this.docentes = data['_embedded'].docentes;
-        console.log(this.docentes);
+        // console.log(this.docentes);
       }
     )
   }
@@ -35,7 +37,8 @@ export class DocentesComponent implements OnInit {
   borrarDocente(id: number): void {
     this.docentesService.borrarDocente(id).subscribe(
       data => {
-        location.reload();
+        this.getDocentes();
+        // location.reload();
       }
     )
   }
@@ -51,7 +54,8 @@ export class DocentesComponent implements OnInit {
   *Función que dirige al apartado welcome
   */
   volver(): void {
-    location.assign('welcome');
+    this.router.navigate([`/welcome`]);
+    // location.assign('welcome');
   }
   
 }

@@ -116,7 +116,7 @@
     <a id="mostrarAdd" class="waves-effect waves-light btn-small btn right" *ngIf="!activarBoton" disabled (click)="mostrarMaterias()">Añadir Materias</a>
     <a id="mostrarAdd" class="waves-effect waves-light btn-small btn right" *ngIf="activarBoton" (click)="mostrarMaterias()">Añadir Materias</a>
   </div>
-  <div class="row" [hidden]="!mostrar">
+  <div class="row" *ngIf="activarBoton" [hidden]="!mostrar">
       <div class="col s12">
         <table class="centered">
           <thead>
@@ -169,7 +169,7 @@
               </div>
               <div class="row">
                 <div class="input-field col s12">
-                    <button id="botonCrear" class="btn waves-effect waves-light right" 
+                    <button id="botonCrear" class="modal-close btn waves-effect waves-light right" 
                             type="button" type="submit" 
                             name="action">Enviar
                     </button>

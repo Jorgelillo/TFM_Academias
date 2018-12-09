@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MateriasService } from 'src/app/Servicios/materias.service';
 import { Materias } from 'src/app/Modelos/Materias';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-materias',
@@ -11,7 +12,8 @@ export class MateriasComponent implements OnInit {
 
   materias: any[];
   
-  constructor(private materiaService: MateriasService) { }
+  constructor(private materiaService: MateriasService,
+              private router: Router) { }
 
   ngOnInit() {
     this.getMaterias();
@@ -24,7 +26,7 @@ export class MateriasComponent implements OnInit {
     this.materiaService.getMaterias().subscribe(
       data => {
         this.materias = data['_embedded'].materias;
-        console.log(this.materias);
+        // console.log(this.materias);
       }
     )
   }
@@ -35,7 +37,8 @@ export class MateriasComponent implements OnInit {
   borrarMateria(id: number): void {
     this.materiaService.borrarMateria(id).subscribe(
       data => {
-        location.reload();
+        this.getMaterias();
+        // location.reload();
       }
     )
   }
@@ -51,7 +54,8 @@ export class MateriasComponent implements OnInit {
   *Función que dirige al apartado welcome
   */
   volver(): void {
-    location.assign('welcome');
+    this.router.navigate([`/welcome`]);
+    // location.assign('welcome');
   }
   
 }

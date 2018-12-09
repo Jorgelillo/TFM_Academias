@@ -1,28 +1,35 @@
-<div class="row">
-  <form (ngSubmit)="crearAulas()" [formGroup]="crearaulas" novalidate>
-    <div class="row">
+<app-header></app-header>
+<div class="container z-depth-5">
+  <div class="row center">
+    <h5>Crear Aulas</h5>
+  </div>
+  <div class="row">
+    <form (ngSubmit)="crearAulas()" [formGroup]="crearaulas" novalidate>
       <div class="row">
-        <div class="input-field col s6">
-          <label class="active" for="nombre">Nombre</label>
-          <input id="nombre" type="text" class="validate" formControlName="nombre">
+        <div class="row">
+          <div class="input-field col s6">
+            <label class="active" for="nombre">Nombre</label>
+            <input id="nombre" type="text" class="validate" formControlName="nombre">
+          </div>
+          <div class="input-field col s6">
+              <label class="active" for="codigo">Código</label>
+              <input id="codigo" type="text" class="validate" formControlName="codigo">
+          </div>
+          <div class="input-field col s6">
+            <label class="active" for="capacidad">Capacidad</label>
+            <input id="capacidad" type="text" class="validate" formControlName="capacidad">
+          </div>
         </div>
-        <div class="input-field col s6">
-            <label class="active" for="codigo">Código</label>
-            <input id="codigo" type="text" class="validate" formControlName="codigo">
-        </div>
-        <div class="input-field col s6">
-          <label class="active" for="capacidad">Capacidad</label>
-          <input id="capacidad" type="text" class="validate" formControlName="capacidad">
+        <div class="row">
+          <div class="input-field col s12">
+            <button id="botonCrear" class="btn waves-effect waves-light right" 
+                    type="button" type="submit" 
+                    name="action">Enviar
+            </button>
+          </div>
         </div>
       </div>
-      <div class="row">
-        <div class="input-field col s12">
-          <button id="botonCrear" class="btn waves-effect waves-light right" 
-                  type="button" type="submit" 
-                  name="action">Enviar
-          </button>
-        </div>
-      </div>
-    </div>
-  </form>
+    </form>
+  </div>
+<app-footer></app-footer>
 </div>

@@ -8,8 +8,10 @@
     </div>
   </div>
   <div class="row">
-    <a class="waves-effect waves-light btn btn-small modal-trigger right" href="#modificar">Modificar</a>
+    <a class="waves-effect waves-light btn btn-small right" routerLink="/aula">Atrás</a>
+    <a class="waves-effect waves-light btn btn-small right modal-trigger" href="#modificar">Modificar</a>
     <a id="mostrarHorarios" class="waves-effect waves-light btn btn-small right" (click)="mostrarHorarios()">Detalles Horarios</a>
+    
   </div>
   <div class="row" [hidden]="!mostrar">
     <div class="col s12">
@@ -103,7 +105,7 @@
                 </div>
               <div class="row">
                 <div class="input-field col s12">
-                    <button id="botonCrear" class="btn waves-effect waves-light right" 
+                    <button id="botonCrear" class="modal-close btn waves-effect waves-light right" 
                             type="button" type="submit" 
                             name="action">Enviar
                     </button>

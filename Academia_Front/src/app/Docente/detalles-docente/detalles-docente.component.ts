@@ -30,6 +30,8 @@ export class DetallesDocenteComponent implements OnInit {
   viernes: any = [];
   sabado: any = [];
 
+  idMat = +this.route.snapshot.paramMap.get('id');
+
   constructor(private formBuilder: FormBuilder,
               private docentesService: DocentesService,
               private materiasService: MateriasService,
@@ -68,10 +70,11 @@ export class DetallesDocenteComponent implements OnInit {
     const telefono = this.modificarDocente.value.telefono;
     this.docentesService.modificarDocente(this.docente.id, nombre, apellidos, email, telefono).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
+        this.getDocente(this.docente.id);
       }
     );
-    location.assign(`docente/detalles/${this.docente.id}`);
+    // location.assign(`docente/detalles/${this.docente.id}`);
   }
 
   /*
@@ -86,7 +89,7 @@ export class DetallesDocenteComponent implements OnInit {
         this.docente.apellidos = data.apellidos;
         this.docente.email = data.email;
         this.docente.telefono = data.telefono;
-        console.log(data);
+        // console.log(data);
       }
     );
   }
@@ -102,16 +105,16 @@ export class DetallesDocenteComponent implements OnInit {
       this.vista = data;
         if(this.vista.length == 0){
           this.verHora = false;
-          console.log(this.verHora);
+          // console.log(this.verHora);
         } else {
           this.verHora = true;
-          console.log(this.verHora);
+          // console.log(this.verHora);
         }
-        console.log(this.vista);
+        // console.log(this.vista);
         for( let i = 0; i < this.vista.length; i++){
           let hora = this.vista[i].horario;
           let datos = this.vista[i];
-          console.log(hora);
+          // console.log(hora);
           if (hora.substring(0,1) == 'L'){
             this.lunes.push({horario: hora.substring(2,7),
               materia: datos.materia,
@@ -184,8 +187,8 @@ export class DetallesDocenteComponent implements OnInit {
               grupo: datos.grupo
               })
           }
-          console.log(this.miercoles);
-          console.log(this.miercoles);
+          // console.log(this.miercoles);
+          // console.log(this.miercoles);
         }
         }
       );
@@ -199,11 +202,11 @@ export class DetallesDocenteComponent implements OnInit {
     this.materiasService.getMateriasDocentes(id).subscribe(
       data => {
         this.materias = data['_embedded'].materias;
-        console.log(this.materias);
-        console.log(data);
+        // console.log(this.materias);
+        // console.log(data);
         for(let i = 0; i < this.materias.length; i++){
-          console.log(this.materias[i].nombre)
-          console.log(this.materias[i]['_links'].horarios.href);
+          // console.log(this.materias[i].nombre)
+          // console.log(this.materias[i]['_links'].horarios.href);
           this.getMateriasHorarios(this.materias[i]['_links'].horarios.href);
         }
       }
@@ -219,12 +222,12 @@ export class DetallesDocenteComponent implements OnInit {
       data => {
         const horarios = data['_embedded'].horarios;
         for(let i = 0; i < horarios.length; i++){
-          console.log(data['_embedded'].horarios[i].horarios);
-          console.log(horarios);
+          // console.log(data['_embedded'].horarios[i].horarios);
+          // console.log(horarios);
           this.horarios.push(data['_embedded'].horarios[i].horarios);
           // this.horarios[i] = data['_embedded'].horarios[i].horarios;
           }
-          console.log(this.horarios);
+          // console.log(this.horarios);
         }
       )
     }
@@ -270,12 +273,21 @@ export class DetallesDocenteComponent implements OnInit {
   addMateria(id: number): void {
     this.docentesService.addMateria(this.docente.id, id).subscribe(
       data => {
-        console.log('Id docente ' + this.docente.id);
-        console.log('Id materia ' + id);
-        console.log(data);
+        // console.log('Id docente ' + this.docente.id);
+        // console.log('Id materia ' + id);
+        // console.log(data);
+        this.getMateriasDocentes(this.docente.id);
+        this.getMateriasRestantes(this.docente.id);
+        this.lunes = [];
+        this.martes = [];
+        this.miercoles = [];
+        this.jueves = [];
+        this.viernes = [];
+        this.sabado = [];
+        this.getVistaHorarios(this.idMat);
       }
     );
-   location.reload();
+   // location.reload();
   }
 
   /**
@@ -284,12 +296,21 @@ export class DetallesDocenteComponent implements OnInit {
   borrarMateria(id: number): void {
     this.docentesService.borrarMateria(this.docente.id, id).subscribe(
       data => {
-        console.log('Id docente ' + this.docente.id);
-        console.log('Id materia ' + id);
-        console.log(data);
+        // console.log('Id docente ' + this.docente.id);
+        // console.log('Id materia ' + id);
+        // console.log(data);
+        this.getMateriasDocentes(this.docente.id);
+        this.getMateriasRestantes(this.docente.id);
+        this.lunes = [];
+        this.martes = [];
+        this.miercoles = [];
+        this.jueves = [];
+        this.viernes = [];
+        this.sabado = [];
+        this.getVistaHorarios(this.idMat);
       }
     );
-    location.reload();
+    // location.reload();
   }
 
 }

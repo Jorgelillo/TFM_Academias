@@ -59,10 +59,11 @@ export class DetallesEstudianteComponent implements OnInit {
     const telefono = this.modificarEstudiante.value.telefono;
     this.estudianteService.modificarEstudiantes(this.estudiante.id, nombre, apellidos, email, telefono).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
+        this.getEstudiante(this.estudiante.id);
       }
     );
-    location.assign(`estudiante/detalles/${this.estudiante.id}`);
+    // location.assign(`estudiante/detalles/${this.estudiante.id}`);
   }
 
   /*
@@ -77,7 +78,7 @@ export class DetallesEstudianteComponent implements OnInit {
         this.estudiante.apellidos = data.apellidos;
         this.estudiante.email = data.email;
         this.estudiante.telefono = data.telefono;
-        console.log(data);
+        // console.log(data);
         }
       );
     }
@@ -89,7 +90,7 @@ export class DetallesEstudianteComponent implements OnInit {
     this.materiasService.getMateriasEstudiante(id).subscribe(
       data => {
         this.materias = data['_embedded'].materias;
-        console.log(this.materias);
+        // console.log(this.materias);
       }
     )
   }
@@ -102,7 +103,7 @@ export class DetallesEstudianteComponent implements OnInit {
     this.materiasService.getMateriasRestantesEstudiante(id).subscribe(
       data => {
         this.materiasRestantes = data;
-        console.log(this.materiasRestantes);
+        // console.log(this.materiasRestantes);
         if(this.materiasRestantes.length !== 0){
           this.activarBoton = true;
         } else {
@@ -136,12 +137,14 @@ export class DetallesEstudianteComponent implements OnInit {
   addMateria(id: number): void {
     this.estudianteService.addMateria(this.estudiante.id, id).subscribe(
       data => {
-        console.log('Id docente ' + this.estudiante.id);
-        console.log('Id materia ' + id);
-        console.log(data);
+        // console.log('Id docente ' + this.estudiante.id);
+        // console.log('Id materia ' + id);
+        // console.log(data);
+        this.getMateriasEstudiante(this.estudiante.id);
+        this.getMateriasRestantesEstudiante(this.estudiante.id);
       }
     );
-   location.reload();
+   // location.reload();
   }
 
   /**
@@ -150,12 +153,14 @@ export class DetallesEstudianteComponent implements OnInit {
   borrarMateria(id: number): void {
     this.estudianteService.borrarMateria(this.estudiante.id, id).subscribe(
       data => {
-        console.log('Id docente ' + this.estudiante.id);
-        console.log('Id materia ' + id);
-        console.log(data);
+        // console.log('Id docente ' + this.estudiante.id);
+        // console.log('Id materia ' + id);
+        // console.log(data);
+        this.getMateriasEstudiante(this.estudiante.id);
+        this.getMateriasRestantesEstudiante(this.estudiante.id);
       }
     );
-    location.reload();
+    // location.reload();
   }
 
 }

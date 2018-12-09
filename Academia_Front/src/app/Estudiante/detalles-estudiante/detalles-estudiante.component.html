@@ -54,7 +54,7 @@
   <a id="mostrarAdd" class="waves-effect waves-light btn btn-small right" *ngIf="!activarBoton" disabled (click)="mostrarMaterias()">Añadir Materias</a>
   <a id="mostrarAdd" class="waves-effect waves-light btn btn-small right" *ngIf="activarBoton" (click)="mostrarMaterias()">Añadir Materias</a>
 </div>
-<div class="row" [hidden]="!mostrar">
+<div class="row" *ngIf="activarBoton" [hidden]="!mostrar">
     <div class="col s12">
       <table class="centered">
         <thead>

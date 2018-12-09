@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Aulas } from 'src/app/Modelos/Aulas';
 import { AulasServiceService } from 'src/app/Servicios/aulas-service.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 
 
@@ -28,7 +28,8 @@ export class DetallesAulaComponent implements OnInit {
 
   constructor(private formBuilder: FormBuilder,
               private aulasService: AulasServiceService,
-              private route: ActivatedRoute) { }
+              private route: ActivatedRoute,
+              private router: Router) { }
 
   ngOnInit() {
     const id = +this.route.snapshot.paramMap.get('id');
@@ -61,10 +62,12 @@ export class DetallesAulaComponent implements OnInit {
     const capacidad = this.modificarAula.value.capacidad;
     this.aulasService.modificarAulas(this.aula.id, capacidad, nombre, codigo).subscribe(
       data => {
-        console.log(data);
+        this.getAula(this.aula.id);
+        // console.log(data);
       }
     );
-    location.assign(`aula/detalles/${this.aula.id}`);
+    this.router.navigate([`aula/detalles/${this.aula.id}`]);
+    // location.assign(`aula/detalles/${this.aula.id}`);
   }
 
   /*
@@ -78,7 +81,7 @@ export class DetallesAulaComponent implements OnInit {
         this.aula.nombre = data.nombre;
         this.aula.codigo = data.codigo;
         this.aula.capacidad = data.capacidad;
-        console.log(data);
+        // console.log(data);
       }
     );
   }
@@ -94,17 +97,17 @@ export class DetallesAulaComponent implements OnInit {
         this.vista = data;
         if(this.vista.length == 0){
           this.verHora = false;
-          console.log(this.verHora);
+          // console.log(this.verHora);
         } else {
           this.verHora = true;
-          console.log(this.verHora);
+          // console.log(this.verHora);
         }
-        console.log(this.vista);
+        // console.log(this.vista);
         for( let i = 0; i < this.vista.length; i++){
           let hora = this.vista[i].horario;
           let datos = this.vista[i];
 
-          console.log(hora);
+          // console.log(hora);
 
           if (hora.substring(0,1) == 'L'){
             this.lunes.push({horario: hora.substring(2,7),
@@ -166,8 +169,8 @@ export class DetallesAulaComponent implements OnInit {
               materia: datos.materia,
               })
           }
-          console.log(this.miercoles);
-          console.log(this.miercoles);
+          // console.log(this.miercoles);
+          // console.log(this.miercoles);
         }
       }
     );
@@ -189,60 +192,60 @@ export class DetallesAulaComponent implements OnInit {
     this.aulasService.getHorarios(id).subscribe(
       data => {
         this.horarios = data['_embedded'].horarios;
-        console.log(this.horarios);
+        // console.log(this.horarios);
 
         for( let i = 0; i < this.horarios.length; i++){
           let hora = this.horarios[i].horarios;
-          console.log(hora.substring(0,1));
-          console.log(hora.substring(9,10));
+          // console.log(hora.substring(0,1));
+          // console.log(hora.substring(9,10));
 
           if (hora.substring(0,1) == 'L'){
             this.lunes.push(hora.substring(2,7));
-            console.log(this.lunes);
+            // console.log(this.lunes);
           }
           if (hora.substring(9,10) == 'L'){
             this.lunes.push(hora.substring(11,16));
-            console.log(this.lunes);
+            // console.log(this.lunes);
           }
           if (hora.substring(0,1) == 'M'){
             this.martes.push(hora.substring(2,7));
-            console.log(this.martes);
+            // console.log(this.martes);
           }
           if (hora.substring(9,10) == 'M'){
             this.martes.push(hora.substring(11,16));
-            console.log(this.martes);
+            // console.log(this.martes);
           }
           if (hora.substring(0,1) == 'X'){
             this.miercoles.push(hora.substring(2,7));
-            console.log(this.miercoles);
+            // console.log(this.miercoles);
           }
           if (hora.substring(9,10) == 'X'){
             this.miercoles.push(hora.substring(11,16));
-            console.log(this.miercoles);
+            // console.log(this.miercoles);
           }
           if (hora.substring(0,1) == 'J'){
             this.jueves.push(hora.substring(2,7));
-            console.log(this.jueves);
+            // console.log(this.jueves);
           }
           if (hora.substring(9,10) == 'J'){
             this.jueves.push(hora.substring(11,16));
-            console.log(this.jueves);
+            // console.log(this.jueves);
           }
           if (hora.substring(0,1) == 'V'){
             this.viernes.push(hora.substring(2,7));
-            console.log(this.viernes);
+            // console.log(this.viernes);
           }
           if (hora.substring(9,10) == 'V'){
             this.viernes.push(hora.substring(11,16));
-            console.log(this.viernes);
+            // console.log(this.viernes);
           }
           if (hora.substring(0,1) == 'S'){
             this.sabado.push(hora.substring(2,7));
-            console.log(this.sabado);
+            // console.log(this.sabado);
           }
           if (hora.substring(9,10) == 'S'){
             this.sabado.push(hora.substring(11,16));
-            console.log(this.sabado);
+            // console.log(this.sabado);
           }
         }
         this.lunes.sort();
@@ -257,5 +260,13 @@ export class DetallesAulaComponent implements OnInit {
 
   }
    */
+
+     /*
+  *Función que dirige al apartado welcome
+  */
+  volver(): void {
+    this.router.navigate([`/aula`]);
+    // location.assign('welcome');
+  }
 
 }

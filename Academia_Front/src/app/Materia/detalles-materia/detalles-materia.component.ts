@@ -21,6 +21,8 @@ export class DetallesMateriaComponent implements OnInit {
   estudiantes: any[];
   aulas: any[];
   aula: any[];
+  urlAula: string;
+  idHorario: number;
   estudiantesRestantes: any[];
   horariosMateria: any[];
   activarBotonDoc: boolean;
@@ -98,10 +100,11 @@ export class DetallesMateriaComponent implements OnInit {
     const grupo = this.modificarMateria.value.grupo;
     this.materiaService.modificarMaterias(this.materia.id, nombre, nivel, grupo).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
+        this.getMateria(this.materia.id);
       }
     );
-    location.assign(`materia/detalles/${this.materia.id}`);
+    // location.assign(`materia/detalles/${this.materia.id}`);
   }
 
   /**
@@ -114,10 +117,12 @@ export class DetallesMateriaComponent implements OnInit {
     const materias = `/${this.materia.id}`
     this.horariosService.setHorarios(horarios, materias, aulas).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
+        this.getHorario(this.materia.id);
       }
     );
-    location.assign(`materia/detalles/${this.materia.id}`);
+    
+    // location.assign(`materia/detalles/${this.materia.id}`);
   }
 
   /**
@@ -126,16 +131,17 @@ export class DetallesMateriaComponent implements OnInit {
   actualizarHorarios(): void {
     const horarios = this.actualizarAula.value.horario;
     const selectAulas = this.actualizarAula.value.selectAulas;
-    console.log(horarios);
-    console.log(selectAulas);
+    // console.log(horarios);
+    // console.log(selectAulas);
     const aulas = `http://localhost:4200/aula/${selectAulas}`;
     const horarioId = this.horariosMateria[0].id;
     this.horariosService.actualizarHorarios(horarioId, horarios, aulas).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
+        this.getHorario(this.materia.id);
       }
     );
-    location.assign(`materia/detalles/${this.materia.id}`);
+    // location.assign(`materia/detalles/${this.materia.id}`);
   }
 
   /*
@@ -160,7 +166,7 @@ export class DetallesMateriaComponent implements OnInit {
     this.docentesService.getDocentesMateria(id).subscribe(
       data => {
         this.docentes = data['_embedded'].docentes;
-        console.log(this.docentes);
+        // console.log(this.docentes);
       }
     )
   }
@@ -204,12 +210,14 @@ export class DetallesMateriaComponent implements OnInit {
   borrarDocente(id: number): void {
     this.materiaService.borrarDocente(this.materia.id, id).subscribe(
       data => {
-        console.log('Id docente ' + this.materia.id);
-        console.log('Id materia ' + id);
-        console.log(data);
+        // console.log('Id docente ' + this.materia.id);
+        // console.log('Id materia ' + id);
+        // console.log(data);
+        this.getDocentesMateria(this.materia.id);
+        this.getDocentesRestantes(this.materia.id);
       }
     );
-    location.reload();
+    // location.reload();
   }
 
   /**
@@ -218,10 +226,12 @@ export class DetallesMateriaComponent implements OnInit {
   addDocente(idDocente: number): void {
     this.docentesService.addMateria(idDocente, this.materia.id).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
+        this.getDocentesMateria(this.materia.id);
+        this.getDocentesRestantes(this.materia.id);
       }
     );
-    location.reload();
+    // location.reload();
   }
 
   /*
@@ -231,7 +241,7 @@ export class DetallesMateriaComponent implements OnInit {
     this.estudiantesService.getMateriasEstudiantes(id).subscribe(
       data => {
         this.estudiantes = data['_embedded'].estudiantes;
-        console.log(this.estudiantes);
+        // console.log(this.estudiantes);
       }
     )
   }
@@ -277,12 +287,14 @@ export class DetallesMateriaComponent implements OnInit {
 borrarEstudiante(id: number): void {
   this.materiaService.borrarEstudiante(this.materia.id, id).subscribe(
     data => {
-      console.log('Id Estudiante ' + this.materia.id);
-      console.log('Id materia ' + id);
-      console.log(data);
+      // console.log('Id Estudiante ' + this.materia.id);
+      // console.log('Id materia ' + id);
+      // console.log(data);
+      this.getEstudiantesMateria(this.materia.id);
+      this.getEstudiantesRestantes(this.materia.id);
     }
   );
-  location.reload();
+  // location.reload();
 }
 
   /**
@@ -291,10 +303,11 @@ borrarEstudiante(id: number): void {
   addEstudiante(idEstudiante: number): void {
     this.estudiantesService.addMateria(idEstudiante, this.materia.id).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
+        this.getEstudiantesMateria(this.materia.id);
+        this.getEstudiantesRestantes(this.materia.id);
       }
     );
-    location.reload();
   }
 
   /**
@@ -304,7 +317,7 @@ borrarEstudiante(id: number): void {
     this.aulasService.getAulas().subscribe(
       data => {
         this.aulas = data['_embedded'].aulas;
-        console.log(this.aulas);
+        // console.log(this.aulas);
       }
     );
   }
@@ -318,10 +331,13 @@ borrarEstudiante(id: number): void {
         this.horariosMateria = data['_embedded'].horarios;
         console.log(this.horariosMateria);
         if( this.horariosMateria[0]) {
+        this.idHorario = this.horariosMateria[0].id;
+        this.urlAula = this.horariosMateria[0]['_links'].aulas.href;
+        // console.log(this.horariosMateria[0].id);
         const url = this.horariosMateria[0]['_links'].aulas.href;
         this.getAula(url);
         }
-        // console.log(this.horariosMateria[0]['_links'].aulas.href);
+        // // console.log(this.horariosMateria[0]['_links'].aulas.href);
       }
     );
   }
@@ -332,10 +348,19 @@ borrarEstudiante(id: number): void {
   getAula(url: string): void {
     this.aulasService.getAulaHorario(url).subscribe(
       data => {
-        console.log(data);
+        // console.log(data);
         this.aula = data;
       }
     );
+  }
+
+  borrarHorario(): void {
+    this.horariosService.borrarHorario(this.idHorario).subscribe(
+      data => {
+        this.getHorario(this.materia.id);
+        this.aula = null;
+      }
+    )
   }
 
 }

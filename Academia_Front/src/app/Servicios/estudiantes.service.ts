@@ -20,7 +20,7 @@ public getEstudiantes(): Observable<any[]> {
 
   return this.http.get<any[]>(url, {headers: Httpheader})
     .pipe(
-      tap(estudiantes => console.log('fetched estudiantes'))
+      tap(estudiantes =>  console.log('fetched estudiantes'))
     );  
   }
 
@@ -34,7 +34,7 @@ public getEstudiante(id: number): Observable<any> {
 
   return this.http.get(url, {headers: Httpheader })
     .pipe(
-        tap(_ => console.log(`fetched estudiantes id=${id}`))
+        tap(_ =>  console.log(`fetched estudiantes id=${id}`))
     );
   }
 
@@ -53,7 +53,7 @@ public getEstudiante(id: number): Observable<any> {
 
     return this.http.post(url, body, {headers: Httpheader})
       .pipe(
-        tap((estudiantes: any) => console.log(`Estudiantes creado /id=${estudiantes.id}`))
+        tap((estudiantes: any) =>  console.log(`Estudiantes creado /id=${estudiantes.id}`))
     )
   }
 
@@ -66,7 +66,7 @@ public getEstudiante(id: number): Observable<any> {
 
     return this.http.delete(url, {headers: Httpheader})
       .pipe(
-        tap((estudiantes: any) => console.log(`Estudiante eliminado /id=${id}`))
+        tap((estudiantes: any) =>  console.log(`Estudiante eliminado /id=${id}`))
       )
   }
 
@@ -79,7 +79,7 @@ public getEstudiante(id: number): Observable<any> {
 
     return this.http.get(url, {headers: Httpheader})
       .pipe(
-        tap((_: any) => console.log(`fetched estudiantes id=${id}`))
+        tap((_: any) =>  console.log(`fetched estudiantes id=${id}`))
       );
     }
     
@@ -92,7 +92,7 @@ public getEstudiante(id: number): Observable<any> {
       const body = `http://localhost:8080/estudiantes/${idEstudiante}`;
   
       return this.http.patch<any>(url, body, {headers: Httpheader}).pipe(
-        tap((materias: any) => console.log(`Añadida materia id=${materias}`))
+        tap((materias: any) =>  console.log(`Añadida materia id=${materias}`))
       );
     }
   
@@ -104,7 +104,7 @@ public getEstudiante(id: number): Observable<any> {
       const url = `http://localhost:8080/materias/${idMateria}/estudiantes/${idEstudiante}`;
   
       return this.http.delete<any>(url, {headers: Httpheader}).pipe(
-        tap((_: any) => console.log(`Eliminada materia id=${idMateria}`))
+        tap((_: any) =>  console.log(`Eliminada materia id=${idMateria}`))
       );
     }
 
@@ -117,7 +117,7 @@ public getEstudiante(id: number): Observable<any> {
 
     return this.http.get(url, {headers: Httpheader})
       .pipe(
-        tap((_: any) => console.log(`Fetched estudiantes`))
+        tap((_: any) =>  console.log(`Fetched estudiantes`))
       );
   }
 
@@ -135,7 +135,7 @@ public getEstudiante(id: number): Observable<any> {
     }
 
     return this.http.patch<any>(url, body, {headers: Httpheader}).pipe(
-      tap( _=> console.log(`Estudiante modificado`))
+      tap( _=>  console.log(`Estudiante modificado`))
     );
   }
 

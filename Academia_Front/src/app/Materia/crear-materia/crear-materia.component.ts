@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { MateriasService } from 'src/app/Servicios/materias.service';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -13,7 +14,8 @@ export class CrearMateriaComponent implements OnInit {
   crearMaterias: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private materiaService: MateriasService) { }
+              private materiaService: MateriasService,
+              private router: Router) { }
 
   ngOnInit() {
     this.crearFormulario();
@@ -40,8 +42,9 @@ export class CrearMateriaComponent implements OnInit {
     const grupo = this.crearMaterias.value.grupo;
     this.materiaService.crearMateria(nombre, nivel, grupo).subscribe(
       data => {
-        console.log(data);
-        location.assign('materia');
+        // console.log(data);
+        this.router.navigate([`/materia`]);
+        // location.assign('materia');
       }
     )
   }

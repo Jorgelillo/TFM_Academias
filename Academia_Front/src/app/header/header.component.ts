@@ -20,7 +20,7 @@ export class HeaderComponent implements OnInit {
    */
   private getUrl(): void {
     const url = location.href;
-    console.log(url);
+    // console.log(url);
 
       if (url.substr(0, 30) === `http://localhost:4200/docentes`) {
         this.url['docentes'] = 'active';

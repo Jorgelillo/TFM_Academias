@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { DocentesService } from 'src/app/Servicios/docentes.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-docente',
@@ -12,7 +13,8 @@ export class CrearDocenteComponent implements OnInit {
   creardocentes: FormGroup;
 
   constructor(private formBuilder: FormBuilder,
-              private docentesService: DocentesService) { }
+              private docentesService: DocentesService,
+              private router: Router) { }
 
   ngOnInit() {
     this.crearFormulario();
@@ -41,8 +43,9 @@ export class CrearDocenteComponent implements OnInit {
     const telefono = this.creardocentes.value.telefono;
     this.docentesService.crearDocente(nombre, apellidos, email, telefono).subscribe(
       data => {
-        console.log(data);
-        location.assign('docente');
+        // console.log(data);
+        this.router.navigate([`/docente`]);
+        // location.assign('docente');
       }
     )
   }
